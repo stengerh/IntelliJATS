@@ -17,8 +17,12 @@ public class ATSKeyImpl extends ASTWrapperPsiElement implements ATSKey {
     super(node);
   }
 
+  public void accept(@NotNull ATSVisitor visitor) {
+    visitor.visitKey(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof ATSVisitor) ((ATSVisitor)visitor).visitKey(this);
+    if (visitor instanceof ATSVisitor) accept((ATSVisitor)visitor);
     else super.accept(visitor);
   }
 

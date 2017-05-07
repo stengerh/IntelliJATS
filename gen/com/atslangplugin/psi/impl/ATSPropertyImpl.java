@@ -17,8 +17,12 @@ public class ATSPropertyImpl extends ASTWrapperPsiElement implements ATSProperty
     super(node);
   }
 
+  public void accept(@NotNull ATSVisitor visitor) {
+    visitor.visitProperty(this);
+  }
+
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof ATSVisitor) ((ATSVisitor)visitor).visitProperty(this);
+    if (visitor instanceof ATSVisitor) accept((ATSVisitor)visitor);
     else super.accept(visitor);
   }
 

@@ -9,9 +9,10 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.lang.PsiParser;
+import com.intellij.lang.LightPsiParser;
 
 @SuppressWarnings({"SimplifiableIfStatement", "UnusedAssignment"})
-public class ATSParser implements PsiParser {
+public class ATSParser implements PsiParser, LightPsiParser {
 
   public ASTNode parse(IElementType t, PsiBuilder b) {
     parseLight(t, b);
@@ -214,7 +215,7 @@ public class ATSParser implements PsiParser {
   public static boolean KEY(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "KEY")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, "<key>");
+    Marker m = enter_section_(b, l, _NONE_, KEY, "<key>");
     r = consumeToken(b, NONE);
     if (!r) r = consumeToken(b, AT);
     if (!r) r = consumeToken(b, BACKSLASH);
@@ -374,7 +375,7 @@ public class ATSParser implements PsiParser {
     if (!r) r = consumeToken(b, PERCENT);
     if (!r) r = consumeToken(b, QMARK);
     if (!r) r = consumeToken(b, EOF);
-    exit_section_(b, l, m, KEY, r, false, null);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
@@ -396,10 +397,10 @@ public class ATSParser implements PsiParser {
   public static boolean property(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "property")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, "<property>");
+    Marker m = enter_section_(b, l, _NONE_, PROPERTY, "<property>");
     r = property_0(b, l + 1);
     if (!r) r = KEY(b, l + 1);
-    exit_section_(b, l, m, PROPERTY, r, false, null);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 

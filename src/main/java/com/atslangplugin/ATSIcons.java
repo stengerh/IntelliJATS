@@ -10,6 +10,6 @@ import javax.swing.*;
 
 public class ATSIcons {
     public static final Icon FILE =
-            IconLoader.getIcon("/com/atslangplugin/icons/ATSLogo.png");
+            IconLoader.getIcon("/icons/ATSLogo.png");
 
 }

@@ -1,4 +1,4 @@
-package test.com.atslangplugin; 
+package com.atslangplugin;
 
 import com.atslangplugin.ATSLexerAdapter;
 import com.atslangplugin.ATSTokenTypes;

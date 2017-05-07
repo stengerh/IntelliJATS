@@ -50,7 +50,7 @@ public class ATSColorSettingsPage implements ColorSettingsPage {
     @Nullable
     @Override
     public Icon getIcon() {
-        return ATSIcons.FILE;
+        return ATSIcons.INSTANCE.getFILE();
     }
 
     @NotNull

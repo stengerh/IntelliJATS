@@ -38,6 +38,6 @@ public class ATSFileTypeDynamic extends LanguageFileType {
     @Nullable
     @Override
     public Icon getIcon() {
-        return ATSIcons.FILE;
+        return ATSIcons.INSTANCE.getFILE();
     }
 }

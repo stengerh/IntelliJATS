@@ -1,4 +1,8 @@
-* get code /sdk hooked up
+* generate jflex and bnf through the build system. (and in the correct directories)
+  * https://github.com/jprante/gradle-plugin-jflex
+  * what does the BNF project?
+
+---
 * review the 2017 documentation https://www.jetbrains.com/help/idea/2017.1/plugin-development-guidelines.html#d632480e8
 * review the tutorial
 * review the ats plugin

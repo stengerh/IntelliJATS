@@ -36,6 +36,7 @@
     <colorSettingsPage implementation="com.atslangplugin.ATSColorSettingsPage"/>
     <lang.syntaxHighlighterFactory language="ATS"
                                    implementationClass="com.atslangplugin.ATSSyntaxHighlighterFactory"/>
+    <lang.commenter language="ATS" implementationClass="com.atslangplugin.ATSCommenter"/>
   </extensions>
 
   <application-components>

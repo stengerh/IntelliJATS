@@ -2,8 +2,9 @@
   <id>com.atslangplugin</id>
   <name>IntelliJATS</name>
   <version>1.1</version>
-<!-- TODO: add "vendor"-->
-  <vendor email="brandon.barker@cornell.edu" url="http://www.cac.cornell.edu/">Cornell Center for Advanced Computing</vendor>
+  <!-- TODO: add "vendor"-->
+  <vendor email="brandon.barker@cornell.edu" url="http://www.cac.cornell.edu/">Cornell Center for Advanced Computing
+  </vendor>
 
   <description><![CDATA[
       This is an IntelliJ plugin for the Applied Type System
@@ -27,10 +28,14 @@
   -->
 
   <extensions defaultExtensionNs="com.intellij">
-    <colorSettingsPage implementation="com.atslangplugin.ATSColorSettingsPage"/>
-    <lang.syntaxHighlighterFactory language="ATS" implementationClass="com.atslangplugin.ATSSyntaxHighlighterFactory"/>
-    <!-- <lang.parserDefinition language="ATS" implementationClass="com.atslangplugin.ATSParserDefinition"/> -->
     <fileTypeFactory implementation="com.atslangplugin.ATSFileTypeFactory"/>
+
+    <!-- TODO: the parser generator is too weak, we should replace this with ATS jsonize-->
+    <lang.parserDefinition language="ATS" implementationClass="com.atslangplugin.ATSParserDefinition"/>
+
+    <colorSettingsPage implementation="com.atslangplugin.ATSColorSettingsPage"/>
+    <lang.syntaxHighlighterFactory language="ATS"
+                                   implementationClass="com.atslangplugin.ATSSyntaxHighlighterFactory"/>
   </extensions>
 
   <application-components>

@@ -12,15 +12,14 @@ class ATSFileTypeFactory : FileTypeFactory() {
     override fun createFileTypes(fileTypeConsumer: FileTypeConsumer) {
         val matcherList = ArrayList<FileNameMatcher>()
 
-        val ATSSourceExtensions = ArrayList<String>(3)
-        ATSSourceExtensions.add(0, ATSFileTypeDynamic.INSTANCE.defaultExtension)
-        ATSSourceExtensions.add(1, ATSFileTypeStatic.INSTANCE.defaultExtension)
-        ATSSourceExtensions.add(2, ATSFileTypeInclude.INSTANCE.defaultExtension)
+        //dats
+        matcherList.add(ExtensionFileNameMatcher(ATSFileTypeDynamic.INSTANCE.defaultExtension))
+        //sats
+        matcherList.add(ExtensionFileNameMatcher(ATSFileTypeStatic.INSTANCE.defaultExtension))
+        //hats
+        matcherList.add(ExtensionFileNameMatcher(ATSFileTypeInclude.INSTANCE.defaultExtension))
 
-        for (s in ATSSourceExtensions) {
-            matcherList.add(ExtensionFileNameMatcher(s))
-        }
-
+        //TODO: these should be properly separate classes, rather than instances of the same class?
         fileTypeConsumer.consume(ATSFileTypeDynamic.INSTANCE,
                 *matcherList.toTypedArray())
         matcherList.clear()

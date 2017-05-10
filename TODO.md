@@ -6,13 +6,10 @@
 
 * icons for the different file types, also higher resolution versions
 ---
-* review the tutorial
 * check out kotlin
 
 
-* remove spell checking from ats keywords
-
-* how Faithful is the BNF?
+* how Faithful is the BNF? not really.
 * project structure
 * ATS what is the getCharset?
 * can we get at the ATS lexer, parser, type checker?

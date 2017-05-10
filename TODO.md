@@ -2,11 +2,11 @@
   * https://github.com/jprante/gradle-plugin-jflex
   * what does the BNF project?
 
-* icons for the different file types
+* standardize the new line encoding
+
+* icons for the different file types, also higher resolution versions
 ---
-* review the 2017 documentation https://www.jetbrains.com/help/idea/2017.1/plugin-development-guidelines.html#d632480e8
 * review the tutorial
-* review the ats plugin
 * check out kotlin
 
 

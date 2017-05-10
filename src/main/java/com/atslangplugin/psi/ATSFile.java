@@ -21,7 +21,7 @@ import javax.swing.text.StringContent;
 public class ATSFile extends PsiFileBase {
 
     public ATSFile(@NotNull FileViewProvider viewProvider) {
-        super(viewProvider, ATSLanguage.Companion.getINSTANCE());
+        super(viewProvider, ATSLanguage.INSTANCE);
 
         String extension = "";
         int i = this.getName().lastIndexOf('.');

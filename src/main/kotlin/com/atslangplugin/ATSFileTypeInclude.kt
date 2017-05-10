@@ -4,7 +4,7 @@ import com.intellij.openapi.fileTypes.LanguageFileType
 
 import javax.swing.*
 
-class ATSFileTypeInclude private constructor() : LanguageFileType(ATSLanguage.INSTANCE) {
+class ATSFileTypeInclude private constructor() : LanguageFileType(ATSLanguage) {
 
     override fun getName(): String {
         return "hats file"

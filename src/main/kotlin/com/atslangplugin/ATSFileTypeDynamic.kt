@@ -5,7 +5,7 @@ import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.*
 
 
-class ATSFileTypeDynamic private constructor() : LanguageFileType(ATSLanguage.INSTANCE) {
+class ATSFileTypeDynamic private constructor() : LanguageFileType(ATSLanguage) {
 
     override fun getName(): String {
         return "dats file"

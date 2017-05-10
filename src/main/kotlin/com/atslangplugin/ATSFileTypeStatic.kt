@@ -5,7 +5,7 @@ import com.intellij.openapi.fileTypes.LanguageFileType
 import javax.swing.*
 
 
-class ATSFileTypeStatic private constructor() : LanguageFileType(ATSLanguage.INSTANCE) {
+class ATSFileTypeStatic private constructor() : LanguageFileType(ATSLanguage) {
 
     override fun getName(): String {
         return "sats file"

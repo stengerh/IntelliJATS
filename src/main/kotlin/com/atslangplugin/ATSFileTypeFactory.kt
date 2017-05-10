@@ -1,12 +1,10 @@
 package com.atslangplugin
 
+import com.intellij.openapi.fileTypes.ExtensionFileNameMatcher
+import com.intellij.openapi.fileTypes.FileNameMatcher
 import com.intellij.openapi.fileTypes.FileTypeConsumer
 import com.intellij.openapi.fileTypes.FileTypeFactory
-
-import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.fileTypes.*
-
-import java.util.ArrayList
+import java.util.*
 
 
 class ATSFileTypeFactory : FileTypeFactory() {

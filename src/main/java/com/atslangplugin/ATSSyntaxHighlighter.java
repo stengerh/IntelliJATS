@@ -15,9 +15,6 @@ import static com.intellij.openapi.editor.DefaultLanguageHighlighterColors.*;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
-/**
- * Created by Brandon Elam Barker on 12/21/2014.
- */
 public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
 
     // Coloring BAD_CHARACTERs seems to cause a runtime error
@@ -116,7 +113,7 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final Map<IElementType, TextAttributesKey[]> tokenColorMap;
     static{
         Map<IElementType, TextAttributesKey[]> tmpMap =
-                new HashMap<IElementType, TextAttributesKey[]>();
+                new HashMap<>();
         tmpMap.put(ATSTokenTypes.ABSTYPE, ATS_TYPE_DECLARATIONS_KEYS);
         tmpMap.put(ATSTokenTypes.ADDRAT, ATS_KEYWORD_KEYS);
         tmpMap.put(ATSTokenTypes.AND, ATS_OPERATION_SIGN_KEYS);
@@ -282,7 +279,7 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
     @NotNull
     @Override
     public Lexer getHighlightingLexer() {
-        return new FlexAdapter(new ATSLexer((Reader) null));
+        return new FlexAdapter(new ATSLexer(null));
     }
 
     @NotNull

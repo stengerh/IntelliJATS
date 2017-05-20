@@ -4,7 +4,6 @@ import com.atslangplugin.parser.ATSParser
 import com.atslangplugin.psi.ATSFile
 import com.atslangplugin.psi.ATSTypes
 import com.intellij.lang.ASTNode
-import com.intellij.lang.Language
 import com.intellij.lang.ParserDefinition
 import com.intellij.lang.PsiParser
 import com.intellij.lexer.FlexAdapter
@@ -60,11 +59,13 @@ class ATSParserDefinition : ParserDefinition {
 
     companion object {
         val WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE)
-        val COMMENTS = TokenSet.create(ATSTypes.COMMENT)
+        val COMMENTS = TokenSet.create(
+//                ATSTypes.COMMENT,
+                ATSTypes.COMMENT_BLOCK,
+                ATSTypes.COMMENT_LINE,
+                ATSTypes.COMMENT_REST)
 
-        val FILE = IFileElementType(
-                Language.findInstance(ATSLanguage::class.java)
-        )
+        val FILE = IFileElementType(ATSLanguage)
     }
 
 

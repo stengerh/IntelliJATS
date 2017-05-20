@@ -33,7 +33,6 @@ theLogo
 theLogo.png
 **ats_icon.png
 
-###### end of [.gitignore] ######
 /.idea/
 /.gradle/
 /build/

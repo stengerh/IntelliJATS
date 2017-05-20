@@ -10,3 +10,9 @@ class ATSTokenType(@NonNls debugName: String) : IElementType(debugName, ATSLangu
         return "ATSTokenType." + super.toString()
     }
 }
+
+
+sealed class CreateSubscriptionResult {
+    class Success(val subscription: Int): CreateSubscriptionResult()
+    class Failure(val errors: List<String>): CreateSubscriptionResult()
+}

@@ -1,7 +1,7 @@
 package com.atslangplugin;
 
 import com.atslangplugin.ATSLexerAdapter;
-import com.atslangplugin.ATSTokenTypes;
+import com.atslangplugin.psi.ATSTokenTypes;
 import com.intellij.psi.tree.IElementType;
 import org.junit.Test;
 import org.junit.Before; 

@@ -1,18 +1,15 @@
-// This was a generated file, created from ATS.bnf.
-// But since we don't currently want to use the PSI
-// parser generator, we leave it alone for now.
+// This is a generated file. Not intended for manual editing.
+package com.atslangplugin.psi;
 
-package com.atslangplugin;
-
-import com.atslangplugin.psi.ATSElementType;
-import com.atslangplugin.psi.ATSTokenType;
-//import com.atslangplugin.psi.impl.ATSKeyImpl;
-//import com.atslangplugin.psi.impl.ATSPropertyImpl;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.PsiElement;
+import com.intellij.lang.ASTNode;
+import com.atslangplugin.psi.impl.*;
 
 public interface ATSTokenTypes {
+
+  IElementType KEY = new ATSElementType("KEY");
+  IElementType PROPERTY = new ATSElementType("PROPERTY");
 
   IElementType ABSTYPE = new ATSTokenType("ABSTYPE");
   IElementType ADDRAT = new ATSTokenType("ADDRAT");
@@ -24,7 +21,6 @@ public interface ATSTokenTypes {
   IElementType ATLBRACKET = new ATSTokenType("ATLBRACKET");
   IElementType ATLPAREN = new ATSTokenType("ATLPAREN");
   IElementType BACKSLASH = new ATSTokenType("BACKSLASH");
-  IElementType BAD_CHARACTER = new ATSTokenType("BAD_CHARACTER");
   IElementType BANG = new ATSTokenType("BANG");
   IElementType BAR = new ATSTokenType("BAR");
   IElementType BEGIN = new ATSTokenType("BEGIN");
@@ -38,6 +34,9 @@ public interface ATSTokenTypes {
   IElementType COLONLT = new ATSTokenType("COLONLT");
   IElementType COMMA = new ATSTokenType("COMMA");
   IElementType COMMALPAREN = new ATSTokenType("COMMALPAREN");
+  IElementType COMMENBLOCK = new ATSTokenType("COMMENblock");
+  IElementType COMMENLINE = new ATSTokenType("COMMENline");
+  IElementType COMMENREST = new ATSTokenType("COMMENrest");
   IElementType COMMENT = new ATSTokenType("COMMENT");
   IElementType COMMENT_BLOCK = new ATSTokenType("COMMENT_BLOCK");
   IElementType COMMENT_LINE = new ATSTokenType("COMMENT_LINE");
@@ -48,6 +47,7 @@ public interface ATSTokenTypes {
   IElementType DLRARRPSZ = new ATSTokenType("DLRARRPSZ");
   IElementType DLRBREAK = new ATSTokenType("DLRBREAK");
   IElementType DLRCONTINUE = new ATSTokenType("DLRCONTINUE");
+  IElementType DLRD2CTYPE = new ATSTokenType("DLRD2CTYPE");
   IElementType DLRDELAY = new ATSTokenType("DLRDELAY");
   IElementType DLREFFMASK = new ATSTokenType("DLREFFMASK");
   IElementType DLREFFMASK_ARG = new ATSTokenType("DLREFFMASK_ARG");
@@ -58,6 +58,7 @@ public interface ATSTokenTypes {
   IElementType DLREXTVAL = new ATSTokenType("DLREXTVAL");
   IElementType DLREXTYPE = new ATSTokenType("DLREXTYPE");
   IElementType DLREXTYPE_STRUCT = new ATSTokenType("DLREXTYPE_STRUCT");
+  IElementType DLRLITERAL = new ATSTokenType("DLRLITERAL");
   IElementType DLRLST = new ATSTokenType("DLRLST");
   IElementType DLRMYFILENAME = new ATSTokenType("DLRMYFILENAME");
   IElementType DLRMYFUNCTION = new ATSTokenType("DLRMYFUNCTION");
@@ -65,8 +66,11 @@ public interface ATSTokenTypes {
   IElementType DLRRAISE = new ATSTokenType("DLRRAISE");
   IElementType DLRREC = new ATSTokenType("DLRREC");
   IElementType DLRSHOWTYPE = new ATSTokenType("DLRSHOWTYPE");
-  IElementType DLRTUP = new ATSTokenType("DLRTUP");
+  IElementType DLRSOLASSERT = new ATSTokenType("DLRSOLASSERT");
+  IElementType DLRSOLVERIFY = new ATSTokenType("DLRSOLVERIFY");
   IElementType DLRTEMPENVER = new ATSTokenType("DLRTEMPENVER");
+  IElementType DLRTUP = new ATSTokenType("DLRTUP");
+  IElementType DLRTYREP = new ATSTokenType("DLRTYREP");
   IElementType DLRVCOPYENV = new ATSTokenType("DLRVCOPYENV");
   IElementType DO = new ATSTokenType("DO");
   IElementType DOLLAR = new ATSTokenType("DOLLAR");
@@ -76,7 +80,6 @@ public interface ATSTokenTypes {
   IElementType DOTINT = new ATSTokenType("DOTINT");
   IElementType DOTLT = new ATSTokenType("DOTLT");
   IElementType DOTLTGTDOT = new ATSTokenType("DOTLTGTDOT");
-  IElementType DYNLOAD = new ATSTokenType("DYNLOAD");
   IElementType ELSE = new ATSTokenType("ELSE");
   IElementType END = new ATSTokenType("END");
   IElementType EOF = new ATSTokenType("EOF");
@@ -87,6 +90,7 @@ public interface ATSTokenTypes {
   IElementType EQLTGT = new ATSTokenType("EQLTGT");
   IElementType EQSLASHEQGT = new ATSTokenType("EQSLASHEQGT");
   IElementType EQSLASHEQGTGT = new ATSTokenType("EQSLASHEQGTGT");
+  IElementType ERR = new ATSTokenType("ERR");
   IElementType EXCEPTION = new ATSTokenType("EXCEPTION");
   IElementType EXTCODE = new ATSTokenType("EXTCODE");
   IElementType EXTERN = new ATSTokenType("EXTERN");
@@ -96,6 +100,7 @@ public interface ATSTokenTypes {
   IElementType FIXITY = new ATSTokenType("FIXITY");
   IElementType FLOAT = new ATSTokenType("FLOAT");
   IElementType FOLDAT = new ATSTokenType("FOLDAT");
+  IElementType FOR = new ATSTokenType("FOR");
   IElementType FORSTAR = new ATSTokenType("FORSTAR");
   IElementType FREEAT = new ATSTokenType("FREEAT");
   IElementType FUN = new ATSTokenType("FUN");
@@ -103,9 +108,18 @@ public interface ATSTokenTypes {
   IElementType GTDOT = new ATSTokenType("GTDOT");
   IElementType GTLT = new ATSTokenType("GTLT");
   IElementType HASH = new ATSTokenType("HASH");
+  IElementType HASHLBRACKET = new ATSTokenType("HASHLBRACKET");
   IElementType HASHLBRACKETOLON = new ATSTokenType("HASHLBRACKETOLON");
-  IElementType IDENTIFIER = new ATSTokenType("IDENTIFIER"); // Not exactly in ATS (CHECK_ME)
+  IElementType IDENALP = new ATSTokenType("IDENalp");
+  IElementType IDENARR = new ATSTokenType("IDENarr");
+  IElementType IDENDLR = new ATSTokenType("IDENdlr");
+  IElementType IDENEXT = new ATSTokenType("IDENext");
+  IElementType IDENSRP = new ATSTokenType("IDENsrp");
+  IElementType IDENSYM = new ATSTokenType("IDENsym");
+  IElementType IDENTIFIER = new ATSTokenType("IDENTIFIER");
+  IElementType IDENTMP = new ATSTokenType("IDENtmp");
   IElementType IF = new ATSTokenType("IF");
+  IElementType IFCASE = new ATSTokenType("IFCASE");
   IElementType IMPLEMENT = new ATSTokenType("IMPLEMENT");
   IElementType IMPORT = new ATSTokenType("IMPORT");
   IElementType IN = new ATSTokenType("IN");
@@ -121,7 +135,7 @@ public interface ATSTokenTypes {
   IElementType MINUSGT = new ATSTokenType("MINUSGT");
   IElementType MINUSLT = new ATSTokenType("MINUSLT");
   IElementType MINUSLTGT = new ATSTokenType("MINUSLTGT");
-  //IElementType NONE = new ATSTokenType("NONE"); // unused
+  IElementType NONE = new ATSTokenType("NONE");
   IElementType NONFIX = new ATSTokenType("NONFIX");
   IElementType OF = new ATSTokenType("OF");
   IElementType OP = new ATSTokenType("OP");
@@ -134,17 +148,22 @@ public interface ATSTokenTypes {
   IElementType QUOTELPAREN = new ATSTokenType("QUOTELPAREN");
   IElementType RBRACE = new ATSTokenType("RBRACE");
   IElementType RBRACKET = new ATSTokenType("RBRACKET");
+  IElementType REASSUME = new ATSTokenType("REASSUME");
   IElementType REC = new ATSTokenType("REC");
   IElementType REFAT = new ATSTokenType("REFAT");
-  IElementType REF_IDENTIFIER = new ATSTokenType("REF_IDENTIFIER"); // (CHECK_ME)
+  IElementType REF_IDENTIFIER = new ATSTokenType("REF_IDENTIFIER");
   IElementType REQUIRE = new ATSTokenType("REQUIRE");
   IElementType RPAREN = new ATSTokenType("RPAREN");
   IElementType SCASE = new ATSTokenType("SCASE");
   IElementType SEMICOLON = new ATSTokenType("SEMICOLON");
+  IElementType SEPARATOR = new ATSTokenType("SEPARATOR");
   IElementType SIF = new ATSTokenType("SIF");
   IElementType SORTDEF = new ATSTokenType("SORTDEF");
   IElementType SRPASSERT = new ATSTokenType("SRPASSERT");
+  IElementType SRPCODEGEN2 = new ATSTokenType("SRPCODEGEN2");
+  IElementType SRPCODEGEN3 = new ATSTokenType("SRPCODEGEN3");
   IElementType SRPDEFINE = new ATSTokenType("SRPDEFINE");
+  IElementType SRPDYNLOAD = new ATSTokenType("SRPDYNLOAD");
   IElementType SRPELIF = new ATSTokenType("SRPELIF");
   IElementType SRPELIFDEF = new ATSTokenType("SRPELIFDEF");
   IElementType SRPELIFNDEF = new ATSTokenType("SRPELIFNDEF");
@@ -155,12 +174,15 @@ public interface ATSTokenTypes {
   IElementType SRPIFDEF = new ATSTokenType("SRPIFDEF");
   IElementType SRPIFNDEF = new ATSTokenType("SRPIFNDEF");
   IElementType SRPINCLUDE = new ATSTokenType("SRPINCLUDE");
+  IElementType SRPPRAGMA = new ATSTokenType("SRPPRAGMA");
+  IElementType SRPPRERR = new ATSTokenType("SRPPRERR");
   IElementType SRPPRINT = new ATSTokenType("SRPPRINT");
+  IElementType SRPREQUIRE = new ATSTokenType("SRPREQUIRE");
+  IElementType SRPSTALOAD = new ATSTokenType("SRPSTALOAD");
   IElementType SRPTHEN = new ATSTokenType("SRPTHEN");
   IElementType SRPUNDEF = new ATSTokenType("SRPUNDEF");
   IElementType STACST = new ATSTokenType("STACST");
   IElementType STADEF = new ATSTokenType("STADEF");
-  IElementType STALOAD = new ATSTokenType("STALOAD");
   IElementType STATIC = new ATSTokenType("STATIC");
   IElementType STRING = new ATSTokenType("STRING");
   IElementType SYMELIM = new ATSTokenType("SYMELIM");
@@ -172,18 +194,17 @@ public interface ATSTokenTypes {
   IElementType TYPE = new ATSTokenType("TYPE");
   IElementType TYPEDEF = new ATSTokenType("TYPEDEF");
   IElementType VAL = new ATSTokenType("VAL");
-  IElementType VAL_IDENTIFIER = new ATSTokenType("VAL_IDENTIFIER"); // (CHECK_ME)
+  IElementType VALUE = new ATSTokenType("VALUE");
+  IElementType VAL_IDENTIFIER = new ATSTokenType("VAL_IDENTIFIER");
   IElementType VAR = new ATSTokenType("VAR");
   IElementType VIEWAT = new ATSTokenType("VIEWAT");
   IElementType WHEN = new ATSTokenType("WHEN");
   IElementType WHERE = new ATSTokenType("WHERE");
   IElementType WHILE = new ATSTokenType("WHILE");
-  IElementType WHITE_SPACE = new ATSTokenType("WHITE_SPACE"); // Not exactly in ATS (CHECK_ME)
   IElementType WHILESTAR = new ATSTokenType("WHILESTAR");
   IElementType WITH = new ATSTokenType("WITH");
   IElementType WITHTYPE = new ATSTokenType("WITHTYPE");
 
-  /*
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
@@ -196,5 +217,4 @@ public interface ATSTokenTypes {
       throw new AssertionError("Unknown element type: " + type);
     }
   }
-  */
 }

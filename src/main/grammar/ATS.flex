@@ -2,8 +2,12 @@ package com.atslangplugin;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
-import com.atslangplugin.ATSTokenTypes;
 import com.intellij.psi.TokenType;
+
+import static com.intellij.psi.TokenType.BAD_CHARACTER;
+import static com.intellij.psi.TokenType.WHITE_SPACE;
+//TODO: static import this
+import com.atslangplugin.psi.ATSTokenTypes;
 
 %%
 
@@ -88,10 +92,11 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 
 %%
 
-/* for more information, see the following */
-/* in the ATS-Postiats source repository:  */
-/* src/pats_lexing.sats                    */
-/* src/pats_lexing_token.dats              */
+/* for more information, see the following
+   in the ATS-Postiats source repository:
+   src/pats_lexing.sats
+   src/pats_lexing_token.dats
+*/
 
 /*  *** *** keywords and symbols  *** ***  */
 
@@ -164,7 +169,7 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 "datatype"|"dataprop"|"dataview"|"dataviewtype"|"datavtype"
                             { return ATSTokenTypes.DATATYPE; }
 "do"                        { return ATSTokenTypes.DO; }
-"dynload"                   { return ATSTokenTypes.DYNLOAD; }
+"dynload"                   { return ATSTokenTypes.SRPDYNLOAD; }
 "else"                      { return ATSTokenTypes.ELSE; }
 "end"                       { return ATSTokenTypes.END; }
 "exception"                 { return ATSTokenTypes.EXCEPTION; }
@@ -199,7 +204,7 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 "sortdef"                   { return ATSTokenTypes.SORTDEF; }
 "stacst"                    { return ATSTokenTypes.STACST; }
 "stadef"                    { return ATSTokenTypes.STADEF; }
-"staload"                   { return ATSTokenTypes.STALOAD; }
+"staload"                   { return ATSTokenTypes.SRPSTALOAD; }
 "static"                    { return ATSTokenTypes.STATIC; }
 /*
   | T_STAVAR of () // stavar // HX: a suspended hack
@@ -325,7 +330,7 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 "?"                         { return ATSTokenTypes.QMARK; }
 
 //Not ATS tokens, precisely:
-{WHITE_SPACE}               { return ATSTokenTypes.WHITE_SPACE; }
+{WHITE_SPACE}               { return WHITE_SPACE; }
 {CRLF}                      { return ATSTokenTypes.CRLF; }
 {IDENTIFIER}                { return ATSTokenTypes.IDENTIFIER; }
 "!"{IDENTIFIER}             { return ATSTokenTypes.VAL_IDENTIFIER; }
@@ -349,7 +354,7 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 //
 // Match anything not picked up and throw an error:
 //
-[^]         { return ATSTokenTypes.BAD_CHARACTER; }
+[^]         { return BAD_CHARACTER; }
 //
 
 

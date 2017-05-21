@@ -3,7 +3,7 @@ package com.atslangplugin.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-import static com.atslangplugin.psi.ATSTypes.*;
+import static com.atslangplugin.psi.ATSTokenTypes.*;
 import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.lang.ASTNode;
@@ -26,6 +26,9 @@ public class ATSParser implements PsiParser, LightPsiParser {
     if (root_ == KEY) {
       result_ = KEY(builder_, 0);
     }
+    else if (root_ == PROPERTY) {
+      result_ = property(builder_, 0);
+    }
     else {
       result_ = parse_root_(root_, builder_, 0);
     }
@@ -37,12 +40,12 @@ public class ATSParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // KEY*
+  // item_*
   static boolean ATSFile(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "ATSFile")) return false;
     int pos_ = current_position_(builder_);
     while (true) {
-      if (!KEY(builder_, level_ + 1)) break;
+      if (!item_(builder_, level_ + 1)) break;
       if (!empty_element_parsed_guard_(builder_, "ATSFile", pos_)) break;
       pos_ = current_position_(builder_);
     }
@@ -51,17 +54,25 @@ public class ATSParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // NONE |
+  // 
   // AT |
-  // BACKSLASH |
+  // 
+  // BAR |
   // BANG |
   // BQUOTE |
+  // BACKSLASH |
+  // 
   // COLON |
   // COLONLT |
+  // 
   // DOLLAR |
+  // 
   // DOT |
   // DOTDOT |
   // DOTDOTDOT |
+  // 
   // DOTINT |
+  // 
   // EQ |
   // EQGT |
   // EQLT |
@@ -69,39 +80,54 @@ public class ATSParser implements PsiParser, LightPsiParser {
   // EQSLASHEQGT |
   // EQGTGT |
   // EQSLASHEQGTGT |
+  // 
   // HASH |
+  // 
   // LT |
   // GT |
+  // 
   // GTLT |
   // DOTLT |
   // GTDOT |
   // DOTLTGTDOT |
+  // 
   // MINUSGT |
   // MINUSLT |
   // MINUSLTGT |
+  // 
   // TILDE |
+  // 
+  // // HX: for absprop, abstype, abst@ype; |
   // ABSTYPE |
-  // AND |
-  // AS |
+  // 
   // ASSUME |
+  // REASSUME |
+  // 
+  // AS |
+  // AND |
   // BEGIN |
   // CASE |
   // CLASSDEC |
   // DATASORT |
   // DATATYPE |
   // DO |
-  // DYNLOAD |
   // ELSE |
   // END |
   // EXCEPTION |
+  // 
   // EXTERN |
   // EXTYPE |
   // EXTVAR |
+  // 
   // FIX |
   // FIXITY |
+  // FOR |
   // FORSTAR |
   // FUN |
+  // 
   // IF |
+  // IFCASE |
+  // 
   // IMPLEMENT |
   // IMPORT |
   // IN |
@@ -114,15 +140,15 @@ public class ATSParser implements PsiParser, LightPsiParser {
   // OF |
   // OP |
   // REC |
-  // REFAT |
-  // REQUIRE |
-  // SCASE |
+  // 
   // SIF |
-  // SORTDEF |
+  // SCASE |
+  // 
   // STACST |
   // STADEF |
-  // STALOAD |
   // STATIC |
+  // SORTDEF |
+  // 
   // SYMELIM |
   // SYMINTR |
   // THEN |
@@ -130,6 +156,7 @@ public class ATSParser implements PsiParser, LightPsiParser {
   // TRY |
   // TYPE |
   // TYPEDEF |
+  // 
   // VAL |
   // VAR |
   // WHEN |
@@ -138,86 +165,156 @@ public class ATSParser implements PsiParser, LightPsiParser {
   // WHILESTAR |
   // WITH |
   // WITHTYPE |
+  // // end of [WITHTYPE] // HX: it is from DML and now rarely used |
+  // 
   // ADDRAT |
   // FOLDAT |
   // FREEAT |
   // VIEWAT |
-  // DLRARRPSZ |
+  // 
   // DLRDELAY |
+  // 
+  // DLRARRPSZ |
+  // 
+  // DLRTYREP |
+  // DLRD2CTYPE |
+  // 
   // DLREFFMASK |
   // DLREFFMASK_ARG |
+  // 
   // DLREXTERN |
-  // DLREXTKIND |
   // DLREXTYPE |
+  // DLREXTKIND |
   // DLREXTYPE_STRUCT |
+  // 
   // DLREXTVAL |
   // DLREXTFCALL |
   // DLREXTMCALL |
-  // DLRBREAK |
-  // DLRCONTINUE |
-  // DLRRAISE |
-  // DLRLST |
-  // DLRREC |
-  // DLRTUP |
+  // 
+  // DLRLITERAL |
+  // 
   // DLRMYFILENAME |
   // DLRMYLOCATION |
   // DLRMYFUNCTION |
+  // 
+  // DLRLST |
+  // DLRREC |
+  // DLRTUP |
+  // 
+  // DLRBREAK |
+  // DLRCONTINUE |
+  // 
+  // DLRRAISE |
+  // 
   // DLRSHOWTYPE |
+  // 
   // DLRVCOPYENV |
-  // SRPASSERT |
-  // SRPDEFINE |
+  // 
+  // DLRTEMPENVER |
+  // 
+  // DLRSOLASSERT |
+  // DLRSOLVERIFY |
+  // 
+  // SRPIF |
+  // SRPIFDEF |
+  // SRPIFNDEF |
+  // 
+  // SRPTHEN |
+  // 
   // SRPELIF |
   // SRPELIFDEF |
   // SRPELIFNDEF |
   // SRPELSE |
+  // 
   // SRPENDIF |
+  // 
   // SRPERROR |
-  // SRPIF |
-  // SRPIFDEF |
-  // SRPIFNDEF |
-  // SRPINCLUDE |
+  // SRPPRERR |
   // SRPPRINT |
-  // SRPTHEN |
+  // 
+  // SRPASSERT |
+  // 
   // SRPUNDEF |
+  // SRPDEFINE |
+  // 
+  // SRPINCLUDE |
+  // 
+  // SRPSTALOAD |
+  // SRPDYNLOAD |
+  // 
+  // SRPREQUIRE |
+  // 
+  // SRPPRAGMA |
+  // SRPCODEGEN2 |
+  // SRPCODEGEN3 |
+  // 
+  // IDENalp |
+  // IDENsym |
+  // IDENarr |
+  // IDENtmp |
+  // IDENdlr |
+  // IDENsrp |
+  // IDENext |
+  // 
   // INT |
+  // 
   // CHAR |
+  // 
   // FLOAT |
+  // 
   // CDATA |
   // STRING |
+  // 
   // COMMA |
   // SEMICOLON |
+  // 
   // LPAREN |
   // RPAREN |
   // LBRACKET |
   // RBRACKET |
   // LBRACE |
   // RBRACE |
+  // 
   // ATLPAREN |
   // QUOTELPAREN |
   // ATLBRACKET |
   // QUOTELBRACKET |
-  // HASHLBRACKETOLON |
+  // HASHLBRACKET |
   // ATLBRACE |
   // QUOTELBRACE |
+  // 
   // BQUOTELPAREN |
   // COMMALPAREN |
   // PERCENTLPAREN |
+  // 
   // EXTCODE |
-  // COMMENT_LINE |
-  // COMMENT_BLOCK |
-  // COMMENT_REST |
+  // 
+  // COMMENline |
+  // COMMENblock |
+  // COMMENrest |
+  // 
+  // ERR |
+  // 
+  // EOF |
+  // // some modified types that don't exactly match the ATS lexer
+  // IDENTIFIER |
+  // VAL_IDENTIFIER |
+  // REF_IDENTIFIER |
   // PERCENT |
+  // HASHLBRACKETOLON |
+  // REFAT |
   // QMARK |
-  // EOF
+  // REQUIRE
   public static boolean KEY(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "KEY")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, KEY, "<key>");
     result_ = consumeToken(builder_, NONE);
     if (!result_) result_ = consumeToken(builder_, AT);
-    if (!result_) result_ = consumeToken(builder_, BACKSLASH);
+    if (!result_) result_ = consumeToken(builder_, BAR);
     if (!result_) result_ = consumeToken(builder_, BANG);
     if (!result_) result_ = consumeToken(builder_, BQUOTE);
+    if (!result_) result_ = consumeToken(builder_, BACKSLASH);
     if (!result_) result_ = consumeToken(builder_, COLON);
     if (!result_) result_ = consumeToken(builder_, COLONLT);
     if (!result_) result_ = consumeToken(builder_, DOLLAR);
@@ -244,16 +341,16 @@ public class ATSParser implements PsiParser, LightPsiParser {
     if (!result_) result_ = consumeToken(builder_, MINUSLTGT);
     if (!result_) result_ = consumeToken(builder_, TILDE);
     if (!result_) result_ = consumeToken(builder_, ABSTYPE);
-    if (!result_) result_ = consumeToken(builder_, AND);
-    if (!result_) result_ = consumeToken(builder_, AS);
     if (!result_) result_ = consumeToken(builder_, ASSUME);
+    if (!result_) result_ = consumeToken(builder_, REASSUME);
+    if (!result_) result_ = consumeToken(builder_, AS);
+    if (!result_) result_ = consumeToken(builder_, AND);
     if (!result_) result_ = consumeToken(builder_, BEGIN);
     if (!result_) result_ = consumeToken(builder_, CASE);
     if (!result_) result_ = consumeToken(builder_, CLASSDEC);
     if (!result_) result_ = consumeToken(builder_, DATASORT);
     if (!result_) result_ = consumeToken(builder_, DATATYPE);
     if (!result_) result_ = consumeToken(builder_, DO);
-    if (!result_) result_ = consumeToken(builder_, DYNLOAD);
     if (!result_) result_ = consumeToken(builder_, ELSE);
     if (!result_) result_ = consumeToken(builder_, END);
     if (!result_) result_ = consumeToken(builder_, EXCEPTION);
@@ -262,9 +359,11 @@ public class ATSParser implements PsiParser, LightPsiParser {
     if (!result_) result_ = consumeToken(builder_, EXTVAR);
     if (!result_) result_ = consumeToken(builder_, FIX);
     if (!result_) result_ = consumeToken(builder_, FIXITY);
+    if (!result_) result_ = consumeToken(builder_, FOR);
     if (!result_) result_ = consumeToken(builder_, FORSTAR);
     if (!result_) result_ = consumeToken(builder_, FUN);
     if (!result_) result_ = consumeToken(builder_, IF);
+    if (!result_) result_ = consumeToken(builder_, IFCASE);
     if (!result_) result_ = consumeToken(builder_, IMPLEMENT);
     if (!result_) result_ = consumeToken(builder_, IMPORT);
     if (!result_) result_ = consumeToken(builder_, IN);
@@ -277,15 +376,12 @@ public class ATSParser implements PsiParser, LightPsiParser {
     if (!result_) result_ = consumeToken(builder_, OF);
     if (!result_) result_ = consumeToken(builder_, OP);
     if (!result_) result_ = consumeToken(builder_, REC);
-    if (!result_) result_ = consumeToken(builder_, REFAT);
-    if (!result_) result_ = consumeToken(builder_, REQUIRE);
-    if (!result_) result_ = consumeToken(builder_, SCASE);
     if (!result_) result_ = consumeToken(builder_, SIF);
-    if (!result_) result_ = consumeToken(builder_, SORTDEF);
+    if (!result_) result_ = consumeToken(builder_, SCASE);
     if (!result_) result_ = consumeToken(builder_, STACST);
     if (!result_) result_ = consumeToken(builder_, STADEF);
-    if (!result_) result_ = consumeToken(builder_, STALOAD);
     if (!result_) result_ = consumeToken(builder_, STATIC);
+    if (!result_) result_ = consumeToken(builder_, SORTDEF);
     if (!result_) result_ = consumeToken(builder_, SYMELIM);
     if (!result_) result_ = consumeToken(builder_, SYMINTR);
     if (!result_) result_ = consumeToken(builder_, THEN);
@@ -305,43 +401,63 @@ public class ATSParser implements PsiParser, LightPsiParser {
     if (!result_) result_ = consumeToken(builder_, FOLDAT);
     if (!result_) result_ = consumeToken(builder_, FREEAT);
     if (!result_) result_ = consumeToken(builder_, VIEWAT);
-    if (!result_) result_ = consumeToken(builder_, DLRARRPSZ);
     if (!result_) result_ = consumeToken(builder_, DLRDELAY);
+    if (!result_) result_ = consumeToken(builder_, DLRARRPSZ);
+    if (!result_) result_ = consumeToken(builder_, DLRTYREP);
+    if (!result_) result_ = consumeToken(builder_, DLRD2CTYPE);
     if (!result_) result_ = consumeToken(builder_, DLREFFMASK);
     if (!result_) result_ = consumeToken(builder_, DLREFFMASK_ARG);
     if (!result_) result_ = consumeToken(builder_, DLREXTERN);
-    if (!result_) result_ = consumeToken(builder_, DLREXTKIND);
     if (!result_) result_ = consumeToken(builder_, DLREXTYPE);
+    if (!result_) result_ = consumeToken(builder_, DLREXTKIND);
     if (!result_) result_ = consumeToken(builder_, DLREXTYPE_STRUCT);
     if (!result_) result_ = consumeToken(builder_, DLREXTVAL);
     if (!result_) result_ = consumeToken(builder_, DLREXTFCALL);
     if (!result_) result_ = consumeToken(builder_, DLREXTMCALL);
-    if (!result_) result_ = consumeToken(builder_, DLRBREAK);
-    if (!result_) result_ = consumeToken(builder_, DLRCONTINUE);
-    if (!result_) result_ = consumeToken(builder_, DLRRAISE);
-    if (!result_) result_ = consumeToken(builder_, DLRLST);
-    if (!result_) result_ = consumeToken(builder_, DLRREC);
-    if (!result_) result_ = consumeToken(builder_, DLRTUP);
+    if (!result_) result_ = consumeToken(builder_, DLRLITERAL);
     if (!result_) result_ = consumeToken(builder_, DLRMYFILENAME);
     if (!result_) result_ = consumeToken(builder_, DLRMYLOCATION);
     if (!result_) result_ = consumeToken(builder_, DLRMYFUNCTION);
+    if (!result_) result_ = consumeToken(builder_, DLRLST);
+    if (!result_) result_ = consumeToken(builder_, DLRREC);
+    if (!result_) result_ = consumeToken(builder_, DLRTUP);
+    if (!result_) result_ = consumeToken(builder_, DLRBREAK);
+    if (!result_) result_ = consumeToken(builder_, DLRCONTINUE);
+    if (!result_) result_ = consumeToken(builder_, DLRRAISE);
     if (!result_) result_ = consumeToken(builder_, DLRSHOWTYPE);
     if (!result_) result_ = consumeToken(builder_, DLRVCOPYENV);
-    if (!result_) result_ = consumeToken(builder_, SRPASSERT);
-    if (!result_) result_ = consumeToken(builder_, SRPDEFINE);
+    if (!result_) result_ = consumeToken(builder_, DLRTEMPENVER);
+    if (!result_) result_ = consumeToken(builder_, DLRSOLASSERT);
+    if (!result_) result_ = consumeToken(builder_, DLRSOLVERIFY);
+    if (!result_) result_ = consumeToken(builder_, SRPIF);
+    if (!result_) result_ = consumeToken(builder_, SRPIFDEF);
+    if (!result_) result_ = consumeToken(builder_, SRPIFNDEF);
+    if (!result_) result_ = consumeToken(builder_, SRPTHEN);
     if (!result_) result_ = consumeToken(builder_, SRPELIF);
     if (!result_) result_ = consumeToken(builder_, SRPELIFDEF);
     if (!result_) result_ = consumeToken(builder_, SRPELIFNDEF);
     if (!result_) result_ = consumeToken(builder_, SRPELSE);
     if (!result_) result_ = consumeToken(builder_, SRPENDIF);
     if (!result_) result_ = consumeToken(builder_, SRPERROR);
-    if (!result_) result_ = consumeToken(builder_, SRPIF);
-    if (!result_) result_ = consumeToken(builder_, SRPIFDEF);
-    if (!result_) result_ = consumeToken(builder_, SRPIFNDEF);
-    if (!result_) result_ = consumeToken(builder_, SRPINCLUDE);
+    if (!result_) result_ = consumeToken(builder_, SRPPRERR);
     if (!result_) result_ = consumeToken(builder_, SRPPRINT);
-    if (!result_) result_ = consumeToken(builder_, SRPTHEN);
+    if (!result_) result_ = consumeToken(builder_, SRPASSERT);
     if (!result_) result_ = consumeToken(builder_, SRPUNDEF);
+    if (!result_) result_ = consumeToken(builder_, SRPDEFINE);
+    if (!result_) result_ = consumeToken(builder_, SRPINCLUDE);
+    if (!result_) result_ = consumeToken(builder_, SRPSTALOAD);
+    if (!result_) result_ = consumeToken(builder_, SRPDYNLOAD);
+    if (!result_) result_ = consumeToken(builder_, SRPREQUIRE);
+    if (!result_) result_ = consumeToken(builder_, SRPPRAGMA);
+    if (!result_) result_ = consumeToken(builder_, SRPCODEGEN2);
+    if (!result_) result_ = consumeToken(builder_, SRPCODEGEN3);
+    if (!result_) result_ = consumeToken(builder_, IDENALP);
+    if (!result_) result_ = consumeToken(builder_, IDENSYM);
+    if (!result_) result_ = consumeToken(builder_, IDENARR);
+    if (!result_) result_ = consumeToken(builder_, IDENTMP);
+    if (!result_) result_ = consumeToken(builder_, IDENDLR);
+    if (!result_) result_ = consumeToken(builder_, IDENSRP);
+    if (!result_) result_ = consumeToken(builder_, IDENEXT);
     if (!result_) result_ = consumeToken(builder_, INT);
     if (!result_) result_ = consumeToken(builder_, CHAR);
     if (!result_) result_ = consumeToken(builder_, FLOAT);
@@ -359,21 +475,84 @@ public class ATSParser implements PsiParser, LightPsiParser {
     if (!result_) result_ = consumeToken(builder_, QUOTELPAREN);
     if (!result_) result_ = consumeToken(builder_, ATLBRACKET);
     if (!result_) result_ = consumeToken(builder_, QUOTELBRACKET);
-    if (!result_) result_ = consumeToken(builder_, HASHLBRACKETOLON);
+    if (!result_) result_ = consumeToken(builder_, HASHLBRACKET);
     if (!result_) result_ = consumeToken(builder_, ATLBRACE);
     if (!result_) result_ = consumeToken(builder_, QUOTELBRACE);
     if (!result_) result_ = consumeToken(builder_, BQUOTELPAREN);
     if (!result_) result_ = consumeToken(builder_, COMMALPAREN);
     if (!result_) result_ = consumeToken(builder_, PERCENTLPAREN);
     if (!result_) result_ = consumeToken(builder_, EXTCODE);
+    if (!result_) result_ = consumeToken(builder_, COMMENLINE);
+    if (!result_) result_ = consumeToken(builder_, COMMENBLOCK);
+    if (!result_) result_ = consumeToken(builder_, COMMENREST);
+    if (!result_) result_ = consumeToken(builder_, ERR);
+    if (!result_) result_ = consumeToken(builder_, EOF);
+    if (!result_) result_ = consumeToken(builder_, IDENTIFIER);
+    if (!result_) result_ = consumeToken(builder_, VAL_IDENTIFIER);
+    if (!result_) result_ = consumeToken(builder_, REF_IDENTIFIER);
+    if (!result_) result_ = consumeToken(builder_, PERCENT);
+    if (!result_) result_ = consumeToken(builder_, HASHLBRACKETOLON);
+    if (!result_) result_ = consumeToken(builder_, REFAT);
+    if (!result_) result_ = consumeToken(builder_, QMARK);
+    if (!result_) result_ = consumeToken(builder_, REQUIRE);
+    exit_section_(builder_, level_, marker_, result_, false, null);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // property|COMMENT | COMMENT_LINE |
+  //                             COMMENT_BLOCK |
+  //                             COMMENT_REST | CRLF
+  static boolean item_(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "item_")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = property(builder_, level_ + 1);
+    if (!result_) result_ = consumeToken(builder_, COMMENT);
     if (!result_) result_ = consumeToken(builder_, COMMENT_LINE);
     if (!result_) result_ = consumeToken(builder_, COMMENT_BLOCK);
     if (!result_) result_ = consumeToken(builder_, COMMENT_REST);
-    if (!result_) result_ = consumeToken(builder_, PERCENT);
-    if (!result_) result_ = consumeToken(builder_, QMARK);
-    if (!result_) result_ = consumeToken(builder_, EOF);
+    if (!result_) result_ = consumeToken(builder_, CRLF);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // (KEY? SEPARATOR VALUE?) | KEY
+  public static boolean property(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "property")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, PROPERTY, "<property>");
+    result_ = property_0(builder_, level_ + 1);
+    if (!result_) result_ = KEY(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
+  }
+
+  // KEY? SEPARATOR VALUE?
+  private static boolean property_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "property_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = property_0_0(builder_, level_ + 1);
+    result_ = result_ && consumeToken(builder_, SEPARATOR);
+    result_ = result_ && property_0_2(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // KEY?
+  private static boolean property_0_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "property_0_0")) return false;
+    KEY(builder_, level_ + 1);
+    return true;
+  }
+
+  // VALUE?
+  private static boolean property_0_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "property_0_2")) return false;
+    consumeToken(builder_, VALUE);
+    return true;
   }
 
 }

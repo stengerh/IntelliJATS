@@ -4,8 +4,12 @@ package com.atslangplugin;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
-import com.atslangplugin.ATSTokenTypes;
 import com.intellij.psi.TokenType;
+
+import static com.intellij.psi.TokenType.BAD_CHARACTER;
+import static com.intellij.psi.TokenType.WHITE_SPACE;
+//TODO: static import this
+import com.atslangplugin.psi.ATSTokenTypes;
 
 
 /**
@@ -1299,7 +1303,7 @@ public class ATSLexer implements FlexLexer {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { return ATSTokenTypes.BAD_CHARACTER;
+            { return BAD_CHARACTER;
             }
           case 166: break;
           case 2: 
@@ -1311,7 +1315,7 @@ public class ATSLexer implements FlexLexer {
             }
           case 168: break;
           case 4: 
-            { return ATSTokenTypes.WHITE_SPACE;
+            { return WHITE_SPACE;
             }
           case 169: break;
           case 5: 
@@ -1835,7 +1839,7 @@ public class ATSLexer implements FlexLexer {
             }
           case 299: break;
           case 135: 
-            { return ATSTokenTypes.DYNLOAD;
+            { return ATSTokenTypes.SRPDYNLOAD;
             }
           case 300: break;
           case 136: 
@@ -1851,7 +1855,7 @@ public class ATSLexer implements FlexLexer {
             }
           case 303: break;
           case 139: 
-            { return ATSTokenTypes.STALOAD;
+            { return ATSTokenTypes.SRPSTALOAD;
             }
           case 304: break;
           case 140: 

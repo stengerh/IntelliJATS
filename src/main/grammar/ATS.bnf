@@ -8,30 +8,40 @@
   psiPackage="com.atslangplugin.psi"
   psiImplPackage="com.atslangplugin.psi.impl"
 
-  elementTypeHolderClass="com.atslangplugin.psi.ATSTypes"
+  elementTypeHolderClass="com.atslangplugin.psi.ATSTokenTypes"
   elementTypeClass="com.atslangplugin.psi.ATSElementType"
   tokenTypeClass="com.atslangplugin.psi.ATSTokenType"
 }
 
 ATSFile ::= item_*
 
-private item_ ::= (property|COMMENT|CRLF)
+private item_ ::= (property|COMMENT | COMMENT_LINE |
+                            COMMENT_BLOCK |
+                            COMMENT_REST | CRLF)
 
 property ::= (KEY? SEPARATOR VALUE?) | KEY
 
 KEY ::=
 NONE |
+
 AT |
-BACKSLASH |
+
+BAR |
 BANG |
 BQUOTE |
+BACKSLASH |
+
 COLON |
 COLONLT |
+
 DOLLAR |
+
 DOT |
 DOTDOT |
 DOTDOTDOT |
+
 DOTINT |
+
 EQ |
 EQGT |
 EQLT |
@@ -39,39 +49,54 @@ EQLTGT |
 EQSLASHEQGT |
 EQGTGT |
 EQSLASHEQGTGT |
+
 HASH |
+
 LT |
 GT |
+
 GTLT |
 DOTLT |
 GTDOT |
 DOTLTGTDOT |
+
 MINUSGT |
 MINUSLT |
 MINUSLTGT |
+
 TILDE |
+
+// HX: for absprop, abstype, abst@ype;
 ABSTYPE |
-AND |
-AS |
+
 ASSUME |
+REASSUME |
+
+AS |
+AND |
 BEGIN |
 CASE |
 CLASSDEC |
 DATASORT |
 DATATYPE |
 DO |
-DYNLOAD |
 ELSE |
 END |
 EXCEPTION |
+
 EXTERN |
 EXTYPE |
 EXTVAR |
+
 FIX |
 FIXITY |
+FOR |
 FORSTAR |
 FUN |
+
 IF |
+IFCASE |
+
 IMPLEMENT |
 IMPORT |
 IN |
@@ -84,15 +109,15 @@ OVERLOAD |
 OF |
 OP |
 REC |
-REFAT |
-REQUIRE |
-SCASE |
+
 SIF |
-SORTDEF |
+SCASE |
+
 STACST |
 STADEF |
-STALOAD |
 STATIC |
+SORTDEF |
+
 SYMELIM |
 SYMINTR |
 THEN |
@@ -100,6 +125,7 @@ TKINDEF |
 TRY |
 TYPE |
 TYPEDEF |
+
 VAL |
 VAR |
 WHEN |
@@ -108,74 +134,143 @@ WHILE |
 WHILESTAR |
 WITH |
 WITHTYPE |
+// end of [WITHTYPE] // HX: it is from DML and now rarely used |
+
 ADDRAT |
 FOLDAT |
 FREEAT |
 VIEWAT |
-DLRARRPSZ |
+
 DLRDELAY |
+
+DLRARRPSZ |
+
+DLRTYREP |
+DLRD2CTYPE |
+
 DLREFFMASK |
 DLREFFMASK_ARG |
+
 DLREXTERN |
-DLREXTKIND |
 DLREXTYPE |
+DLREXTKIND |
 DLREXTYPE_STRUCT |
+
 DLREXTVAL |
 DLREXTFCALL |
 DLREXTMCALL |
-DLRBREAK |
-DLRCONTINUE |
-DLRRAISE |
-DLRLST |
-DLRREC |
-DLRTUP |
+
+DLRLITERAL |
+
 DLRMYFILENAME |
 DLRMYLOCATION |
 DLRMYFUNCTION |
+
+DLRLST |
+DLRREC |
+DLRTUP |
+
+DLRBREAK |
+DLRCONTINUE |
+
+DLRRAISE |
+
 DLRSHOWTYPE |
+
 DLRVCOPYENV |
-SRPASSERT |
-SRPDEFINE |
+
+DLRTEMPENVER |
+
+DLRSOLASSERT |
+DLRSOLVERIFY |
+
+SRPIF |
+SRPIFDEF |
+SRPIFNDEF |
+
+SRPTHEN |
+
 SRPELIF |
 SRPELIFDEF |
 SRPELIFNDEF |
 SRPELSE |
+
 SRPENDIF |
+
 SRPERROR |
-SRPIF |
-SRPIFDEF |
-SRPIFNDEF |
-SRPINCLUDE |
+SRPPRERR |
 SRPPRINT |
-SRPTHEN |
+
+SRPASSERT |
+
 SRPUNDEF |
+SRPDEFINE |
+
+SRPINCLUDE |
+
+SRPSTALOAD |
+SRPDYNLOAD |
+
+SRPREQUIRE |
+
+SRPPRAGMA |
+SRPCODEGEN2 |
+SRPCODEGEN3 |
+
+IDENalp |
+IDENsym |
+IDENarr |
+IDENtmp |
+IDENdlr |
+IDENsrp |
+IDENext |
+
 INT |
+
 CHAR |
+
 FLOAT |
+
 CDATA |
 STRING |
+
 COMMA |
 SEMICOLON |
+
 LPAREN |
 RPAREN |
 LBRACKET |
 RBRACKET |
 LBRACE |
 RBRACE |
+
 ATLPAREN |
 QUOTELPAREN |
 ATLBRACKET |
 QUOTELBRACKET |
-HASHLBRACKETOLON |
+HASHLBRACKET |
 ATLBRACE |
 QUOTELBRACE |
+
 BQUOTELPAREN |
 COMMALPAREN |
 PERCENTLPAREN |
+
 EXTCODE |
-COMMENT_LINE |
-COMMENT_BLOCK |
-COMMENT_REST |
+
+COMMENline |
+COMMENblock |
+COMMENrest |
+
+ERR |
+
+EOF |
+// some modified types that don't exactly match the ATS lexer
+IDENTIFIER |
+VAL_IDENTIFIER |
+REF_IDENTIFIER |
 PERCENT |
+HASHLBRACKETOLON |
+REFAT |
 QMARK |
-EOF
+REQUIRE

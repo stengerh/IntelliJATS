@@ -11,19 +11,25 @@ import static com.atslangplugin.psi.ATSTokenTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.atslangplugin.psi.*;
 
-public class ATSKeyImpl extends ASTWrapperPsiElement implements ATSKey {
+public class ATSPropertyImpl extends ASTWrapperPsiElement implements ATSProperty {
 
-  public ATSKeyImpl(ASTNode node) {
+  public ATSPropertyImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull ATSVisitor visitor) {
-    visitor.visitKey(this);
+    visitor.visitProperty(this);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof ATSVisitor) accept((ATSVisitor)visitor);
     else super.accept(visitor);
+  }
+
+  @Override
+  @Nullable
+  public ATSKey getKey() {
+    return findChildByClass(ATSKey.class);
   }
 
 }

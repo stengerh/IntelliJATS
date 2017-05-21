@@ -47,7 +47,7 @@ targetCompatibility = 1.8
 
 apply plugin: 'org.jetbrains.grammarkit'
 grammarKit {
-//    grammarKitRelease = '1.5.1'
+//    grammarKitRelease = '1.5.1' //TODO: bump to latest when stable
     grammarKitTargetRoot = 'src/gen/java'
     purgeOldFiles = false //todo: muliple generated locations for better cleaning?
 }

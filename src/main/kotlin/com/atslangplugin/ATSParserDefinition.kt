@@ -2,7 +2,7 @@ package com.atslangplugin
 
 import com.atslangplugin.parser.ATSParser
 import com.atslangplugin.psi.ATSFile
-import com.atslangplugin.psi.ATSTypes
+import com.atslangplugin.psi.ATSTokenTypes
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
 import com.intellij.lang.PsiParser
@@ -32,6 +32,7 @@ class ATSParserDefinition : ParserDefinition {
     }
 
     override fun getStringLiteralElements(): TokenSet {
+        //TODO
         return TokenSet.EMPTY
     }
 
@@ -54,16 +55,14 @@ class ATSParserDefinition : ParserDefinition {
     }
 
     override fun createElement(node: ASTNode): PsiElement {
-        return ATSTypes.Factory.createElement(node)
+        return ATSTokenTypes.Factory.createElement(node)
     }
 
     companion object {
         val WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE)
         val COMMENTS = TokenSet.create(
-//                ATSTypes.COMMENT,
-                ATSTypes.COMMENT_BLOCK,
-                ATSTypes.COMMENT_LINE,
-                ATSTypes.COMMENT_REST)
+                ATSTokenTypes.COMMENT
+        )
 
         val FILE = IFileElementType(ATSLanguage)
     }

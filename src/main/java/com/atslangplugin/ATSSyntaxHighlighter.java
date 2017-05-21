@@ -1,5 +1,6 @@
 package com.atslangplugin;
 
+import com.atslangplugin.psi.ATSTokenTypes;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
@@ -7,12 +8,10 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.intellij.openapi.editor.DefaultLanguageHighlighterColors.*;
-
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
 public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
@@ -111,7 +110,8 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
 
     @NotNull
     private static final Map<IElementType, TextAttributesKey[]> tokenColorMap;
-    static{
+
+    static {
         Map<IElementType, TextAttributesKey[]> tmpMap =
                 new HashMap<>();
         tmpMap.put(ATSTokenTypes.ABSTYPE, ATS_TYPE_DECLARATIONS_KEYS);
@@ -168,7 +168,7 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
         tmpMap.put(ATSTokenTypes.DOTINT, ATS_OPERATION_SIGN_KEYS); // what is it?
         tmpMap.put(ATSTokenTypes.DOTLT, ATS_KEYWORD_KEYS);
         tmpMap.put(ATSTokenTypes.DOTLTGTDOT, ATS_KEYWORD_KEYS);
-        tmpMap.put(ATSTokenTypes.DYNLOAD, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPDYNLOAD, ATS_KEYWORD_KEYS);
         tmpMap.put(ATSTokenTypes.ELSE, ATS_KEYWORD_KEYS);
         tmpMap.put(ATSTokenTypes.END, ATS_KEYWORD_KEYS);
         // don't color EOF
@@ -251,7 +251,7 @@ public class ATSSyntaxHighlighter extends SyntaxHighlighterBase {
         tmpMap.put(ATSTokenTypes.SRPUNDEF, ATS_DIRECTIVES_KEYS);
         tmpMap.put(ATSTokenTypes.STACST, ATS_VAL_DECLARATIONS_KEYS);
         tmpMap.put(ATSTokenTypes.STADEF, ATS_TYPE_DECLARATIONS_KEYS);
-        tmpMap.put(ATSTokenTypes.STALOAD, ATS_KEYWORD_KEYS);
+        tmpMap.put(ATSTokenTypes.SRPSTALOAD, ATS_KEYWORD_KEYS);
         tmpMap.put(ATSTokenTypes.STATIC, ATS_TYPE_DECLARATIONS_KEYS);
         tmpMap.put(ATSTokenTypes.STRING, ATS_STRING_KEYS);
         tmpMap.put(ATSTokenTypes.SYMELIM, ATS_VAL_DECLARATIONS_KEYS);

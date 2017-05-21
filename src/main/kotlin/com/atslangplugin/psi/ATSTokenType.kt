@@ -9,10 +9,7 @@ class ATSTokenType(@NonNls debugName: String) : IElementType(debugName, ATSLangu
     override fun toString(): String {
         return "ATSTokenType." + super.toString()
     }
-}
 
 
-sealed class CreateSubscriptionResult {
-    class Success(val subscription: Int): CreateSubscriptionResult()
-    class Failure(val errors: List<String>): CreateSubscriptionResult()
+
 }

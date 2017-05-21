@@ -8,3 +8,5 @@ auto commenter annoyingly jumps lines
 
 integrating with the clion pugin would be ideal, but it hasn't been released yet
 * https://intellij-support.jetbrains.com/hc/en-us/articles/206558629-Is-there-a-community-edition-for-CLion-Is-CLion-available-as-a-plugin-for-IntelliJ-IDEA-
+
+the lexer goes (pats_lexing.sats) undergoes frequent enough changes that some more direct way to test should be employed.  prehaps checkout the the file and jsonized and then staticly confirm it is accurite 

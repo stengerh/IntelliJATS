@@ -1,10 +1,8 @@
-* use d2eclist from jsonize as the "Lexer"
+* Bug: (* *) style comments should nest
+
+* use d2eclist from jsonize as the "Lexer"?
 
 
-
-* generate jflex and bnf through the build system. (and in the correct directories)
-  * https://github.com/jprante/gradle-plugin-jflex
-  * what does the BNF project?
 
 * standardize the new line encoding
 

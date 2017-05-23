@@ -8,15 +8,23 @@ An ATS Plugin for IntelliJ IDEA.
 ## Current Features
 * Complete JFlex lexer based on the ATS2 lexer definition
 * Customizable syntax highlighting
-* Building ATS programs (indirectly; use a [makefile wrapper](https://gist.github.com/bbarker/c73ecf257bca966c1efd))
+* Building ATS programs (with the [makefile support plugin](https://plugins.jetbrains.com/plugin/9333-makefile-support))
 * An icon for the various ATS files
 
 ## Important Notes for Development
 
-Before working with this project, you'll want to follow
-the prerequisites found in the [IntelliJ Documentation]
-(https://confluence.jetbrains.com/display/IntelliJIDEA/Prerequisites).
+This project is now build using gradle.  Intellij has very good gradle support.
 
-If you plan to try using the PSI parser or possibly other
-parts of the PSI toolkit, you'll need to mark the `gen` folder as a
-"Sources Root" in IntelliJ.
+To experiment wih the plugin from sources run
+
+```
+$ gradle runIde
+```
+(warning it will download an entire development copy of IntelliJ, this can be very large)
+
+To regenerate the lexer and parser run
+
+```
+$ gradle generateATSLexer
+$ gradle generateATSParser
+```

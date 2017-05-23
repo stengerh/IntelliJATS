@@ -95,7 +95,7 @@ intellij {
     plugins['org.intellij.plugins.markdown:8.5.0.20160208']
 //    plugins ['name.kropp.intellij.makefile:1.1']
 //    plugins 'gradle' if we need to build with gradle
-    pluginName 'yet_another_plugin'
+    pluginName 'IntelliJATS'
 }
 
 

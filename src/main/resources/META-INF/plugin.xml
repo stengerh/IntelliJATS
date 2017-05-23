@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>com.atslangplugin</id>
   <name>IntelliJATS</name>
-  <version>1.1</version>
+  <version>1.2.0</version>
   <!-- TODO: add "vendor"-->
   <vendor email="brandon.barker@cornell.edu" url="http://www.cac.cornell.edu/">Cornell Center for Advanced Computing
   </vendor>
@@ -30,13 +30,17 @@
   <extensions defaultExtensionNs="com.intellij">
     <fileTypeFactory implementation="com.atslangplugin.ATSFileTypeFactory"/>
 
-    <!-- TODO: the parser generator is too weak, we should replace this with ATS jsonize-->
+    <!-- TODO: the parser generator is too weak, we should replace this with ATS jsonize? -->
     <lang.parserDefinition language="ATS" implementationClass="com.atslangplugin.ATSParserDefinition"/>
+
+
+    <!--<externalAnnotator language="ATS" implementationClass="com.atslangplugin.CompileAnnotator"/>-->
 
     <colorSettingsPage implementation="com.atslangplugin.ATSColorSettingsPage"/>
     <lang.syntaxHighlighterFactory language="ATS"
                                    implementationClass="com.atslangplugin.ATSSyntaxHighlighterFactory"/>
     <lang.commenter language="ATS" implementationClass="com.atslangplugin.ATSCommenter"/>
+    <!--<annotator language="ATS" implementationClass="com.atslangplugin.CompileAnnotator"/>-->
   </extensions>
 
   <application-components>

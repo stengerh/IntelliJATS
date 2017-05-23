@@ -1,7 +1,14 @@
+* multiline (* *) style comments not being properly highlighted
 * Bug: (* *) style comments should nest
+* typedef,datatype, dataprop should have syntax coloring
+* make sure sort constructors, type constructors, and term constructors can get different coloering (color them different by defualt)
 
-* use d2eclist from jsonize as the "Lexer"?
+* TODO: does jsonize give an error for fact2?
 
+
+* TODO: add support for cats
+
+"jsonize as lexer"
 
 
 * standardize the new line encoding

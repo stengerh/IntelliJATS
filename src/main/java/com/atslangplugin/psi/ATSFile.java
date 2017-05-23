@@ -11,6 +11,7 @@ import com.intellij.openapi.vfs.InvalidVirtualFileAccessException;
 import com.intellij.psi.FileViewProvider;
 import org.jetbrains.annotations.NotNull;
 
+//TODO: compare with make file plugin TODO convert to koltin
 public class ATSFile extends PsiFileBase {
 
     public ATSFile(@NotNull FileViewProvider viewProvider) {

@@ -74,9 +74,7 @@ end // end of [list_vt_quicksort]
 (* ****** ****** *)"""
     }
 
-    override fun getAdditionalHighlightingTagToDescriptorMap(): Map<String, TextAttributesKey>? {
-        return null
-    }
+    override fun getAdditionalHighlightingTagToDescriptorMap(): Map<String, TextAttributesKey>? = null
 
     override fun getAttributeDescriptors(): Array<AttributesDescriptor> {
         return DESCRIPTORS
@@ -91,6 +89,23 @@ end // end of [list_vt_quicksort]
     }
 
     companion object {
-        private val DESCRIPTORS = arrayOf(AttributesDescriptor("Block comments", ATSSyntaxHighlighter.ATS_BLOCK_COMMENT), AttributesDescriptor("Braces", ATSSyntaxHighlighter.ATS_BRACES), AttributesDescriptor("Brackets", ATSSyntaxHighlighter.ATS_BRACKETS), AttributesDescriptor("Commas", ATSSyntaxHighlighter.ATS_COMMA), AttributesDescriptor("Directives", ATSSyntaxHighlighter.ATS_DIRECTIVES), AttributesDescriptor("Identifiers", ATSSyntaxHighlighter.ATS_IDENTIFIER), AttributesDescriptor("Line comments", ATSSyntaxHighlighter.ATS_LINE_COMMENT), AttributesDescriptor("Keywords", ATSSyntaxHighlighter.ATS_KEYWORD), AttributesDescriptor("Local variables", ATSSyntaxHighlighter.ATS_LOCAL_VARIABLE), AttributesDescriptor("Numbers", ATSSyntaxHighlighter.ATS_NUMBER), AttributesDescriptor("Operators", ATSSyntaxHighlighter.ATS_OPERATION_SIGN), AttributesDescriptor("Parentheses", ATSSyntaxHighlighter.ATS_PARENTHESES), AttributesDescriptor("Semicolons", ATSSyntaxHighlighter.ATS_SEMICOLON), AttributesDescriptor("Strings", ATSSyntaxHighlighter.ATS_STRING), AttributesDescriptor("Type declarations", ATSSyntaxHighlighter.ATS_TYPE_DECLARATIONS), AttributesDescriptor("Val, Fun declarations", ATSSyntaxHighlighter.ATS_VAL_DECLARATIONS))
+        private val DESCRIPTORS = arrayOf(
+                AttributesDescriptor("Block comments", ATSSyntaxHighlighter.ATS_BLOCK_COMMENT),
+                AttributesDescriptor("Braces", ATSSyntaxHighlighter.ATS_BRACES),
+                AttributesDescriptor("Brackets", ATSSyntaxHighlighter.ATS_BRACKETS),
+                AttributesDescriptor("Commas", ATSSyntaxHighlighter.ATS_COMMA),
+                AttributesDescriptor("Directives", ATSSyntaxHighlighter.ATS_DIRECTIVES),
+                AttributesDescriptor("Identifiers", ATSSyntaxHighlighter.ATS_IDENTIFIER),
+                AttributesDescriptor("Line comments", ATSSyntaxHighlighter.ATS_LINE_COMMENT),
+                AttributesDescriptor("Keywords", ATSSyntaxHighlighter.ATS_KEYWORD),
+                AttributesDescriptor("Local variables", ATSSyntaxHighlighter.ATS_LOCAL_VARIABLE),
+                AttributesDescriptor("Numbers", ATSSyntaxHighlighter.ATS_NUMBER),
+                AttributesDescriptor("Operators", ATSSyntaxHighlighter.ATS_OPERATION_SIGN),
+                AttributesDescriptor("Parentheses", ATSSyntaxHighlighter.ATS_PARENTHESES),
+                AttributesDescriptor("Semicolons", ATSSyntaxHighlighter.ATS_SEMICOLON),
+                AttributesDescriptor("Strings", ATSSyntaxHighlighter.ATS_STRING),
+                AttributesDescriptor("Type declarations", ATSSyntaxHighlighter.ATS_TYPE_DECLARATIONS),
+                AttributesDescriptor("Val, Fun declarations", ATSSyntaxHighlighter.ATS_VAL_DECLARATIONS)
+        )
     }
 }

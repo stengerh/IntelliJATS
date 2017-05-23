@@ -25,7 +25,7 @@ plugins {
 
 group 'com.atslangplugin'
 //id 'IntelliJATS'
-version '1.2.0'
+version '0.1.0'
 
 
 apply plugin: 'java'

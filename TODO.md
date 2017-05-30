@@ -1,15 +1,34 @@
+* uninstall ats, install the course version
+
+* comments
+* syntax of the intro class we have reached
+
+
 * multiline (* *) style comments not being properly highlighted
+* /* */ not working
 * Bug: (* *) style comments should nest
+
 * typedef,datatype, dataprop should have syntax coloring
 * make sure sort constructors, type constructors, and term constructors can get different coloering (color them different by defualt)
 
+* will probly need to rely on the lexer/internal prarser for friendly errors, the compiler warnings are not great for those
+
+* need to extend the regular espression for type erroes, (or have hwx ommit more formatted errors)
 * TODO: does jsonize give an error for fact2?
+
+* go through old course repo and make sure at least there are no errors there
+
+* make the ats executable configurable
 
 
 * TODO: add support for cats
 
-"jsonize as lexer"
+"jsonize as lexer" (?)
 
+
+* get complier underlining to happen in the right place based on line and pos: otherwise line encoding messes things up
+
+* TODO: a test of all the ways somments and string literals can nest
 
 * standardize the new line encoding
 

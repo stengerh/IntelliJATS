@@ -1,6 +1,6 @@
 package com.atslangplugin
 
-import com.atslangplugin.parser.ATSParser
+import com.atslangplugin.parser.ATSParserWrapper
 import com.atslangplugin.psi.ATSFile
 import com.atslangplugin.psi.ATSTokenTypes
 import com.intellij.lang.ASTNode
@@ -37,7 +37,7 @@ class ATSParserDefinition : ParserDefinition {
     }
 
     override fun createParser(project: Project): PsiParser {
-        return ATSParser()
+        return ATSParserWrapper()
     }
 
     override fun getFileNodeType(): IFileElementType {
@@ -51,6 +51,7 @@ class ATSParserDefinition : ParserDefinition {
     override fun spaceExistanceTypeBetweenTokens(
             Left: ASTNode, Right: ASTNode
     ): ParserDefinition.SpaceRequirements {
+        //TODO: this should be a lot more specific
         return ParserDefinition.SpaceRequirements.MAY
     }
 

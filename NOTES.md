@@ -28,5 +28,15 @@ auto commenter annoyingly jumps lines
 
 integrating with the clion pugin would be ideal, but it hasn't been released yet
 * https://intellij-support.jetbrains.com/hc/en-us/articles/206558629-Is-there-a-community-edition-for-CLion-Is-CLion-available-as-a-plugin-for-IntelliJ-IDEA-
+* when clion is usable linking to the emmitted comments is possible (ideally collaps the comments and then link the actual generated line)
+
+/*
+emit_instr: loc0 = /cygdrive/c/Users/Mark/IdeaProjectsgit/cs320-2017-summer/lectures/lecture-05-23/hello.dats: 106(line=16, offs=1) -- 151(line=17, offs=35)
+*/
+
 
 the lexer goes (pats_lexing.sats) undergoes frequent enough changes that some more direct way to test should be employed.  prehaps checkout the the file and jsonized and then staticly confirm it is accurite 
+
+It would be good to start a convention such that generated files go into a "gen" directory and exicutables go to a "build" directory
+
+Intellij is less agressive about showing inferred types?  how does the scala plugin handle this?

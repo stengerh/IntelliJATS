@@ -166,45 +166,44 @@ public class ATSLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\2\0\1\1\1\2\1\3\2\4\1\5\1\6\1\7"+
-    "\1\10\1\11\1\12\1\5\11\2\2\1\1\13\1\14"+
-    "\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24"+
-    "\1\25\1\26\1\27\1\30\1\1\1\31\10\2\1\32"+
-    "\1\33\1\34\1\35\1\1\1\36\2\37\2\40\1\41"+
-    "\4\0\1\42\16\0\1\37\2\5\1\43\1\44\11\2"+
-    "\1\45\6\2\1\46\4\2\1\47\1\50\1\2\1\51"+
-    "\1\52\1\0\1\53\1\54\1\55\1\17\1\16\1\56"+
-    "\1\57\1\16\1\60\2\17\1\61\1\62\1\63\1\64"+
-    "\1\65\1\66\1\67\1\0\1\70\1\71\1\72\1\73"+
-    "\1\74\4\2\1\75\22\2\1\76\1\77\1\37\1\0"+
-    "\1\100\27\0\3\2\1\101\3\2\1\102\1\2\1\103"+
-    "\2\2\1\104\3\2\1\105\1\46\3\2\1\106\1\101"+
-    "\2\2\3\51\1\52\1\107\1\110\1\0\1\16\1\17"+
-    "\1\0\1\111\1\112\1\113\1\114\4\2\1\115\4\2"+
-    "\1\116\14\2\1\117\1\120\4\2\15\0\1\121\3\0"+
-    "\1\122\4\0\1\123\4\0\5\2\1\124\1\2\1\103"+
-    "\1\2\1\103\2\2\1\125\4\2\1\105\2\2\1\126"+
-    "\1\127\2\2\1\0\1\51\1\0\2\107\1\130\1\16"+
-    "\1\131\16\2\1\132\1\133\10\2\1\117\1\134\1\2"+
-    "\1\135\3\2\6\0\1\136\1\137\2\0\1\140\30\0"+
-    "\1\141\4\2\1\124\1\142\11\2\1\143\1\144\2\2"+
-    "\1\51\1\145\1\0\1\146\1\147\5\2\1\150\1\151"+
-    "\10\2\1\132\4\2\1\117\1\152\4\2\1\153\1\154"+
-    "\2\2\2\0\1\155\1\156\1\0\1\157\2\0\1\160"+
-    "\1\0\1\161\1\0\1\121\1\0\1\162\7\0\1\122"+
-    "\2\0\1\163\2\0\1\164\1\0\1\123\1\0\1\123"+
-    "\5\0\1\141\1\2\1\165\1\166\7\2\1\167\1\170"+
-    "\1\171\2\2\1\145\3\2\1\172\1\2\1\173\1\2"+
-    "\1\174\1\175\4\2\1\124\4\2\1\176\1\177\1\0"+
-    "\1\200\1\201\2\0\1\202\2\0\1\203\1\0\1\204"+
-    "\1\205\2\0\1\122\1\206\7\0\6\2\1\207\1\2"+
-    "\1\210\1\2\2\211\1\212\1\213\1\214\1\215\1\216"+
-    "\1\217\4\2\1\220\1\0\1\221\1\0\1\222\3\0"+
-    "\1\223\7\0\1\2\1\224\1\225\2\226\1\2\1\227"+
-    "\1\2\2\230\1\231\1\232\1\233\1\0\1\234\1\0"+
-    "\1\235\5\0\1\236\1\237\3\0\1\240\6\0\1\241"+
-    "\1\242\1\243\1\244\3\0\1\211\2\0\1\245\2\0"+
-    "\1\241";
+    "\2\0\2\1\1\2\2\3\1\4\1\5\1\6\1\7"+
+    "\1\10\1\11\1\4\13\1\1\12\1\13\1\14\1\15"+
+    "\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25"+
+    "\1\26\1\27\1\1\1\30\10\1\1\31\1\32\1\33"+
+    "\1\34\1\1\1\35\2\36\2\37\1\40\4\0\1\41"+
+    "\16\0\1\36\2\4\1\42\1\43\11\1\1\44\6\1"+
+    "\1\45\4\1\1\46\1\47\1\1\1\50\1\51\1\0"+
+    "\1\52\1\53\1\54\1\16\1\15\1\55\1\56\1\15"+
+    "\1\57\2\16\1\60\1\61\1\62\1\63\1\64\1\65"+
+    "\1\66\1\0\1\67\1\70\1\71\1\72\1\73\4\1"+
+    "\1\74\22\1\1\75\1\76\1\36\1\0\1\77\27\0"+
+    "\3\1\1\100\3\1\1\101\1\1\1\102\2\1\1\103"+
+    "\3\1\1\104\1\45\3\1\1\105\1\100\2\1\3\50"+
+    "\1\51\1\106\1\107\1\0\1\15\1\16\1\0\1\110"+
+    "\1\111\1\112\1\113\4\1\1\114\4\1\1\115\14\1"+
+    "\1\116\1\117\4\1\15\0\1\120\3\0\1\121\4\0"+
+    "\1\122\4\0\5\1\1\123\1\1\1\102\1\1\1\102"+
+    "\2\1\1\124\4\1\1\104\2\1\1\125\1\126\2\1"+
+    "\1\0\1\50\1\0\2\106\1\127\1\15\1\130\16\1"+
+    "\1\131\1\132\10\1\1\116\1\133\1\1\1\134\3\1"+
+    "\6\0\1\135\1\136\2\0\1\137\30\0\1\140\4\1"+
+    "\1\123\1\141\11\1\1\142\1\143\2\1\1\50\1\144"+
+    "\1\0\1\145\1\146\5\1\1\147\1\150\10\1\1\131"+
+    "\4\1\1\116\1\151\4\1\1\152\1\153\2\1\2\0"+
+    "\1\154\1\155\1\0\1\156\2\0\1\157\1\0\1\160"+
+    "\1\0\1\120\1\0\1\161\7\0\1\121\2\0\1\162"+
+    "\2\0\1\163\1\0\1\122\1\0\1\122\5\0\1\140"+
+    "\1\1\1\164\1\165\7\1\1\166\1\167\1\170\2\1"+
+    "\1\144\3\1\1\171\1\1\1\172\1\1\1\173\1\174"+
+    "\4\1\1\123\4\1\1\175\1\176\1\0\1\177\1\200"+
+    "\2\0\1\201\2\0\1\202\1\0\1\203\1\204\2\0"+
+    "\1\121\1\205\7\0\6\1\1\206\1\1\1\207\1\1"+
+    "\2\210\1\211\1\212\1\213\1\214\1\215\1\216\4\1"+
+    "\1\217\1\0\1\220\1\0\1\221\3\0\1\222\7\0"+
+    "\1\1\1\223\1\224\2\225\1\1\1\226\1\1\2\227"+
+    "\1\230\1\231\1\232\1\0\1\233\1\0\1\234\5\0"+
+    "\1\235\1\236\3\0\1\237\6\0\1\240\1\241\1\242"+
+    "\1\243\3\0\1\210\2\0\1\244\2\0\1\240";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[617];
@@ -1303,665 +1302,661 @@ public class ATSLexer implements FlexLexer {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { return BAD_CHARACTER;
-            }
-          case 166: break;
-          case 2: 
             { return ATSTokenTypes.IDENTIFIER;
             }
-          case 167: break;
-          case 3: 
+          case 165: break;
+          case 2: 
             { return ATSTokenTypes.BACKSLASH;
             }
-          case 168: break;
-          case 4: 
+          case 166: break;
+          case 3: 
             { return WHITE_SPACE;
             }
-          case 169: break;
-          case 5: 
+          case 167: break;
+          case 4: 
             { return ATSTokenTypes.INT;
             }
-          case 170: break;
-          case 6: 
+          case 168: break;
+          case 5: 
             { return ATSTokenTypes.PERCENT;
             }
-          case 171: break;
-          case 7: 
+          case 169: break;
+          case 6: 
             { return ATSTokenTypes.LBRACE;
             }
-          case 172: break;
-          case 8: 
+          case 170: break;
+          case 7: 
             { return ATSTokenTypes.HASH;
             }
-          case 173: break;
-          case 9: 
+          case 171: break;
+          case 8: 
             { return ATSTokenTypes.DOLLAR;
             }
-          case 174: break;
-          case 10: 
+          case 172: break;
+          case 9: 
             { return ATSTokenTypes.RBRACE;
             }
-          case 175: break;
-          case 11: 
+          case 173: break;
+          case 10: 
             { return ATSTokenTypes.RPAREN;
             }
-          case 176: break;
-          case 12: 
+          case 174: break;
+          case 11: 
             { return ATSTokenTypes.LPAREN;
             }
-          case 177: break;
-          case 13: 
+          case 175: break;
+          case 12: 
             { return ATSTokenTypes.DOT;
             }
-          case 178: break;
-          case 14: 
+          case 176: break;
+          case 13: 
             { return ATSTokenTypes.STRING;
             }
-          case 179: break;
-          case 15: 
+          case 177: break;
+          case 14: 
             { return ATSTokenTypes.CHAR;
             }
-          case 180: break;
-          case 16: 
+          case 178: break;
+          case 15: 
             { return ATSTokenTypes.LBRACKET;
             }
-          case 181: break;
-          case 17: 
+          case 179: break;
+          case 16: 
             { return ATSTokenTypes.AT;
             }
-          case 182: break;
-          case 18: 
+          case 180: break;
+          case 17: 
             { return ATSTokenTypes.BANG;
             }
-          case 183: break;
-          case 19: 
+          case 181: break;
+          case 18: 
             { return ATSTokenTypes.BAR;
             }
-          case 184: break;
-          case 20: 
+          case 182: break;
+          case 19: 
             { return ATSTokenTypes.BQUOTE;
             }
-          case 185: break;
-          case 21: 
+          case 183: break;
+          case 20: 
             { return ATSTokenTypes.COLON;
             }
-          case 186: break;
-          case 22: 
+          case 184: break;
+          case 21: 
             { return ATSTokenTypes.LT;
             }
-          case 187: break;
-          case 23: 
+          case 185: break;
+          case 22: 
             { return ATSTokenTypes.EQ;
             }
-          case 188: break;
-          case 24: 
+          case 186: break;
+          case 23: 
             { return ATSTokenTypes.GT;
             }
-          case 189: break;
-          case 25: 
+          case 187: break;
+          case 24: 
             { return ATSTokenTypes.TILDE;
             }
-          case 190: break;
-          case 26: 
+          case 188: break;
+          case 25: 
             { return ATSTokenTypes.COMMA;
             }
-          case 191: break;
-          case 27: 
+          case 189: break;
+          case 26: 
             { return ATSTokenTypes.SEMICOLON;
             }
-          case 192: break;
-          case 28: 
+          case 190: break;
+          case 27: 
             { return ATSTokenTypes.RBRACKET;
             }
-          case 193: break;
-          case 29: 
+          case 191: break;
+          case 28: 
             { return ATSTokenTypes.QMARK;
             }
-          case 194: break;
-          case 30: 
+          case 192: break;
+          case 29: 
             { return ATSTokenTypes.CRLF;
             }
-          case 195: break;
-          case 31: 
+          case 193: break;
+          case 30: 
             { return ATSTokenTypes.FLOAT;
             }
-          case 196: break;
-          case 32: 
+          case 194: break;
+          case 31: 
             { return ATSTokenTypes.EXTCODE;
             }
-          case 197: break;
-          case 33: 
+          case 195: break;
+          case 32: 
             { return ATSTokenTypes.PERCENTLPAREN;
             }
-          case 198: break;
-          case 34: 
+          case 196: break;
+          case 33: 
             { return ATSTokenTypes.HASHLBRACKETOLON;
             }
-          case 199: break;
-          case 35: 
+          case 197: break;
+          case 34: 
             { return ATSTokenTypes.IN;
             }
-          case 200: break;
-          case 36: 
+          case 198: break;
+          case 35: 
             { return ATSTokenTypes.IF;
             }
-          case 201: break;
-          case 37: 
+          case 199: break;
+          case 36: 
             { return ATSTokenTypes.DO;
             }
-          case 202: break;
-          case 38: 
+          case 200: break;
+          case 37: 
             { return ATSTokenTypes.FUN;
             }
-          case 203: break;
-          case 39: 
+          case 201: break;
+          case 38: 
             { return ATSTokenTypes.OF;
             }
-          case 204: break;
-          case 40: 
+          case 202: break;
+          case 39: 
             { return ATSTokenTypes.OP;
             }
-          case 205: break;
-          case 41: 
+          case 203: break;
+          case 40: 
             { return ATSTokenTypes.COMMENT_LINE;
             }
-          case 206: break;
-          case 42: 
+          case 204: break;
+          case 41: 
             { return ATSTokenTypes.COMMENT_BLOCK;
             }
-          case 207: break;
-          case 43: 
+          case 205: break;
+          case 42: 
             { return ATSTokenTypes.DOTINT;
             }
-          case 208: break;
-          case 44: 
+          case 206: break;
+          case 43: 
             { return ATSTokenTypes.DOTDOT;
             }
-          case 209: break;
-          case 45: 
+          case 207: break;
+          case 44: 
             { return ATSTokenTypes.DOTLT;
             }
-          case 210: break;
-          case 46: 
+          case 208: break;
+          case 45: 
             { return ATSTokenTypes.QUOTELBRACE;
             }
-          case 211: break;
-          case 47: 
+          case 209: break;
+          case 46: 
             { return ATSTokenTypes.QUOTELPAREN;
             }
-          case 212: break;
-          case 48: 
+          case 210: break;
+          case 47: 
             { return ATSTokenTypes.QUOTELBRACKET;
             }
-          case 213: break;
-          case 49: 
+          case 211: break;
+          case 48: 
             { return ATSTokenTypes.ATLBRACE;
             }
-          case 214: break;
-          case 50: 
+          case 212: break;
+          case 49: 
             { return ATSTokenTypes.ATLPAREN;
             }
-          case 215: break;
-          case 51: 
+          case 213: break;
+          case 50: 
             { return ATSTokenTypes.ATLBRACKET;
             }
-          case 216: break;
-          case 52: 
+          case 214: break;
+          case 51: 
             { return ATSTokenTypes.VAL_IDENTIFIER;
             }
-          case 217: break;
-          case 53: 
+          case 215: break;
+          case 52: 
             { return ATSTokenTypes.BQUOTELPAREN;
             }
-          case 218: break;
-          case 54: 
+          case 216: break;
+          case 53: 
             { return ATSTokenTypes.COLONLT;
             }
-          case 219: break;
-          case 55: 
+          case 217: break;
+          case 54: 
             { return ATSTokenTypes.GTLT;
             }
-          case 220: break;
-          case 56: 
+          case 218: break;
+          case 55: 
             { return ATSTokenTypes.EQLT;
             }
-          case 221: break;
-          case 57: 
+          case 219: break;
+          case 56: 
             { return ATSTokenTypes.EQGT;
             }
-          case 222: break;
-          case 58: 
+          case 220: break;
+          case 57: 
             { return ATSTokenTypes.GTDOT;
             }
-          case 223: break;
-          case 59: 
+          case 221: break;
+          case 58: 
             { return ATSTokenTypes.MINUSLT;
             }
-          case 224: break;
-          case 60: 
+          case 222: break;
+          case 59: 
             { return ATSTokenTypes.MINUSGT;
             }
-          case 225: break;
-          case 61: 
+          case 223: break;
+          case 60: 
             { return ATSTokenTypes.AS;
             }
-          case 226: break;
-          case 62: 
+          case 224: break;
+          case 61: 
             { return ATSTokenTypes.COMMALPAREN;
             }
-          case 227: break;
-          case 63: 
+          case 225: break;
+          case 62: 
             { return ATSTokenTypes.REF_IDENTIFIER;
             }
-          case 228: break;
-          case 64: 
+          case 226: break;
+          case 63: 
             { return ATSTokenTypes.SRPIF;
             }
-          case 229: break;
-          case 65: 
+          case 227: break;
+          case 64: 
             { return ATSTokenTypes.DLREFFMASK_ARG;
             }
-          case 230: break;
-          case 66: 
+          case 228: break;
+          case 65: 
             { return ATSTokenTypes.LET;
             }
-          case 231: break;
-          case 67: 
+          case 229: break;
+          case 66: 
             { return ATSTokenTypes.LAM;
             }
-          case 232: break;
-          case 68: 
+          case 230: break;
+          case 67: 
             { return ATSTokenTypes.END;
             }
-          case 233: break;
-          case 69: 
+          case 231: break;
+          case 68: 
             { return ATSTokenTypes.FIX;
             }
-          case 234: break;
-          case 70: 
+          case 232: break;
+          case 69: 
             { return ATSTokenTypes.REC;
             }
-          case 235: break;
-          case 71: 
+          case 233: break;
+          case 70: 
             { return ATSTokenTypes.COMMENT;
             }
-          case 236: break;
-          case 72: 
+          case 234: break;
+          case 71: 
             { return ATSTokenTypes.DOTDOTDOT;
             }
-          case 237: break;
-          case 73: 
+          case 235: break;
+          case 72: 
             { return ATSTokenTypes.EQLTGT;
             }
-          case 238: break;
-          case 74: 
+          case 236: break;
+          case 73: 
             { return ATSTokenTypes.EQGTGT;
             }
-          case 239: break;
-          case 75: 
+          case 237: break;
+          case 74: 
             { return ATSTokenTypes.MINUSLTGT;
             }
-          case 240: break;
-          case 76: 
+          case 238: break;
+          case 75: 
             { return ATSTokenTypes.AND;
             }
-          case 241: break;
-          case 77: 
+          case 239: break;
+          case 76: 
             { return ATSTokenTypes.SIF;
             }
-          case 242: break;
-          case 78: 
+          case 240: break;
+          case 77: 
             { return ATSTokenTypes.TRY;
             }
-          case 243: break;
-          case 79: 
+          case 241: break;
+          case 78: 
             { return ATSTokenTypes.VAL;
             }
-          case 244: break;
-          case 80: 
+          case 242: break;
+          case 79: 
             { return ATSTokenTypes.VAR;
             }
-          case 245: break;
-          case 81: 
+          case 243: break;
+          case 80: 
             { return ATSTokenTypes.DLRLST;
             }
-          case 246: break;
-          case 82: 
+          case 244: break;
+          case 81: 
             { return ATSTokenTypes.DLRREC;
             }
-          case 247: break;
-          case 83: 
+          case 245: break;
+          case 82: 
             { return ATSTokenTypes.DLRTUP;
             }
-          case 248: break;
-          case 84: 
+          case 246: break;
+          case 83: 
             { return ATSTokenTypes.CASE;
             }
-          case 249: break;
-          case 85: 
+          case 247: break;
+          case 84: 
             { return ATSTokenTypes.ELSE;
             }
-          case 250: break;
-          case 86: 
+          case 248: break;
+          case 85: 
             { return ATSTokenTypes.FORSTAR;
             }
-          case 251: break;
-          case 87: 
+          case 249: break;
+          case 86: 
             { return ATSTokenTypes.REFAT;
             }
-          case 252: break;
-          case 88: 
+          case 250: break;
+          case 87: 
             { return ATSTokenTypes.DOTLTGTDOT;
             }
-          case 253: break;
-          case 89: 
+          case 251: break;
+          case 88: 
             { return ATSTokenTypes.EQSLASHEQGT;
             }
-          case 254: break;
-          case 90: 
+          case 252: break;
+          case 89: 
             { return ATSTokenTypes.TYPE;
             }
-          case 255: break;
-          case 91: 
+          case 253: break;
+          case 90: 
             { return ATSTokenTypes.THEN;
             }
-          case 256: break;
-          case 92: 
+          case 254: break;
+          case 91: 
             { return ATSTokenTypes.WITH;
             }
-          case 257: break;
-          case 93: 
+          case 255: break;
+          case 92: 
             { return ATSTokenTypes.WHEN;
             }
-          case 258: break;
-          case 94: 
+          case 256: break;
+          case 93: 
             { return ATSTokenTypes.SRPELIF;
             }
-          case 259: break;
-          case 95: 
+          case 257: break;
+          case 94: 
             { return ATSTokenTypes.SRPELSE;
             }
-          case 260: break;
-          case 96: 
+          case 258: break;
+          case 95: 
             { return ATSTokenTypes.SRPTHEN;
             }
-          case 261: break;
-          case 97: 
+          case 259: break;
+          case 96: 
             { return ATSTokenTypes.FIXITY;
             }
-          case 262: break;
-          case 98: 
+          case 260: break;
+          case 97: 
             { return ATSTokenTypes.LOCAL;
             }
-          case 263: break;
-          case 99: 
+          case 261: break;
+          case 98: 
             { return ATSTokenTypes.FREEAT;
             }
-          case 264: break;
-          case 100: 
+          case 262: break;
+          case 99: 
             { return ATSTokenTypes.FOLDAT;
             }
-          case 265: break;
-          case 101: 
+          case 263: break;
+          case 100: 
             { return ATSTokenTypes.COMMENT_REST;
             }
-          case 266: break;
-          case 102: 
+          case 264: break;
+          case 101: 
             { return ATSTokenTypes.EQSLASHEQGTGT;
             }
-          case 267: break;
-          case 103: 
+          case 265: break;
+          case 102: 
             { return ATSTokenTypes.ADDRAT;
             }
-          case 268: break;
-          case 104: 
+          case 266: break;
+          case 103: 
             { return ATSTokenTypes.BEGIN;
             }
-          case 269: break;
-          case 105: 
+          case 267: break;
+          case 104: 
             { return ATSTokenTypes.SCASE;
             }
-          case 270: break;
-          case 106: 
+          case 268: break;
+          case 105: 
             { return ATSTokenTypes.VIEWAT;
             }
-          case 271: break;
-          case 107: 
+          case 269: break;
+          case 106: 
             { return ATSTokenTypes.WHILE;
             }
-          case 272: break;
-          case 108: 
+          case 270: break;
+          case 107: 
             { return ATSTokenTypes.WHERE;
             }
-          case 273: break;
-          case 109: 
+          case 271: break;
+          case 108: 
             { return ATSTokenTypes.SRPIFDEF;
             }
-          case 274: break;
-          case 110: 
+          case 272: break;
+          case 109: 
             { return ATSTokenTypes.SRPUNDEF;
             }
-          case 275: break;
-          case 111: 
+          case 273: break;
+          case 110: 
             { return ATSTokenTypes.SRPENDIF;
             }
-          case 276: break;
-          case 112: 
+          case 274: break;
+          case 111: 
             { return ATSTokenTypes.SRPERROR;
             }
-          case 277: break;
-          case 113: 
+          case 275: break;
+          case 112: 
             { return ATSTokenTypes.SRPPRINT;
             }
-          case 278: break;
-          case 114: 
+          case 276: break;
+          case 113: 
             { return ATSTokenTypes.DLRDELAY;
             }
-          case 279: break;
-          case 115: 
+          case 277: break;
+          case 114: 
             { return ATSTokenTypes.DLRRAISE;
             }
-          case 280: break;
-          case 116: 
+          case 278: break;
+          case 115: 
             { return ATSTokenTypes.DLRBREAK;
             }
-          case 281: break;
-          case 117: 
+          case 279: break;
+          case 116: 
             { return ATSTokenTypes.IMPORT;
             }
-          case 282: break;
-          case 118: 
+          case 280: break;
+          case 117: 
             { return ATSTokenTypes.NONFIX;
             }
-          case 283: break;
-          case 119: 
+          case 281: break;
+          case 118: 
             { return ATSTokenTypes.EXTERN;
             }
-          case 284: break;
-          case 120: 
+          case 282: break;
+          case 119: 
             { return ATSTokenTypes.EXTYPE;
             }
-          case 285: break;
-          case 121: 
+          case 283: break;
+          case 120: 
             { return ATSTokenTypes.EXTVAR;
             }
-          case 286: break;
-          case 122: 
+          case 284: break;
+          case 121: 
             { return ATSTokenTypes.ASSUME;
             }
-          case 287: break;
-          case 123: 
+          case 285: break;
+          case 122: 
             { return ATSTokenTypes.STACST;
             }
-          case 288: break;
-          case 124: 
+          case 286: break;
+          case 123: 
             { return ATSTokenTypes.STADEF;
             }
-          case 289: break;
-          case 125: 
+          case 287: break;
+          case 124: 
             { return ATSTokenTypes.STATIC;
             }
-          case 290: break;
-          case 126: 
+          case 288: break;
+          case 125: 
             { return ATSTokenTypes.WHILESTAR;
             }
-          case 291: break;
-          case 127: 
+          case 289: break;
+          case 126: 
             { return ATSTokenTypes.MACDEF;
             }
-          case 292: break;
-          case 128: 
+          case 290: break;
+          case 127: 
             { return ATSTokenTypes.SRPIFNDEF;
             }
-          case 293: break;
-          case 129: 
+          case 291: break;
+          case 128: 
             { return ATSTokenTypes.SRPDEFINE;
             }
-          case 294: break;
-          case 130: 
+          case 292: break;
+          case 129: 
             { return ATSTokenTypes.SRPASSERT;
             }
-          case 295: break;
-          case 131: 
+          case 293: break;
+          case 130: 
             { return ATSTokenTypes.DLREXTERN;
             }
-          case 296: break;
-          case 132: 
+          case 294: break;
+          case 131: 
             { return ATSTokenTypes.DLREXTYPE;
             }
-          case 297: break;
-          case 133: 
+          case 295: break;
+          case 132: 
             { return ATSTokenTypes.DLREXTVAL;
             }
-          case 298: break;
-          case 134: 
+          case 296: break;
+          case 133: 
             { return ATSTokenTypes.DLRARRPSZ;
             }
-          case 299: break;
-          case 135: 
+          case 297: break;
+          case 134: 
             { return ATSTokenTypes.SRPDYNLOAD;
             }
-          case 300: break;
-          case 136: 
+          case 298: break;
+          case 135: 
             { return ATSTokenTypes.REQUIRE;
             }
-          case 301: break;
-          case 137: 
+          case 299: break;
+          case 136: 
             { return ATSTokenTypes.ABSTYPE;
             }
-          case 302: break;
-          case 138: 
+          case 300: break;
+          case 137: 
             { return ATSTokenTypes.SORTDEF;
             }
-          case 303: break;
-          case 139: 
+          case 301: break;
+          case 138: 
             { return ATSTokenTypes.SRPSTALOAD;
             }
-          case 304: break;
-          case 140: 
+          case 302: break;
+          case 139: 
             { return ATSTokenTypes.SYMINTR;
             }
-          case 305: break;
-          case 141: 
+          case 303: break;
+          case 140: 
             { return ATSTokenTypes.SYMELIM;
             }
-          case 306: break;
-          case 142: 
+          case 304: break;
+          case 141: 
             { return ATSTokenTypes.TYPEDEF;
             }
-          case 307: break;
-          case 143: 
+          case 305: break;
+          case 142: 
             { return ATSTokenTypes.TKINDEF;
             }
-          case 308: break;
-          case 144: 
+          case 306: break;
+          case 143: 
             { return ATSTokenTypes.SRPINCLUDE;
             }
-          case 309: break;
-          case 145: 
+          case 307: break;
+          case 144: 
             { return ATSTokenTypes.SRPELIFDEF;
             }
-          case 310: break;
-          case 146: 
+          case 308: break;
+          case 145: 
             { return ATSTokenTypes.DLREFFMASK;
             }
-          case 311: break;
-          case 147: 
+          case 309: break;
+          case 146: 
             { return ATSTokenTypes.DLREXTKIND;
             }
-          case 312: break;
-          case 148: 
+          case 310: break;
+          case 147: 
             { return ATSTokenTypes.CLASSDEC;
             }
-          case 313: break;
-          case 149: 
+          case 311: break;
+          case 148: 
             { return ATSTokenTypes.DATASORT;
             }
-          case 314: break;
-          case 150: 
+          case 312: break;
+          case 149: 
             { return ATSTokenTypes.DATATYPE;
             }
-          case 315: break;
-          case 151: 
+          case 313: break;
+          case 150: 
             { return ATSTokenTypes.OVERLOAD;
             }
-          case 316: break;
-          case 152: 
+          case 314: break;
+          case 151: 
             { return ATSTokenTypes.WITHTYPE;
             }
-          case 317: break;
-          case 153: 
+          case 315: break;
+          case 152: 
             { return ATSTokenTypes.SRPELIFNDEF;
             }
-          case 318: break;
-          case 154: 
+          case 316: break;
+          case 153: 
             { return ATSTokenTypes.DLRCONTINUE;
             }
-          case 319: break;
-          case 155: 
+          case 317: break;
+          case 154: 
             { return ATSTokenTypes.DLREXTFCALL;
             }
-          case 320: break;
-          case 156: 
+          case 318: break;
+          case 155: 
             { return ATSTokenTypes.DLREXTMCALL;
             }
-          case 321: break;
-          case 157: 
+          case 319: break;
+          case 156: 
             { return ATSTokenTypes.DLRSHOWTYPE;
             }
-          case 322: break;
-          case 158: 
+          case 320: break;
+          case 157: 
             { return ATSTokenTypes.IMPLEMENT;
             }
-          case 323: break;
-          case 159: 
+          case 321: break;
+          case 158: 
             { return ATSTokenTypes.EXCEPTION;
             }
-          case 324: break;
-          case 160: 
+          case 322: break;
+          case 159: 
             { return ATSTokenTypes.DLRTEMPENVER;
             }
-          case 325: break;
-          case 161: 
+          case 323: break;
+          case 160: 
             { return ATSTokenTypes.DLRVCOPYENV;
             }
-          case 326: break;
-          case 162: 
+          case 324: break;
+          case 161: 
             { return ATSTokenTypes.DLRMYLOCATION;
             }
-          case 327: break;
-          case 163: 
+          case 325: break;
+          case 162: 
             { return ATSTokenTypes.DLRMYFILENAME;
             }
-          case 328: break;
-          case 164: 
+          case 326: break;
+          case 163: 
             { return ATSTokenTypes.DLRMYFUNCTION;
             }
-          case 329: break;
-          case 165: 
+          case 327: break;
+          case 164: 
             { return ATSTokenTypes.DLREXTYPE_STRUCT;
             }
-          case 330: break;
+          case 328: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

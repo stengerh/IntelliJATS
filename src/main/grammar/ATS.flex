@@ -352,10 +352,9 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 // This seems to cause a bug (OOME) in IntelliJ:
 //<<EOF>>                     { return ATSTokenTypes.EOF; }
 //
-// Match anything not picked up and throw an error:
-//
-[^]         { return BAD_CHARACTER; }
-//
+
+//needs to assume this is just some infix thing that was defined in a different file
+[^]         { return ATSTokenTypes.IDENTIFIER; }
 
 
 

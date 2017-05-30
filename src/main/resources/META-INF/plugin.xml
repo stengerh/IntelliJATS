@@ -1,10 +1,11 @@
 <idea-plugin>
   <id>com.atslangplugin</id>
   <name>IntelliJATS</name>
-  <version>0.1.0</version>
-  <!-- TODO: add "vendor"-->
-  <vendor email="brandon.barker@cornell.edu" url="http://www.cac.cornell.edu/">Cornell Center for Advanced Computing
-  </vendor>
+  <version>0.1.1</version>
+  <vendor email="lemay@bu.edu" url="http://www.bu.edu/cs/">Mark Lemay @ Boston University</vendor>
+  <!-- the user will be asked to contact this person if the plugin fails -->
+  <!--<vendor email="brandon.barker@cornell.edu" url="http://www.cac.cornell.edu/">Cornell Center for Advanced Computing-->
+  <!--</vendor>-->
 
   <description><![CDATA[
       This is an IntelliJ plugin for the Applied Type System
@@ -30,17 +31,22 @@
   <extensions defaultExtensionNs="com.intellij">
     <fileTypeFactory implementation="com.atslangplugin.ATSFileTypeFactory"/>
 
-    <!-- TODO: the parser generator is too weak, we should replace this with ATS jsonize? -->
+    <!-- TODO: the parser generator is too weak, we should replace this with ATS jsonize?
+    the I/O will probly be to slow on that.
+    needs this so that the commenter works-->
     <lang.parserDefinition language="ATS" implementationClass="com.atslangplugin.ATSParserDefinition"/>
 
-
-    <!--<externalAnnotator language="ATS" implementationClass="com.atslangplugin.CompileAnnotator"/>-->
 
     <colorSettingsPage implementation="com.atslangplugin.ATSColorSettingsPage"/>
     <lang.syntaxHighlighterFactory language="ATS"
                                    implementationClass="com.atslangplugin.ATSSyntaxHighlighterFactory"/>
     <lang.commenter language="ATS" implementationClass="com.atslangplugin.ATSCommenter"/>
-    <!--<annotator language="ATS" implementationClass="com.atslangplugin.CompileAnnotator"/>-->
+
+
+     <!--this is probably the best way to deal with the installed ats infastructure, but updates are too slow-->
+    <externalAnnotator language="ATS" implementationClass="com.atslangplugin.annotators.CompilerExternalAnnotator"/>
+
+    <!--<annotator language="ATS" implementationClass="com.atslangplugin.annotators.CompilerAnnotator"/>-->
   </extensions>
 
   <application-components>

@@ -25,6 +25,58 @@ data class ErrorMsg(
     companion object {
         val regex = Regex("(.*): \\d+\\(line=(\\d+), offs=(\\d+)\\) -- \\d+\\(line=(\\d+), offs=(\\d+)\\):(.*)")//(//n+)\\(.*")
 
+
+        //TODO: this is ineligent and kind of a mess, but that's what happens when you use java regex
+        fun fromLines(error: String): List<ErrorMsg> {
+            val lines = error.split("\n")
+
+            var list = emptyList<ErrorMsg>()
+
+            for (line in lines) {
+                val data = regex.matchEntire(line)
+                if (data != null) {
+                    try {
+
+                        val msg = ErrorMsg(
+                                data.groupValues[1],
+                                data.groupValues[2].toInt(),
+                                data.groupValues[3].toInt(),
+                                data.groupValues[4].toInt(),
+                                data.groupValues[5].toInt(),
+                                data.groupValues[6],
+                                error
+                        )
+                        list += msg
+
+                    } catch (e: NumberFormatException) {
+                        //TODO: investigate these parse errors
+                    }
+                } else {
+                    //!if there was a prevous error add the line to it, otherwise ignore it
+                    if (!list.isEmpty()) {
+                        val oldmsg = list.last()
+
+                        //TODO: it wouls be easy to make immutable ADTs behave like mutable ones in the following way
+                        val newmsg = ErrorMsg(oldmsg.file,
+                                oldmsg.startLine,
+                                oldmsg.startCol,
+                                oldmsg.endLine,
+                                oldmsg.endCol,
+                                oldmsg.message + "\n" + line,
+                                oldmsg.full + "\n" + line
+                        )
+                        list = list.subList(0, list.lastIndex) + newmsg
+
+                    }
+
+                }
+
+            }
+
+            return list
+        }
+
+
         fun fromString(error: String): ErrorMsg? {
 
             val data = regex.matchEntire(error)
@@ -87,13 +139,16 @@ class CompilerExternalAnnotator : ExternalAnnotator<InitialInfo, String>() {
 //TODO: use psi nonsense to get the file "type" so that it is consistent with the IDE interface
         if (collectedInfo.name.endsWith(".dats")) {
 //            println("run compiler dynamic")
-            val errors = ("""patsopt --jsonize-2 --debug --dynamic """ + collectedInfo.name).runCommand(collectedInfo.dir)
+            val errors = ("""patsopt --typecheck  --debug --dynamic """ + collectedInfo.name).runCommand(collectedInfo.dir)
 //            println(errors)
 //            println("   done compiler")
             return errors
         } else if (collectedInfo.name.endsWith(".sats")) {
 //            println("run compiler static")
-            val errors = ("""patsopt --jsonize-2 --debug --static """ + collectedInfo.name).runCommand(collectedInfo.dir)
+
+//            patsopt --typecheck --dynamic assign_sol.dats
+            val errors = ("patsopt --typecheck  --debug --static " + collectedInfo.name).runCommand(collectedInfo.dir)
+//            val errors = ("""patsopt --jsonize-2 --debug --static """ + collectedInfo.name).runCommand(collectedInfo.dir)
 //            println(errors)
 //            println("   done compiler")
             return errors
@@ -110,9 +165,6 @@ class CompilerExternalAnnotator : ExternalAnnotator<InitialInfo, String>() {
 
 
         //TODO: move this up to the slow function
-        val errors = annotationResult.splitToSequence("\r\n", "\n", "\r")
-
-        //TODO:
 
         val project = file.getProject()
 
@@ -123,8 +175,8 @@ class CompilerExternalAnnotator : ExternalAnnotator<InitialInfo, String>() {
 
         if (document is Document) {
 
-            val m = errors.map { ErrorMsg.fromString(it) }.filterNotNull()
-//TODO: need to check line valitity, since things can get out of sync
+            val m = ErrorMsg.fromLines(annotationResult)
+//TODO: need to check line valitity, since things can get out of sync (see other plugins)
 
 
             //TODO: this regex may not be exact

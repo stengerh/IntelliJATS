@@ -1,24 +1,32 @@
-* uninstall ats, install the course version
+* get myatscc to compile on cygwin without errors
+
+* run button!
+    * compile run button in the context menu of the files (could analyze when it has a main)
+    * make the ats executable configurable
+
+* merge with official IDE
+* publish to the official jetbrains repo
 
 * comments
-* syntax of the intro class we have reached
+    * multiline (* *) style comments not being properly highlighted
+    * /* */ not working
+    * Bug: (* *) style comments should nest
+    * TODO: a test of all the ways comments and string literals can nest
+
+* make package names match the official ATS website
+    
+* parser to support the syntax of the intro class we have reached
+
+* make the hardcoded commandline calls configurable in the UI (see the makefile plugin)
 
 
-* multiline (* *) style comments not being properly highlighted
-* /* */ not working
-* Bug: (* *) style comments should nest
-
-* typedef,datatype, dataprop should have syntax coloring
-* make sure sort constructors, type constructors, and term constructors can get different coloering (color them different by defualt)
+* typedef, datatype, dataprop should have syntax coloring
+* make sure sort constructors, type constructors, and term constructors can get different coloring (color them different by default)
 
 * will probly need to rely on the lexer/internal prarser for friendly errors, the compiler warnings are not great for those
 
-* need to extend the regular espression for type erroes, (or have hwx ommit more formatted errors)
-* TODO: does jsonize give an error for fact2?
-
 * go through old course repo and make sure at least there are no errors there
 
-* make the ats executable configurable
 
 
 * TODO: add support for cats
@@ -26,15 +34,11 @@
 "jsonize as lexer" (?)
 
 
-* get complier underlining to happen in the right place based on line and pos: otherwise line encoding messes things up
+make sure "associate with file type" works correctly
 
-* TODO: a test of all the ways somments and string literals can nest
-
-* standardize the new line encoding
 
 * icons for the different file types, also higher resolution versions
 ---
-* check out kotlin
 
 
 * how Faithful is the BNF? not really.
@@ -45,7 +49,7 @@
 * com.intellij.psi.PsiNamedElement
 
 * formalize ATS enhancements
-  * seperate language enhancements from IDE enhancements
+  * separate language enhancements from IDE enhancements
   * review the wrapper around the compiler
 * build a corpus of all valid ATS code on the latest version
 * if we are using code generation the code needs to be part of the build process. Java code generators are very brittle
@@ -53,6 +57,6 @@
 
 Low priority:
 * Live Templates
-* annotators for ATS? the polygolt interop could be good for ATS, like this method called ats or somethong
+* annotators for ATS? the polygolt interop could be good for ATS, like this method called ats or something
 * build numbers http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html
 * someday the plugin itself could be written in ATS

@@ -1,18 +1,18 @@
 I think of ATS being broken up into 
-syntaxtic glue
-sort declaations, sorts, 
+syntactic glue
+sort declarations, sorts, 
 type declarations, types, 
 term declarations, terms
 
-these should all be highlighted fdifferently
+these should all be highlighted differently
 
-It's not clear where costum fixity falls into this model, also macros
-
-
+It's not clear where custom fixity falls into this model, also macros
 
 
-Current plan, roughly aproximate the lexer and the parser(?) from the ATS compiler.
-Can then aproximate anylisis in the IDE.
+
+
+Current plan, roughly approximate the lexer and the parser(?) from the ATS compiler.
+Can then approximate analysis in the IDE.
 
 Next step: run everything through the full jsonize, mock a fake lexer out of it.  but will need to find a way to deal with partyly incorrect files (we could fall back to the jflex)
 
@@ -35,8 +35,8 @@ emit_instr: loc0 = /cygdrive/c/Users/Mark/IdeaProjectsgit/cs320-2017-summer/lect
 */
 
 
-the lexer goes (pats_lexing.sats) undergoes frequent enough changes that some more direct way to test should be employed.  prehaps checkout the the file and jsonized and then staticly confirm it is accurite 
+the lexer goes (pats_lexing.sats) undergoes frequent enough changes that some more direct way to test should be employed.  perhaps checkout the the file and jsonized and then statically confirm it is accurate 
 
-It would be good to start a convention such that generated files go into a "gen" directory and exicutables go to a "build" directory
+It would be good to start a convention such that generated files go into a "gen" directory and executables go to a "build" directory
 
-Intellij is less agressive about showing inferred types?  how does the scala plugin handle this?
+Intellij is less aggressive about showing inferred types?  how does the scala plugin handle this?

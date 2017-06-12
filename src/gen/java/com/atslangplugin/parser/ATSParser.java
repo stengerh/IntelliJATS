@@ -97,7 +97,7 @@ public class ATSParser implements PsiParser, LightPsiParser {
   // 
   // TILDE |
   // 
-  // // HX: for absprop, abstype, abst@ype; |
+  // // HX: for absprop, abstype, abst@ype;
   // ABSTYPE |
   // 
   // ASSUME |

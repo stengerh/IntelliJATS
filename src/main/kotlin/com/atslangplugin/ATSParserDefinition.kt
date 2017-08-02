@@ -67,6 +67,4 @@ class ATSParserDefinition : ParserDefinition {
 
         val FILE = IFileElementType(ATSLanguage)
     }
-
-
 }

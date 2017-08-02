@@ -14,7 +14,7 @@ import java.util.*
 class ATSSyntaxHighlighter : SyntaxHighlighterBase() {
 
     companion object {
-//I don't entirely get this interface seems like it could be more concise, see MakefileSyntaxHighlighter.kt
+       // this interface seems like it could be more concise, see MakefileSyntaxHighlighter.kt
 
         val ATS_BLOCK_COMMENT = createTextAttributesKey("BLOCK_COMMENT", BLOCK_COMMENT)
         val ATS_BRACES = createTextAttributesKey("BRACES", BRACES)

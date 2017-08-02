@@ -15,7 +15,6 @@ import java.io.File
 
 data class InitialInfo(val dir: File, val name: String)
 
-//TODO: type of error?
 data class ErrorMsg(
         val file: String,
         val startLine: Int, val startCol: Int,
@@ -23,10 +22,10 @@ data class ErrorMsg(
         val message: String, val full: String) {
 
     companion object {
-        val regex = Regex("(.*): \\d+\\(line=(\\d+), offs=(\\d+)\\) -- \\d+\\(line=(\\d+), offs=(\\d+)\\):(.*)")//(//n+)\\(.*")
+        val regex = Regex("(.*): \\d+\\(line=(\\d+), offs=(\\d+)\\) -- \\d+\\(line=(\\d+), offs=(\\d+)\\):(.*)")
 
 
-        //TODO: this is ineligent and kind of a mess, but that's what happens when you use java regex
+        //this is inelegant and kind of a mess, but that's what happens when you use java regex
         fun fromLines(error: String): List<ErrorMsg> {
             val lines = error.split("\n")
 
@@ -52,11 +51,10 @@ data class ErrorMsg(
                         //TODO: investigate these parse errors
                     }
                 } else {
-                    //!if there was a prevous error add the line to it, otherwise ignore it
+                    //if there was a previous error add the line to it, otherwise ignore it
                     if (!list.isEmpty()) {
                         val oldmsg = list.last()
 
-                        //TODO: it wouls be easy to make immutable ADTs behave like mutable ones in the following way
                         val newmsg = ErrorMsg(oldmsg.file,
                                 oldmsg.startLine,
                                 oldmsg.startCol,
@@ -66,11 +64,8 @@ data class ErrorMsg(
                                 oldmsg.full + "\n" + line
                         )
                         list = list.subList(0, list.lastIndex) + newmsg
-
                     }
-
                 }
-
             }
 
             return list
@@ -80,11 +75,9 @@ data class ErrorMsg(
         fun fromString(error: String): ErrorMsg? {
 
             val data = regex.matchEntire(error)
-            data?.let { data ->
-                //                if (data.groupValues.size == 6) {
 
+            if (data != null) {
                 try {
-
                     return ErrorMsg(
                             data.groupValues[1],
                             data.groupValues[2].toInt(),
@@ -98,7 +91,6 @@ data class ErrorMsg(
                 } catch (e: NumberFormatException) {
                     //TODO: investigate these parse errors
                 }
-//                }
 
             }
             return null
@@ -106,104 +98,75 @@ data class ErrorMsg(
     }
 }
 
-// May be required to avoid file deadlocks, since intellij autosaves
-// TODO my guess is it only runs when the parse tree changes, need better parstrees, or just way more specific parse trees
+// May be required to avoid file deadlocks, since intellij auto-saves
+// TODO my guess is it only runs when the parse tree changes, need better parse trees, or just way more specific parse trees
 class CompilerExternalAnnotator : ExternalAnnotator<InitialInfo, String>() {
 
     override fun collectInformation(file: PsiFile, editor: Editor, hasErrors: Boolean): InitialInfo? {
-        //run the compiler even if there are errors
+        //run the compiler even if "hasErrors==true" since the lexer can flag spurious errors
         return collectInformation(file)
     }
 
 
     override fun collectInformation(file: PsiFile): InitialInfo? {
-        println("collectInformation")
 
-        val dir = file.getContainingDirectory()
+        val dir = file.containingDirectory
 
         if (dir is PsiDirectory) {
             val fullDir = recursivePath(dir)
-            println(" do it!")
             return InitialInfo(File(fullDir), file.name)
         }
-        println(" null")
         return null
     }
 
     override fun doAnnotate(collectedInfo: InitialInfo): String? {
 
-        Thread.sleep(1000) //often the file has not been saved to disc.  TODO: find a more robust way to wait until the file is saved
+        Thread.sleep(1000) //often the file has not been saved to disk. (this can also cuase race conditions)
+        //  TODO: find a more robust way to wait until the file is saved
 
-//TODO: need to extend the regex to support --typecheck errors
-
-//TODO: use psi nonsense to get the file "type" so that it is consistent with the IDE interface
+        //TODO: use psi nonsense to get the file "type" so that it is consistent with the IDE interface
         if (collectedInfo.name.endsWith(".dats")) {
-//            println("run compiler dynamic")
+            // TODO: thses strings and the ats compiler path and config should probably be configurable
             val errors = ("""patsopt --typecheck  --debug --dynamic """ + collectedInfo.name).runCommand(collectedInfo.dir)
-//            println(errors)
-//            println("   done compiler")
             return errors
         } else if (collectedInfo.name.endsWith(".sats")) {
-//            println("run compiler static")
-
-//            patsopt --typecheck --dynamic assign_sol.dats
             val errors = ("patsopt --typecheck  --debug --static " + collectedInfo.name).runCommand(collectedInfo.dir)
-//            val errors = ("""patsopt --jsonize-2 --debug --static """ + collectedInfo.name).runCommand(collectedInfo.dir)
-//            println(errors)
-//            println("   done compiler")
             return errors
         }
-        println("  null")
+
         return null
     }
 
 
     override fun apply(file: PsiFile, annotationResult: String, holder: AnnotationHolder) {
-        println("apply")
+        //TODO: move this up to the "slow" function
 
-        println(annotationResult)
+        val project = file.project
 
-
-        //TODO: move this up to the slow function
-
-        val project = file.getProject()
-
-        //TODO: what mkes sure the file hasn't changed since collectInformation
+        //TODO: what makes sure the file hasn't changed since collectInformation?
         val document = PsiDocumentManager.getInstance(project).getDocument(file)
-
-        println(document)
 
         if (document is Document) {
 
             val m = ErrorMsg.fromLines(annotationResult)
-//TODO: need to check line valitity, since things can get out of sync (see other plugins)
+            //TODO: need to check line validity, since things can get out of sync (see other plugins)
 
+            for ((errorFile,
+                    startLine, startCol,
+                    endLine, endCol,
+                    message, _) in m) {
 
-            //TODO: this regex may not be exact
-            m.forEach {
-                error ->
-
-                println(error.file)
-                println(error.file.endsWith(file.name))
-                //TODO: this is inexact if a file depends on another file with the same name at a different location this will not work
-                //TODO: hilight location in the origional file, or the location it was imported
-                if (error.file.endsWith(file.name)) {
+                //TODO: this is inexact if a file depends on another file with the same name at a different location, than this will not work
+                //TODO: highlight location in the original file, or the location it was imported
+                if (errorFile.endsWith(file.name)) {
 
                     val range = TextRange(
-                            document.getLineStartOffset(error.startLine - 1) + error.startCol - 1,
-                            document.getLineStartOffset(error.endLine - 1) + error.endCol - 1)
+                            document.getLineStartOffset(startLine - 1) + startCol - 1,
+                            document.getLineStartOffset(endLine - 1) + endCol - 1)
 
-                    println(range)
-                    println(error)
-
-                    holder.createErrorAnnotation(range, error.message
-//                            + "\n" + error.full //TODO: make the full errors configurable
-                    )
+                    holder.createErrorAnnotation(range, message)
                 }
             }
         }
-
     }
-
-
 }

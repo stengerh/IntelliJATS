@@ -16,7 +16,7 @@ class ATSCommenter : Commenter {
         return "*)"
     }
 
-    //TODO: what are thsese?
+    //TODO: what are these?
     override fun getCommentedBlockCommentPrefix(): String? {
         return "/*"
     }

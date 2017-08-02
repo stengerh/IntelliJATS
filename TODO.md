@@ -13,6 +13,9 @@
     * Bug: (* *) style comments should nest
     * TODO: a test of all the ways comments and string literals can nest
 
+* identifiers like "list0_length(xs)-2-helper" incorrectly highlight the number 2
+* identifiers like xs' misparse in |cons0(x, xs') => let as a tuple
+
 * make package names match the official ATS website
     
 * parser to support the syntax of the intro class we have reached

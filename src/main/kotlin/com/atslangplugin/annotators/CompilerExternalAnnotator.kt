@@ -4,6 +4,7 @@ import com.atslangplugin.annotators.CompilerHelper.recursivePath
 import com.atslangplugin.annotators.CompilerHelper.runCommand
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.ExternalAnnotator
+import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.editor.Document
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.util.TextRange
@@ -13,7 +14,7 @@ import com.intellij.psi.PsiFile
 import java.io.File
 
 
-data class InitialInfo(val dir: File, val name: String)
+data class InitialInfo(val dir: File, val name: String, val patsoptPath:String) // TODO: awkward to store patsoptPath like this
 
 data class ErrorMsg(
         val file: String,
@@ -110,11 +111,14 @@ class CompilerExternalAnnotator : ExternalAnnotator<InitialInfo, String>() {
 
     override fun collectInformation(file: PsiFile): InitialInfo? {
 
+        val patsopt = ServiceManager.getService(file.project, AtsAnnotatorProjectSettings::class.java).settings?.path!!
+
+
         val dir = file.containingDirectory
 
         if (dir is PsiDirectory) {
             val fullDir = recursivePath(dir)
-            return InitialInfo(File(fullDir), file.name)
+            return InitialInfo(File(fullDir), file.name, patsopt)
         }
         return null
     }
@@ -127,10 +131,10 @@ class CompilerExternalAnnotator : ExternalAnnotator<InitialInfo, String>() {
         //TODO: use psi nonsense to get the file "type" so that it is consistent with the IDE interface
         if (collectedInfo.name.endsWith(".dats")) {
             // TODO: thses strings and the ats compiler path and config should probably be configurable
-            val errors = ("""patsopt --typecheck  --debug --dynamic """ + collectedInfo.name).runCommand(collectedInfo.dir)
+            val errors = (collectedInfo.patsoptPath+""" --typecheck --debug --dynamic """ + collectedInfo.name).runCommand(collectedInfo.dir)
             return errors
         } else if (collectedInfo.name.endsWith(".sats")) {
-            val errors = ("patsopt --typecheck  --debug --static " + collectedInfo.name).runCommand(collectedInfo.dir)
+            val errors = (collectedInfo.patsoptPath+""" --typecheck --debug --static """ + collectedInfo.name).runCommand(collectedInfo.dir)
             return errors
         }
 

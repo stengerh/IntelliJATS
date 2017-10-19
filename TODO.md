@@ -7,6 +7,10 @@
 * merge with official IDE
 * publish to the official jetbrains repo
 
+* doesn't support syntax highlighting for %{
+                                          // ...
+                                          %} blocks
+
 * comments
     * multiline (* *) style comments not being properly highlighted
     * /* */ not working

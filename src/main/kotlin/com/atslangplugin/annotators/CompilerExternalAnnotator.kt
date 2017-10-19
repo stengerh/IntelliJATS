@@ -139,34 +139,37 @@ class CompilerExternalAnnotator : ExternalAnnotator<InitialInfo, String>() {
 
 
     override fun apply(file: PsiFile, annotationResult: String, holder: AnnotationHolder) {
-        //TODO: move this up to the "slow" function
+        try {
+            //TODO: move this up to the "slow" function
+            val project = file.project
 
-        val project = file.project
+            //TODO: what makes sure the file hasn't changed since collectInformation?
+            val document = PsiDocumentManager.getInstance(project).getDocument(file)
 
-        //TODO: what makes sure the file hasn't changed since collectInformation?
-        val document = PsiDocumentManager.getInstance(project).getDocument(file)
+            if (document is Document) {
 
-        if (document is Document) {
+                val m = ErrorMsg.fromLines(annotationResult)
 
-            val m = ErrorMsg.fromLines(annotationResult)
-            //TODO: need to check line validity, since things can get out of sync (see other plugins)
+                for ((errorFile,
+                        startLine, startCol,
+                        endLine, endCol,
+                        message, _) in m) {
 
-            for ((errorFile,
-                    startLine, startCol,
-                    endLine, endCol,
-                    message, _) in m) {
+                    //TODO: this is inexact: if a file depends on another file with the same name at a different location, than this will not work
+                    //TODO: highlight location in the original file, or the location it was imported
+                    if (errorFile.endsWith(file.name)) {
 
-                //TODO: this is inexact if a file depends on another file with the same name at a different location, than this will not work
-                //TODO: highlight location in the original file, or the location it was imported
-                if (errorFile.endsWith(file.name)) {
+                        val range = TextRange(
+                                document.getLineStartOffset(startLine - 1) + startCol - 1,
+                                document.getLineStartOffset(endLine - 1) + endCol - 1)
 
-                    val range = TextRange(
-                            document.getLineStartOffset(startLine - 1) + startCol - 1,
-                            document.getLineStartOffset(endLine - 1) + endCol - 1)
-
-                    holder.createErrorAnnotation(range, message)
+                        holder.createErrorAnnotation(range, message)
+                    }
                 }
             }
+
+        } catch (e: java.lang.IndexOutOfBoundsException) {
+            //this is a known issue due to file IO latency,  TODO: if the issue is fixed stop catching the exception
         }
     }
 }

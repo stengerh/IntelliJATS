@@ -13,14 +13,14 @@ An ATS Plugin for IntelliJ IDEA.
 
 ## Important Notes for Development
 
-This project is now build using gradle.  Intellij has very good gradle support.
+This project is now built using gradle.  Intellij has very good gradle support.
 
 To experiment wih the plugin from sources run
 
 ```
 $ gradle runIde
 ```
-(warning it will download an entire development copy of IntelliJ, this can be very large)
+(it will download an entire development copy of IntelliJ, this can be very large)
 
 To regenerate the lexer and parser run
 

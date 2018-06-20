@@ -24,7 +24,7 @@ plugins {
 
 group 'com.atslangplugin'
 //id 'IntelliJATS'
-version '0.2.2'
+version '0.2.3'
 // TODO: synchronize name and build numbers
 
 apply plugin: 'java'
@@ -87,7 +87,8 @@ sourceSets {
 //apply plugin: 'org.jetbrains.intellij'
 
 intellij {
-    version '2017.3' //cross compilation?  This shouldn't be so hard, uses a small subset of the interface
+    version '2017.3' //cross compilation is apparently handled in the plugin.xml see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html
+    //  This shouldn't be so hard, uses a small subset of the interface
     //TODO: update
     //IntelliJ IDEA 2016.3 dependency; for a full list of IntelliJ IDEA releases please see https://www.jetbrains.com/intellij-repository/releases
 //https://www.jetbrains.com/intellij-repository/releases

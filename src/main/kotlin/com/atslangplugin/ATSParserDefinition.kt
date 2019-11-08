@@ -1,8 +1,8 @@
 package com.atslangplugin
 
 import com.atslangplugin.parser.ATSParserWrapper
-import com.atslangplugin.psi.ATSFile
 import com.atslangplugin.psi.ATSTokenTypes
+import com.atslangplugin.psi.impl.ATSFileImpl
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
 import com.intellij.lang.PsiParser
@@ -45,7 +45,7 @@ class ATSParserDefinition : ParserDefinition {
     }
 
     override fun createFile(viewProvider: FileViewProvider): PsiFile {
-        return ATSFile(viewProvider)
+        return ATSFileImpl(viewProvider)
     }
 
     override fun spaceExistanceTypeBetweenTokens(

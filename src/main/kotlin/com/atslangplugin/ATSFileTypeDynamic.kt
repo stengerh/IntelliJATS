@@ -1,18 +1,17 @@
 package com.atslangplugin
 
 import com.intellij.openapi.fileTypes.LanguageFileType
+import javax.swing.Icon
 
-import javax.swing.*
 
-
-class ATSFileTypeDynamic private constructor() : LanguageFileType(ATSLanguage) {
+object ATSFileTypeDynamic : LanguageFileType(ATSLanguage) {
 
     override fun getName(): String {
         return "dats file"
     }
 
     override fun getDescription(): String {
-        return "Dynamic Applied Type System (ATS) language file"
+        return "Applied Type System (ATS) Dynamic Files"
     }
 
     override fun getDefaultExtension(): String {
@@ -21,9 +20,5 @@ class ATSFileTypeDynamic private constructor() : LanguageFileType(ATSLanguage) {
 
     override fun getIcon(): Icon? {
         return ATSIcons.FILE
-    }
-
-    companion object {
-        val INSTANCE = ATSFileTypeDynamic()
     }
 }

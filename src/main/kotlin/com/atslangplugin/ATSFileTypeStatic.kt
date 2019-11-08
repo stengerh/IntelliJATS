@@ -1,18 +1,17 @@
 package com.atslangplugin
 
 import com.intellij.openapi.fileTypes.LanguageFileType
+import javax.swing.Icon
 
-import javax.swing.*
 
-
-class ATSFileTypeStatic private constructor() : LanguageFileType(ATSLanguage) {
+object ATSFileTypeStatic : LanguageFileType(ATSLanguage) {
 
     override fun getName(): String {
         return "sats file"
     }
 
     override fun getDescription(): String {
-        return "Static Applied Type System (ATS) language file"
+        return "Applied Type System (ATS) Static Files"
     }
 
     override fun getDefaultExtension(): String {
@@ -21,9 +20,5 @@ class ATSFileTypeStatic private constructor() : LanguageFileType(ATSLanguage) {
 
     override fun getIcon(): Icon? {
         return ATSIcons.FILE
-    }
-
-    companion object {
-        val INSTANCE = ATSFileTypeStatic()
     }
 }

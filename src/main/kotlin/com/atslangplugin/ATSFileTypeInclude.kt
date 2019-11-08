@@ -4,14 +4,14 @@ import com.intellij.openapi.fileTypes.LanguageFileType
 
 import javax.swing.*
 
-class ATSFileTypeInclude private constructor() : LanguageFileType(ATSLanguage) {
+object ATSFileTypeInclude : LanguageFileType(ATSLanguage) {
 
     override fun getName(): String {
         return "hats file"
     }
 
     override fun getDescription(): String {
-        return "Included (\"header\") Applied Type System (ATS) language file"
+        return "Applied Type System (ATS) Include Files"
     }
 
     override fun getDefaultExtension(): String {
@@ -20,9 +20,5 @@ class ATSFileTypeInclude private constructor() : LanguageFileType(ATSLanguage) {
 
     override fun getIcon(): Icon? {
         return ATSIcons.FILE
-    }
-
-    companion object {
-        val INSTANCE = ATSFileTypeInclude()
     }
 }

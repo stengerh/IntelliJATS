@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
     <rect id="frame" width="16" height="16" fill="none"/>
     <g fill="none" transform="translate(1, 1) scale(7) scale(0.005)">
-        <circle cx="200" cy="200" r="200" fill="#F5F555" opacity="0.8333"/>
+        <circle cx="200" cy="200" r="200" fill="#40B6E0" opacity="0.7"/>
         <g fill="none" transform="translate(36, 100) scale(100)">
-            <path stroke="#FF0000" stroke-width="0.24" d="
+            <path stroke="#231F20" stroke-opacity="0.8" stroke-width="0.24" d="
         M 0 0.5
         C 0.25 0.25 0.5666 0 0.8166 0.25
         C 0.8166 0.25 1.04 0.5 0.975 1
@@ -15,7 +15,7 @@
         </g>
     </g>
     <g fill="none" fill-rule="evenodd" transform="translate(7, -5)">
-        <path fill="#0000FF" fill-opacity="1"
+        <path fill="#231F20" fill-opacity="0.8"
               d="M3 11v3h.649C4.578 14 5 13.493 5 12.515V12.5c0-.978-.422-1.5-1.351-1.5H3zm-1-1h1.649C5.04 10 6 11.093 6 12.5c0 1.421-.96 2.5-2.351 2.5H2v-5z"/>
     </g>
 </svg>

@@ -2,6 +2,8 @@ package com.atslangplugin.annotators
 
 import com.atslangplugin.annotators.CompilerHelper.recursivePath
 import com.atslangplugin.annotators.CompilerHelper.runCommand
+import com.atslangplugin.psi.ATSDynamicFile
+import com.atslangplugin.psi.ATSStaticFile
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.ExternalAnnotator
 import com.intellij.openapi.components.ServiceManager
@@ -14,7 +16,7 @@ import com.intellij.psi.PsiFile
 import java.io.File
 
 
-data class InitialInfo(val dir: File, val name: String, val patsoptPath:String) // TODO: awkward to store patsoptPath like this
+data class InitialInfo(val dir: File, val name: String, val patsoptPath: String, val dynamicFile: Boolean) // TODO: awkward to store patsoptPath like this
 
 data class ErrorMsg(
         val file: String,
@@ -110,15 +112,18 @@ class CompilerExternalAnnotator : ExternalAnnotator<InitialInfo, String>() {
 
 
     override fun collectInformation(file: PsiFile): InitialInfo? {
+        
+        if (!(file is ATSDynamicFile || file is ATSStaticFile)) return null
 
-        val patsopt = ServiceManager.getService(file.project, AtsAnnotatorProjectSettings::class.java).settings?.path!!
-
+        val patsopt = ServiceManager.getService(file.project, AtsAnnotatorProjectSettings::class.java).settings?.path
+        
+        if (patsopt == null || patsopt.isBlank()) return null
 
         val dir = file.containingDirectory
 
         if (dir is PsiDirectory) {
             val fullDir = recursivePath(dir)
-            return InitialInfo(File(fullDir), file.name, patsopt)
+            return InitialInfo(File(fullDir), file.name, patsopt, file is ATSDynamicFile)
         }
         return null
     }
@@ -128,12 +133,11 @@ class CompilerExternalAnnotator : ExternalAnnotator<InitialInfo, String>() {
         Thread.sleep(1000) //often the file has not been saved to disk. (this can also cuase race conditions)
         //  TODO: find a more robust way to wait until the file is saved
 
-        //TODO: use psi nonsense to get the file "type" so that it is consistent with the IDE interface
-        if (collectedInfo.name.endsWith(".dats")) {
-            // TODO: thses strings and the ats compiler path and config should probably be configurable
+        if (collectedInfo.dynamicFile) {
+            // TODO: these strings and config should probably be configurable
             val errors = (collectedInfo.patsoptPath+""" --typecheck --debug --dynamic """ + collectedInfo.name).runCommand(collectedInfo.dir)
             return errors
-        } else if (collectedInfo.name.endsWith(".sats")) {
+        } else {
             val errors = (collectedInfo.patsoptPath+""" --typecheck --debug --static """ + collectedInfo.name).runCommand(collectedInfo.dir)
             return errors
         }

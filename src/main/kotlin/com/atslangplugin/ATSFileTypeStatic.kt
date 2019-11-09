@@ -19,6 +19,6 @@ object ATSFileTypeStatic : LanguageFileType(ATSLanguage) {
     }
 
     override fun getIcon(): Icon? {
-        return ATSIcons.FILE
+        return ATSIcons.STATIC_FILE
     }
 }

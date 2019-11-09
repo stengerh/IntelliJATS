@@ -19,6 +19,6 @@ object ATSFileTypeInclude : LanguageFileType(ATSLanguage) {
     }
 
     override fun getIcon(): Icon? {
-        return ATSIcons.FILE
+        return ATSIcons.INCLUDE_FILE
     }
 }

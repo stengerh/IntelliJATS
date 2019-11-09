@@ -19,6 +19,6 @@ object ATSFileTypeDynamic : LanguageFileType(ATSLanguage) {
     }
 
     override fun getIcon(): Icon? {
-        return ATSIcons.FILE
+        return ATSIcons.DYNAMIC_FILE
     }
 }

@@ -12,7 +12,7 @@ import javax.swing.Icon
 class ATSColorSettingsPage : ColorSettingsPage {
 
     override fun getIcon(): Icon? {
-        return ATSIcons.FILE
+        return ATSIcons.LOGO
     }
 
     override fun getHighlighter(): SyntaxHighlighter {

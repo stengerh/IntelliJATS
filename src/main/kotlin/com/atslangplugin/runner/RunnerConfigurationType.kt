@@ -1,7 +1,6 @@
 package com.atslangplugin.runner
 
 import com.atslangplugin.ATSIcons
-import com.intellij.execution.configurations.ConfigurationFactory
 import com.intellij.execution.configurations.ConfigurationType
 
 
@@ -28,7 +27,7 @@ class RunnerConfigurationType : ConfigurationType {
      * @return the icon
      */
     //TODO: a specific ats run icon?
-    override fun getIcon() = ATSIcons.FILE
+    override fun getIcon() = ATSIcons.LOGO
 
     /**
      * Returns the ID of the configuration type. The ID is used to store run configuration settings in a project or workspace file and

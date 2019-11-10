@@ -61,7 +61,7 @@ SIMPLE_PRE_KEYWORD=(include|ifdef|endif|undef|ifndef|error|defined)
 WHITE_SPACE=[\ \n\r\t\f]
 
 /* comments */
-END_OF_LINE_COMMENT="/""/"([^\r\n]|(\\\r?\n))*
+END_OF_LINE_COMMENT = "//" [^\r\n]*
 COMMENT_TAIL=([^"*"]*("*"+[^"*"")"])?)*("*"+")")?
 TRADITIONAL_COMMENT=("(*"[^"*"]{COMMENT_TAIL})|"*)"
 END_OF_FILE_COMMENT = "////" (.* {CRLF}?)*

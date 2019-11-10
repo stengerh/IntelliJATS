@@ -62,7 +62,10 @@ class ATSParserDefinition : ParserDefinition {
     companion object {
         val WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE)
         val COMMENTS = TokenSet.create(
-                ATSTokenTypes.COMMENT
+                ATSTokenTypes.COMMENT_BLOCK,
+                ATSTokenTypes.COMMENT_DOC,
+                ATSTokenTypes.COMMENT_LINE,
+                ATSTokenTypes.COMMENT_REST
         )
 
         val FILE = IFileElementType(ATSLanguage)

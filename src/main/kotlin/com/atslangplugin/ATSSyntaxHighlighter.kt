@@ -21,6 +21,7 @@ class ATSSyntaxHighlighter : SyntaxHighlighterBase() {
         val ATS_BRACKETS = createTextAttributesKey("BRACKETS", BRACKETS)
         val ATS_COMMA = createTextAttributesKey("COMMA", COMMA)
         val ATS_DIRECTIVES = createTextAttributesKey("DIRECTIVES", PREDEFINED_SYMBOL)
+        val ATS_DOC_COMMENT = createTextAttributesKey("DOC_COMMENT", DOC_COMMENT)
         val ATS_FUNCTION_CALL = createTextAttributesKey("FUNCTION_CALL", FUNCTION_CALL)
         val ATS_IDENTIFIER = createTextAttributesKey("IDENTIFIER", IDENTIFIER)
         val ATS_LINE_COMMENT = createTextAttributesKey("LINE_COMMENT", LINE_COMMENT)
@@ -29,6 +30,7 @@ class ATSSyntaxHighlighter : SyntaxHighlighterBase() {
         val ATS_NUMBER = createTextAttributesKey("NUMBER", NUMBER)
         val ATS_OPERATION_SIGN = createTextAttributesKey("OPERATION_SIGN", OPERATION_SIGN)
         val ATS_PARENTHESES = createTextAttributesKey("PARENTHESES", PARENTHESES)
+        val ATS_REST_COMMENT = createTextAttributesKey("REST_COMMENT", BLOCK_COMMENT)
         val ATS_SEMICOLON = createTextAttributesKey("SEMICOLON", SEMICOLON)
         val ATS_STRING = createTextAttributesKey("STRING", STRING)
         val ATS_TYPE_DECLARATIONS = createTextAttributesKey("TYPE_DECLARATIONS", KEYWORD)
@@ -40,35 +42,22 @@ class ATSSyntaxHighlighter : SyntaxHighlighterBase() {
 
         private val ATS_BLOCK_COMMENT_KEYS = arrayOf(ATS_BLOCK_COMMENT)
         private val ATS_BRACES_KEYS = arrayOf(ATS_BRACES)
-
         private val ATS_BRACKETS_KEYS = arrayOf(ATS_BRACKETS)
-
         private val ATS_COMMA_KEYS = arrayOf(ATS_COMMA)
-
+        private val ATS_DOC_COMMENT_KEYS = arrayOf(ATS_DOC_COMMENT)
         private val ATS_DIRECTIVES_KEYS = arrayOf(ATS_DIRECTIVES)
-
         private val ATS_FUNCTION_CALL_KEYS = arrayOf(ATS_FUNCTION_CALL)
-
         private val ATS_IDENTIFIER_KEYS = arrayOf(ATS_IDENTIFIER)
-
         private val ATS_LINE_COMMENT_KEYS = arrayOf(ATS_LINE_COMMENT)
-
         private val ATS_KEYWORD_KEYS = arrayOf(ATS_KEYWORD)
-
         private val ATS_LOCAL_VARIABLE_KEYS = arrayOf(ATS_LOCAL_VARIABLE)
-
         private val ATS_NUMBER_KEYS = arrayOf(ATS_NUMBER)
-
         private val ATS_OPERATION_SIGN_KEYS = arrayOf(ATS_OPERATION_SIGN)
-
         private val ATS_PARENTHESES_KEYS = arrayOf(ATS_PARENTHESES)
-
+        private val ATS_REST_COMMENT_KEYS = arrayOf(ATS_REST_COMMENT)
         private val ATS_SEMICOLON_KEYS = arrayOf(ATS_SEMICOLON)
-
         private val ATS_STRING_KEYS = arrayOf(ATS_STRING)
-
         private val ATS_TYPE_DECLARATIONS_KEYS = arrayOf(ATS_TYPE_DECLARATIONS)
-
         private val ATS_VAL_DECLARATIONS_KEYS = arrayOf(ATS_VAL_DECLARATIONS)
 
 
@@ -99,8 +88,9 @@ class ATSSyntaxHighlighter : SyntaxHighlighterBase() {
             tmpMap.put(ATSTokenTypes.COMMA, ATS_COMMA_KEYS)
             tmpMap.put(ATSTokenTypes.COMMALPAREN, ATS_PARENTHESES_KEYS)
             tmpMap.put(ATSTokenTypes.COMMENT_BLOCK, ATS_BLOCK_COMMENT_KEYS)
+            tmpMap.put(ATSTokenTypes.COMMENT_DOC, ATS_DOC_COMMENT_KEYS)
             tmpMap.put(ATSTokenTypes.COMMENT_LINE, ATS_LINE_COMMENT_KEYS)
-            tmpMap.put(ATSTokenTypes.COMMENT_REST, ATS_BLOCK_COMMENT_KEYS)
+            tmpMap.put(ATSTokenTypes.COMMENT_REST, ATS_REST_COMMENT_KEYS)
             // Do not want to color CRLF
             tmpMap.put(ATSTokenTypes.DATASORT, ATS_TYPE_DECLARATIONS_KEYS)
             tmpMap.put(ATSTokenTypes.DLRARRPSZ, ATS_TYPE_DECLARATIONS_KEYS)

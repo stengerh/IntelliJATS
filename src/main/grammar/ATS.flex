@@ -64,11 +64,10 @@ WHITE_SPACE=[\ \n\r\t\f]
 END_OF_LINE_COMMENT="/""/"([^\r\n]|(\\\r?\n))*
 COMMENT_TAIL=([^"*"]*("*"+[^"*"")"])?)*("*"+")")?
 TRADITIONAL_COMMENT=("(*"[^"*"]{COMMENT_TAIL})|"*)"
-END_OF_FILE_COMMENT = "////" (.* {CRLF}?)* // CHECK_ME
+END_OF_FILE_COMMENT = "////" (.* {CRLF}?)*
 DOCUMENTATION_COMMENT="(*""*"+("("|([^"(""*"]{COMMENT_TAIL}))?
 //DOCUMENTATION_COMMENT = "(*" (\*+\ +{CRLF}?)* {COMMENT_CONTENT} (\*+\ +{CRLF}?)* "*)"
 //COMMENT_CONTENT = ( [^*] | \*+ [^)*] ) // should we delimit the ')' ?
-COMMENT = {TRADITIONAL_COMMENT} | {END_OF_LINE_COMMENT} | {END_OF_FILE_COMMENT} | {DOCUMENTATION_COMMENT}
 
 FLOAT_LITERAL=({FLOATING_POINT_LITERAL1})|({FLOATING_POINT_LITERAL2})|({FLOATING_POINT_LITERAL3})|({FLOATING_POINT_LITERAL4})
 FLOATING_POINT_LITERAL1=({DIGIT})+"."({DIGIT})*({EXPONENT_PART})?
@@ -324,7 +323,7 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 {END_OF_LINE_COMMENT}       { return ATSTokenTypes.COMMENT_LINE; }
 {TRADITIONAL_COMMENT}       { return ATSTokenTypes.COMMENT_BLOCK; }
 {END_OF_FILE_COMMENT}       { return ATSTokenTypes.COMMENT_REST; }
-{COMMENT}                   { return ATSTokenTypes.COMMENT; }
+{DOCUMENTATION_COMMENT}     { return ATSTokenTypes.COMMENT_DOC; }
 //
 "%"                         { return ATSTokenTypes.PERCENT; }
 "?"                         { return ATSTokenTypes.QMARK; }

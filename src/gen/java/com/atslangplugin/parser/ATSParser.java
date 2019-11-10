@@ -500,7 +500,7 @@ public class ATSParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // property|COMMENT | COMMENT_LINE |
+  // property|COMMENT_DOC | COMMENT_LINE |
   //                             COMMENT_BLOCK |
   //                             COMMENT_REST | CRLF
   static boolean item_(PsiBuilder builder_, int level_) {
@@ -508,7 +508,7 @@ public class ATSParser implements PsiParser, LightPsiParser {
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = property(builder_, level_ + 1);
-    if (!result_) result_ = consumeToken(builder_, COMMENT);
+    if (!result_) result_ = consumeToken(builder_, COMMENT_DOC);
     if (!result_) result_ = consumeToken(builder_, COMMENT_LINE);
     if (!result_) result_ = consumeToken(builder_, COMMENT_BLOCK);
     if (!result_) result_ = consumeToken(builder_, COMMENT_REST);

@@ -92,12 +92,14 @@ end // end of [list_vt_quicksort]
     companion object {
         private val DESCRIPTORS = arrayOf(
                 AttributesDescriptor(message("options.attribute.descriptor.comment.block"), ATSSyntaxHighlighter.ATS_BLOCK_COMMENT),
+                AttributesDescriptor(message("options.attribute.descriptor.comment.doc"), ATSSyntaxHighlighter.ATS_DOC_COMMENT),
+                AttributesDescriptor(message("options.attribute.descriptor.comment.line"), ATSSyntaxHighlighter.ATS_LINE_COMMENT),
+                AttributesDescriptor(message("options.attribute.descriptor.comment.rest"), ATSSyntaxHighlighter.ATS_REST_COMMENT),
                 AttributesDescriptor(message("options.attribute.descriptor.braces"), ATSSyntaxHighlighter.ATS_BRACES),
                 AttributesDescriptor(message("options.attribute.descriptor.brackets"), ATSSyntaxHighlighter.ATS_BRACKETS),
                 AttributesDescriptor(message("options.attribute.descriptor.comma"), ATSSyntaxHighlighter.ATS_COMMA),
                 AttributesDescriptor(message("options.attribute.descriptor.directive"), ATSSyntaxHighlighter.ATS_DIRECTIVES),
                 AttributesDescriptor(message("options.attribute.descriptor.identifier"), ATSSyntaxHighlighter.ATS_IDENTIFIER),
-                AttributesDescriptor(message("options.attribute.descriptor.comment.line"), ATSSyntaxHighlighter.ATS_LINE_COMMENT),
                 AttributesDescriptor(message("options.attribute.descriptor.keyword"), ATSSyntaxHighlighter.ATS_KEYWORD),
                 AttributesDescriptor(message("options.attribute.descriptor.variable"), ATSSyntaxHighlighter.ATS_LOCAL_VARIABLE),
                 AttributesDescriptor(message("options.attribute.descriptor.number"), ATSSyntaxHighlighter.ATS_NUMBER),

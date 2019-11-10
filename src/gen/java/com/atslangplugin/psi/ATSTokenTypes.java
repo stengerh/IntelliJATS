@@ -37,8 +37,8 @@ public interface ATSTokenTypes {
   IElementType COMMENBLOCK = new ATSTokenType("COMMENblock");
   IElementType COMMENLINE = new ATSTokenType("COMMENline");
   IElementType COMMENREST = new ATSTokenType("COMMENrest");
-  IElementType COMMENT = new ATSTokenType("COMMENT");
   IElementType COMMENT_BLOCK = new ATSTokenType("COMMENT_BLOCK");
+  IElementType COMMENT_DOC = new ATSTokenType("COMMENT_DOC");
   IElementType COMMENT_LINE = new ATSTokenType("COMMENT_LINE");
   IElementType COMMENT_REST = new ATSTokenType("COMMENT_REST");
   IElementType CRLF = new ATSTokenType("CRLF");

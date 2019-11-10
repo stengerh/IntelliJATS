@@ -15,7 +15,7 @@
 
 ATSFile ::= item_*
 
-private item_ ::= (property|COMMENT | COMMENT_LINE |
+private item_ ::= (property|COMMENT_DOC | COMMENT_LINE |
                             COMMENT_BLOCK |
                             COMMENT_REST | CRLF)
 

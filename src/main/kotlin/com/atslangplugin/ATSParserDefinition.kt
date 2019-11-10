@@ -32,8 +32,7 @@ class ATSParserDefinition : ParserDefinition {
     }
 
     override fun getStringLiteralElements(): TokenSet {
-        //TODO
-        return TokenSet.EMPTY
+        return STRINGS
     }
 
     override fun createParser(project: Project): PsiParser {
@@ -66,6 +65,9 @@ class ATSParserDefinition : ParserDefinition {
                 ATSTokenTypes.COMMENT_DOC,
                 ATSTokenTypes.COMMENT_LINE,
                 ATSTokenTypes.COMMENT_REST
+        )
+        val STRINGS = TokenSet.create(
+                ATSTokenTypes.STRING
         )
 
         val FILE = IFileElementType(ATSLanguage)

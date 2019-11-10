@@ -29,7 +29,6 @@ import com.atslangplugin.psi.ATSTokenTypes;
 // Old patterns:
 IDENTIFIER= ([:letter:]|_) ([:letter:]|{DIGIT}|_ )*
 
-ESCAPE_SEQUENCE=\\[^\r\n]
 CRLF=(\n | \r | \r\n)
 
 DIGIT=[0-9]
@@ -60,13 +59,12 @@ FLOATING_POINT_LITERAL3=({DIGIT})+({EXPONENT_PART})
 FLOATING_POINT_LITERAL4=({DIGIT})+
 EXPONENT_PART=[Ee]["+""-"]?({DIGIT})*
 
-CHAR_SINGLEQ_BASE=[^\\\'\r\n]|{ESCAPE_SEQUENCE}
-CHAR_DOUBLEQ_BASE=[^\\\"\r\n]|{ESCAPE_SEQUENCE}
-QUOTED_LITERAL="'"({CHAR_SINGLEQ_BASE})*("'"|\\)?
-DOUBLE_QUOTED_LITERAL=\"({CHAR_DOUBLEQ_BASE})*(\"|\\)?
-CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)?
+ESCAPE_SEQUENCE = \\ [^\r\n]
+CHAR_SINGLEQ_BASE = [^\\\'\r\n] | {ESCAPE_SEQUENCE}
+CHAR_DOUBLEQ_BASE = [^\\\"\r\n] | {ESCAPE_SEQUENCE} | \\ {CRLF}
+CHAR_LITERAL = "'" ({CHAR_SINGLEQ_BASE})* ("'" | \\)?
+STRING_LITERAL = \" ({CHAR_DOUBLEQ_BASE})* (\" | \\)?
 
-%state STRING
 %state PRE
 %state PRAGMA
 %state DEFINE
@@ -274,11 +272,10 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 // T_IDENT_alp
 //
 {INTEGER_LITERAL}           { return ATSTokenTypes.INT; }  // CHECK_ME
-{CHAR_LITERAL}              { return ATSTokenTypes.CHAR; }  // CHECK_ME
+{CHAR_LITERAL}              { return ATSTokenTypes.CHAR; }
 {FLOAT_LITERAL}             { return ATSTokenTypes.FLOAT; }
 //?                         { return ATSTokenTypes.CDATA; }  // Unused; for binary data
-{QUOTED_LITERAL}|{DOUBLE_QUOTED_LITERAL}
-                            { return ATSTokenTypes.STRING; }  // CHECK_ME
+{STRING_LITERAL}            { return ATSTokenTypes.STRING; }
 //
 /*
   | T_LABEL of (int(*knd*), string) // HX-2013-01: should it be supported?
@@ -338,17 +335,6 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
                             }
 } // End of <BLOCK_COMMENT>
 
-/* Not using for now
-<STRING> {
-\" { yybegin(YYINITIAL); return symbol(sym.STRING_LITERAL, string.toString()); }
-[^\n\r\"\\]+ { string.append( yytext() ); }
-\\t { string.append('\t'); }
-\\n { string.append('\n'); }
-\\r { string.append('\r'); }
-\\\" { string.append('\"'); }
-\\ { string.append('\\'); }
-} // End of <STRING>
-*/
 // This seems to cause a bug (OOME) in IntelliJ:
 //<<EOF>>                     { return ATSTokenTypes.EOF; }
 //

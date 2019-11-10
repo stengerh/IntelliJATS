@@ -8,8 +8,7 @@ import com.atslangplugin.psi.impl.*;
 
 public interface ATSTokenTypes {
 
-  IElementType KEY = new ATSElementType("KEY");
-  IElementType PROPERTY = new ATSElementType("PROPERTY");
+  IElementType DUMMY = new ATSElementType("DUMMY");
 
   IElementType ABSTYPE = new ATSTokenType("ABSTYPE");
   IElementType ADDRAT = new ATSTokenType("ADDRAT");
@@ -34,9 +33,6 @@ public interface ATSTokenTypes {
   IElementType COLONLT = new ATSTokenType("COLONLT");
   IElementType COMMA = new ATSTokenType("COMMA");
   IElementType COMMALPAREN = new ATSTokenType("COMMALPAREN");
-  IElementType COMMENBLOCK = new ATSTokenType("COMMENblock");
-  IElementType COMMENLINE = new ATSTokenType("COMMENline");
-  IElementType COMMENREST = new ATSTokenType("COMMENrest");
   IElementType COMMENT_BLOCK = new ATSTokenType("COMMENT_BLOCK");
   IElementType COMMENT_DOC = new ATSTokenType("COMMENT_DOC");
   IElementType COMMENT_LINE = new ATSTokenType("COMMENT_LINE");
@@ -156,7 +152,6 @@ public interface ATSTokenTypes {
   IElementType RPAREN = new ATSTokenType("RPAREN");
   IElementType SCASE = new ATSTokenType("SCASE");
   IElementType SEMICOLON = new ATSTokenType("SEMICOLON");
-  IElementType SEPARATOR = new ATSTokenType("SEPARATOR");
   IElementType SIF = new ATSTokenType("SIF");
   IElementType SORTDEF = new ATSTokenType("SORTDEF");
   IElementType SRPASSERT = new ATSTokenType("SRPASSERT");
@@ -194,7 +189,6 @@ public interface ATSTokenTypes {
   IElementType TYPE = new ATSTokenType("TYPE");
   IElementType TYPEDEF = new ATSTokenType("TYPEDEF");
   IElementType VAL = new ATSTokenType("VAL");
-  IElementType VALUE = new ATSTokenType("VALUE");
   IElementType VAL_IDENTIFIER = new ATSTokenType("VAL_IDENTIFIER");
   IElementType VAR = new ATSTokenType("VAR");
   IElementType VIEWAT = new ATSTokenType("VIEWAT");
@@ -208,11 +202,8 @@ public interface ATSTokenTypes {
   class Factory {
     public static PsiElement createElement(ASTNode node) {
       IElementType type = node.getElementType();
-       if (type == KEY) {
-        return new ATSKeyImpl(node);
-      }
-      else if (type == PROPERTY) {
-        return new ATSPropertyImpl(node);
+       if (type == DUMMY) {
+        return new ATSDummyImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

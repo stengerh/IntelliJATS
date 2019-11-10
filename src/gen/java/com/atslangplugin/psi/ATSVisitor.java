@@ -7,11 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public class ATSVisitor extends PsiElementVisitor {
 
-  public void visitKey(@NotNull ATSKey o) {
-    visitPsiElement(o);
-  }
-
-  public void visitProperty(@NotNull ATSProperty o) {
+  public void visitDummy(@NotNull ATSDummy o) {
     visitPsiElement(o);
   }
 

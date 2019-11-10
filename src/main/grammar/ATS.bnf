@@ -15,262 +15,260 @@
 
 ATSFile ::= item_*
 
-private item_ ::= (property|COMMENT_DOC | COMMENT_LINE |
-                            COMMENT_BLOCK |
-                            COMMENT_REST | CRLF)
-
-property ::= (KEY? SEPARATOR VALUE?) | KEY
-
-KEY ::=
-NONE |
-
-AT |
-
-BAR |
-BANG |
-BQUOTE |
-BACKSLASH |
-
-COLON |
-COLONLT |
-
-DOLLAR |
-
-DOT |
-DOTDOT |
-DOTDOTDOT |
-
-DOTINT |
-
-EQ |
-EQGT |
-EQLT |
-EQLTGT |
-EQSLASHEQGT |
-EQGTGT |
-EQSLASHEQGTGT |
-
-HASH |
-
-LT |
-GT |
-
-GTLT |
-DOTLT |
-GTDOT |
-DOTLTGTDOT |
-
-MINUSGT |
-MINUSLT |
-MINUSLTGT |
-
-TILDE |
-
-// HX: for absprop, abstype, abst@ype;
-ABSTYPE |
-
-ASSUME |
-REASSUME |
-
-AS |
-AND |
-BEGIN |
-CASE |
-CLASSDEC |
-DATASORT |
-DATATYPE |
-DO |
-ELSE |
-END |
-EXCEPTION |
-
-EXTERN |
-EXTYPE |
-EXTVAR |
-
-FIX |
-FIXITY |
-FOR |
-FORSTAR |
-FUN |
-
-IF |
-IFCASE |
-
-IMPLEMENT |
-IMPORT |
-IN |
-LAM |
-LET |
-LOCAL |
-MACDEF |
-NONFIX |
-OVERLOAD |
-OF |
-OP |
-REC |
-
-SIF |
-SCASE |
-
-STACST |
-STADEF |
-STATIC |
-SORTDEF |
-
-SYMELIM |
-SYMINTR |
-THEN |
-TKINDEF |
-TRY |
-TYPE |
-TYPEDEF |
-
-VAL |
-VAR |
-WHEN |
-WHERE |
-WHILE |
-WHILESTAR |
-WITH |
-WITHTYPE |
-// end of [WITHTYPE] // HX: it is from DML and now rarely used |
-
-ADDRAT |
-FOLDAT |
-FREEAT |
-VIEWAT |
-
-DLRDELAY |
-
-DLRARRPSZ |
-
-DLRTYREP |
-DLRD2CTYPE |
-
-DLREFFMASK |
-DLREFFMASK_ARG |
-
-DLREXTERN |
-DLREXTYPE |
-DLREXTKIND |
-DLREXTYPE_STRUCT |
-
-DLREXTVAL |
-DLREXTFCALL |
-DLREXTMCALL |
-
-DLRLITERAL |
-
-DLRMYFILENAME |
-DLRMYLOCATION |
-DLRMYFUNCTION |
-
-DLRLST |
-DLRREC |
-DLRTUP |
-
-DLRBREAK |
-DLRCONTINUE |
-
-DLRRAISE |
-
-DLRSHOWTYPE |
-
-DLRVCOPYENV |
-
-DLRTEMPENVER |
-
-DLRSOLASSERT |
-DLRSOLVERIFY |
-
-SRPIF |
-SRPIFDEF |
-SRPIFNDEF |
-
-SRPTHEN |
-
-SRPELIF |
-SRPELIFDEF |
-SRPELIFNDEF |
-SRPELSE |
-
-SRPENDIF |
-
-SRPERROR |
-SRPPRERR |
-SRPPRINT |
-
-SRPASSERT |
-
-SRPUNDEF |
-SRPDEFINE |
-
-SRPINCLUDE |
-
-SRPSTALOAD |
-SRPDYNLOAD |
-
-SRPREQUIRE |
-
-SRPPRAGMA |
-SRPCODEGEN2 |
-SRPCODEGEN3 |
-
-IDENalp |
-IDENsym |
-IDENarr |
-IDENtmp |
-IDENdlr |
-IDENsrp |
-IDENext |
-
-INT |
-
-CHAR |
-
-FLOAT |
-
-CDATA |
-STRING |
-
-COMMA |
-SEMICOLON |
-
-LPAREN |
-RPAREN |
-LBRACKET |
-RBRACKET |
-LBRACE |
-RBRACE |
-
-ATLPAREN |
-QUOTELPAREN |
-ATLBRACKET |
-QUOTELBRACKET |
-HASHLBRACKET |
-ATLBRACE |
-QUOTELBRACE |
-
-BQUOTELPAREN |
-COMMALPAREN |
-PERCENTLPAREN |
-
-EXTCODE |
-
-COMMENline |
-COMMENblock |
-COMMENrest |
-
-ERR |
-
-EOF |
-// some modified types that don't exactly match the ATS lexer
-IDENTIFIER |
-VAL_IDENTIFIER |
-REF_IDENTIFIER |
-PERCENT |
-HASHLBRACKETOLON |
-REFAT |
-QMARK |
-REQUIRE
+private item_ ::=
+    dummy |
+    COMMENT_DOC |
+    COMMENT_LINE |
+    COMMENT_BLOCK |
+    COMMENT_REST |
+    CRLF
+
+dummy ::=
+    NONE |
+    
+    AT |
+    
+    BAR |
+    BANG |
+    BQUOTE |
+    BACKSLASH |
+    
+    COLON |
+    COLONLT |
+    
+    DOLLAR |
+    
+    DOT |
+    DOTDOT |
+    DOTDOTDOT |
+    
+    DOTINT |
+    
+    EQ |
+    EQGT |
+    EQLT |
+    EQLTGT |
+    EQSLASHEQGT |
+    EQGTGT |
+    EQSLASHEQGTGT |
+    
+    HASH |
+    
+    LT |
+    GT |
+    
+    GTLT |
+    DOTLT |
+    GTDOT |
+    DOTLTGTDOT |
+    
+    MINUSGT |
+    MINUSLT |
+    MINUSLTGT |
+    
+    TILDE |
+    
+    // HX: for absprop, abstype, abst@ype;
+    ABSTYPE |
+    
+    ASSUME |
+    REASSUME |
+    
+    AS |
+    AND |
+    BEGIN |
+    CASE |
+    CLASSDEC |
+    DATASORT |
+    DATATYPE |
+    DO |
+    ELSE |
+    END |
+    EXCEPTION |
+    
+    EXTERN |
+    EXTYPE |
+    EXTVAR |
+    
+    FIX |
+    FIXITY |
+    FOR |
+    FORSTAR |
+    FUN |
+    
+    IF |
+    IFCASE |
+    
+    IMPLEMENT |
+    IMPORT |
+    IN |
+    LAM |
+    LET |
+    LOCAL |
+    MACDEF |
+    NONFIX |
+    OVERLOAD |
+    OF |
+    OP |
+    REC |
+    
+    SIF |
+    SCASE |
+    
+    STACST |
+    STADEF |
+    STATIC |
+    SORTDEF |
+    
+    SYMELIM |
+    SYMINTR |
+    THEN |
+    TKINDEF |
+    TRY |
+    TYPE |
+    TYPEDEF |
+    
+    VAL |
+    VAR |
+    WHEN |
+    WHERE |
+    WHILE |
+    WHILESTAR |
+    WITH |
+    WITHTYPE |
+    // end of [WITHTYPE] // HX: it is from DML and now rarely used |
+    
+    ADDRAT |
+    FOLDAT |
+    FREEAT |
+    VIEWAT |
+    
+    DLRDELAY |
+    
+    DLRARRPSZ |
+    
+    DLRTYREP |
+    DLRD2CTYPE |
+    
+    DLREFFMASK |
+    DLREFFMASK_ARG |
+    
+    DLREXTERN |
+    DLREXTYPE |
+    DLREXTKIND |
+    DLREXTYPE_STRUCT |
+    
+    DLREXTVAL |
+    DLREXTFCALL |
+    DLREXTMCALL |
+    
+    DLRLITERAL |
+    
+    DLRMYFILENAME |
+    DLRMYLOCATION |
+    DLRMYFUNCTION |
+    
+    DLRLST |
+    DLRREC |
+    DLRTUP |
+    
+    DLRBREAK |
+    DLRCONTINUE |
+    
+    DLRRAISE |
+    
+    DLRSHOWTYPE |
+    
+    DLRVCOPYENV |
+    
+    DLRTEMPENVER |
+    
+    DLRSOLASSERT |
+    DLRSOLVERIFY |
+    
+    SRPIF |
+    SRPIFDEF |
+    SRPIFNDEF |
+    
+    SRPTHEN |
+    
+    SRPELIF |
+    SRPELIFDEF |
+    SRPELIFNDEF |
+    SRPELSE |
+    
+    SRPENDIF |
+    
+    SRPERROR |
+    SRPPRERR |
+    SRPPRINT |
+    
+    SRPASSERT |
+    
+    SRPUNDEF |
+    SRPDEFINE |
+    
+    SRPINCLUDE |
+    
+    SRPSTALOAD |
+    SRPDYNLOAD |
+    
+    SRPREQUIRE |
+    
+    SRPPRAGMA |
+    SRPCODEGEN2 |
+    SRPCODEGEN3 |
+    
+    IDENalp |
+    IDENsym |
+    IDENarr |
+    IDENtmp |
+    IDENdlr |
+    IDENsrp |
+    IDENext |
+    
+    INT |
+    
+    CHAR |
+    
+    FLOAT |
+    
+    CDATA |
+    STRING |
+    
+    COMMA |
+    SEMICOLON |
+    
+    LPAREN |
+    RPAREN |
+    LBRACKET |
+    RBRACKET |
+    LBRACE |
+    RBRACE |
+    
+    ATLPAREN |
+    QUOTELPAREN |
+    ATLBRACKET |
+    QUOTELBRACKET |
+    HASHLBRACKET |
+    ATLBRACE |
+    QUOTELBRACE |
+    
+    BQUOTELPAREN |
+    COMMALPAREN |
+    PERCENTLPAREN |
+    
+    EXTCODE |
+    
+    ERR |
+    
+    EOF |
+    // some modified types that don't exactly match the ATS lexer
+    IDENTIFIER |
+    VAL_IDENTIFIER |
+    REF_IDENTIFIER |
+    PERCENT |
+    HASHLBRACKETOLON |
+    REFAT |
+    QMARK |
+    REQUIRE

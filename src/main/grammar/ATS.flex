@@ -32,15 +32,27 @@ IDENTIFIER= ([:letter:]|_) ([:letter:]|{DIGIT}|_ )*
 CRLF=(\n | \r | \r\n)
 
 DIGIT=[0-9]
-OCTAL_DIGIT=[0-7]
+// Currently not used
+//OCTAL_DIGIT=[0-7]
 HEX_DIGIT=[0-9A-Fa-f]
 
 EXTCODE = "%{"|"%{#"|"%{^"|"%{$"|"%}"
 
-INTEGER_LITERAL={DECIMAL_INTEGER_LITERAL}|{OCTAL_INTEGER_LITERAL}|{HEX_INTEGER_LITERAL}
-DECIMAL_INTEGER_LITERAL=(0|([1-9]({DIGIT})*))
-HEX_INTEGER_LITERAL=0[Xx]({HEX_DIGIT})*
-OCTAL_INTEGER_LITERAL=0({OCTAL_DIGIT})*
+/*
+ Octal integer literals do not end at the first non-octal digit.
+ Nonetheless they are invalid if they contain the digits 8 and 9.
+ We will handle this in an annotator.
+*/
+//INTEGER_LITERAL = {DECIMAL_INTEGER_LITERAL} | {OCTAL_INTEGER_LITERAL} | {HEXADECIMAL_INTEGER_LITERAL}
+//DECIMAL_INTEGER_LITERAL = (0 | ([1-9] ({DIGIT})*)) ({INTEGER_SUFFIX})?
+//OCTAL_INTEGER_LITERAL = 0 ({OCTAL_DIGIT})* ({INTEGER_SUFFIX})?
+INTEGER_LITERAL = {DECIMAL_OR_OCTAL_INTEGER_LITERAL} | {HEXADECIMAL_INTEGER_LITERAL}
+// TODO: Check valid octal digits in annotator.
+DECIMAL_OR_OCTAL_INTEGER_LITERAL = ({DIGIT})+ ({INTEGER_SUFFIX})?
+// TODO: Check non-empty hex digits in annotator.
+HEXADECIMAL_INTEGER_LITERAL = 0[Xx] ({HEX_DIGIT})* ({INTEGER_SUFFIX})?
+// TODO: Check supported suffixes in annotator: u, l, ul, lu, ll, ull, llu (case-insensitive)
+INTEGER_SUFFIX = [LlUu]+
 
 WHITE_SPACE=[\ \n\r\t\f]
 
@@ -52,12 +64,14 @@ DOCUMENTATION_COMMENT="(*""*"+("("|([^"(""*"]{COMMENT_TAIL}))?
 //DOCUMENTATION_COMMENT = "(*" (\*+\ +{CRLF}?)* {COMMENT_CONTENT} (\*+\ +{CRLF}?)* "*)"
 //COMMENT_CONTENT = ( [^*] | \*+ [^)*] ) // should we delimit the ')' ?
 
-FLOAT_LITERAL=({FLOATING_POINT_LITERAL1})|({FLOATING_POINT_LITERAL2})|({FLOATING_POINT_LITERAL3})|({FLOATING_POINT_LITERAL4})
-FLOATING_POINT_LITERAL1=({DIGIT})+"."({DIGIT})*({EXPONENT_PART})?
-FLOATING_POINT_LITERAL2="."({DIGIT})+({EXPONENT_PART})?
-FLOATING_POINT_LITERAL3=({DIGIT})+({EXPONENT_PART})
-FLOATING_POINT_LITERAL4=({DIGIT})+
-EXPONENT_PART=[Ee]["+""-"]?({DIGIT})*
+FLOAT_LITERAL = ({FLOATING_POINT_LITERAL1}) | ({FLOATING_POINT_LITERAL2}) | ({FLOATING_POINT_LITERAL3})
+FLOATING_POINT_LITERAL1 = ({DIGIT})+ "." ({DIGIT})* ({EXPONENT_PART})? ({FLOATING_POINT_SUFFIX})?
+FLOATING_POINT_LITERAL2 = "." ({DIGIT})+ ({EXPONENT_PART})? ({FLOATING_POINT_SUFFIX})?
+FLOATING_POINT_LITERAL3 = ({DIGIT})+ ({EXPONENT_PART}) ({FLOATING_POINT_SUFFIX})?
+// TODO: Check non-empty exponent digits in annotator.
+EXPONENT_PART = [Ee] ["+""-"]? ({DIGIT})*
+// TODO: Check supported suffixes in annotator: f, l (case-insensitive)
+FLOATING_POINT_SUFFIX = [FfLl]+
 
 ESCAPE_SEQUENCE = \\ [^\r\n]
 CHAR_SINGLEQ_BASE = [^\\\'\r\n] | {ESCAPE_SEQUENCE}

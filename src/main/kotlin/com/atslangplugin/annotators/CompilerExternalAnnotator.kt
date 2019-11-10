@@ -30,11 +30,9 @@ data class ErrorMsg(
 
         //this is inelegant and kind of a mess, but that's what happens when you use java regex
         fun fromLines(error: String): List<ErrorMsg> {
-            val lines = error.split("\n")
-
             var list = emptyList<ErrorMsg>()
 
-            for (line in lines) {
+            for (line in error.lines()) {
                 val data = regex.matchEntire(line)
                 if (data != null) {
                     try {
@@ -58,13 +56,9 @@ data class ErrorMsg(
                     if (!list.isEmpty()) {
                         val oldmsg = list.last()
 
-                        val newmsg = ErrorMsg(oldmsg.file,
-                                oldmsg.startLine,
-                                oldmsg.startCol,
-                                oldmsg.endLine,
-                                oldmsg.endCol,
-                                oldmsg.message + "\n" + line,
-                                oldmsg.full + "\n" + line
+                        val newmsg = oldmsg.copy(
+                                message = oldmsg.message + "\n" + line,
+                                full = oldmsg.full + "\n" + line
                         )
                         list = list.subList(0, list.lastIndex) + newmsg
                     }
@@ -141,8 +135,6 @@ class CompilerExternalAnnotator : ExternalAnnotator<InitialInfo, String>() {
             val errors = (collectedInfo.patsoptPath+""" --typecheck --debug --static """ + collectedInfo.name).runCommand(collectedInfo.dir)
             return errors
         }
-
-        return null
     }
 
 

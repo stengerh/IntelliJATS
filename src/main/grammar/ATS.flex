@@ -21,6 +21,7 @@ import com.atslangplugin.psi.ATSTokenTypes;
 %eof}
 
 %{
+    private int openCommentCount;
 %}
 
 
@@ -47,7 +48,6 @@ WHITE_SPACE=[\ \n\r\t\f]
 /* comments */
 END_OF_LINE_COMMENT = "//" [^\r\n]*
 COMMENT_TAIL=([^"*"]*("*"+[^"*"")"])?)*("*"+")")?
-TRADITIONAL_COMMENT=("(*"[^"*"]{COMMENT_TAIL})|"*)"
 END_OF_FILE_COMMENT = "////" (.* {CRLF}?)*
 DOCUMENTATION_COMMENT="(*""*"+("("|([^"(""*"]{COMMENT_TAIL}))?
 //DOCUMENTATION_COMMENT = "(*" (\*+\ +{CRLF}?)* {COMMENT_CONTENT} (\*+\ +{CRLF}?)* "*)"
@@ -72,6 +72,7 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 %state DEFINE
 %state DEFINE_CONTINUATION
 %state CONTINUATION
+%state BLOCK_COMMENT
 
 %%
 
@@ -305,7 +306,7 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 {EXTCODE}                   { return ATSTokenTypes.EXTCODE; }
 //
 {END_OF_LINE_COMMENT}       { return ATSTokenTypes.COMMENT_LINE; }
-{TRADITIONAL_COMMENT}       { return ATSTokenTypes.COMMENT_BLOCK; }
+"(*"                        { openCommentCount = 1; yybegin(BLOCK_COMMENT); }
 {END_OF_FILE_COMMENT}       { return ATSTokenTypes.COMMENT_REST; }
 {DOCUMENTATION_COMMENT}     { return ATSTokenTypes.COMMENT_DOC; }
 //
@@ -320,6 +321,22 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 "&"{IDENTIFIER}             { return ATSTokenTypes.REF_IDENTIFIER; }
 
 } // End of <YYINITIAL>
+
+<BLOCK_COMMENT> {
+    "(*"                    { openCommentCount += 1; }
+    [^\*\(\)]+              { }  
+    "*)"                    { openCommentCount -= 1;
+                              if (openCommentCount == 0) {
+                                yybegin(YYINITIAL);
+                                return ATSTokenTypes.COMMENT_BLOCK;
+                              }
+                            }
+    [\*\(\)]                { }
+    <<EOF>>                 { openCommentCount = 0;
+                              yybegin(YYINITIAL);
+                              return ATSTokenTypes.COMMENT_BLOCK;
+                            }
+} // End of <BLOCK_COMMENT>
 
 /* Not using for now
 <STRING> {
@@ -338,31 +355,3 @@ CHAR_LITERAL="'"({CHAR_SINGLEQ_BASE})("'"|\\)? | \"({CHAR_DOUBLEQ_BASE})*(\"|\\)
 
 //needs to assume this is just some infix thing that was defined in a different file
 [^]         { return ATSTokenTypes.IDENTIFIER; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

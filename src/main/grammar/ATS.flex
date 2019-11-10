@@ -17,22 +17,10 @@ import com.atslangplugin.psi.ATSTokenTypes;
 %unicode
 %function advance
 %type IElementType
-%line
-%column
 %eof{ return;
 %eof}
 
 %{
-  // Not sure if needed:
-  StringBuffer string = new StringBuffer();
-
-  // Placeholders for line and column information:
-  private int yyline;
-  private int yycolumn;
-
-  public int getYyline() { return yyline; }
-  public int getYycolumn() { return yycolumn; }
-
 %}
 
 
@@ -53,10 +41,6 @@ INTEGER_LITERAL={DECIMAL_INTEGER_LITERAL}|{OCTAL_INTEGER_LITERAL}|{HEX_INTEGER_L
 DECIMAL_INTEGER_LITERAL=(0|([1-9]({DIGIT})*))
 HEX_INTEGER_LITERAL=0[Xx]({HEX_DIGIT})*
 OCTAL_INTEGER_LITERAL=0({OCTAL_DIGIT})*
-
-// for DEFINE:
-SIMPLE_SPACE_CHAR=[\ \t\f]
-SIMPLE_PRE_KEYWORD=(include|ifdef|endif|undef|ifndef|error|defined)
 
 WHITE_SPACE=[\ \n\r\t\f]
 

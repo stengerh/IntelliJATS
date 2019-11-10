@@ -1,6 +1,7 @@
 package com.atslangplugin
 
 
+import com.atslangplugin.ATSBundle.message
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighter
 import com.intellij.openapi.options.colors.AttributesDescriptor
@@ -85,27 +86,27 @@ end // end of [list_vt_quicksort]
     }
 
     override fun getDisplayName(): String {
-        return "ATS"
+        return message("options.display.name");
     }
 
     companion object {
         private val DESCRIPTORS = arrayOf(
-                AttributesDescriptor("Block comments", ATSSyntaxHighlighter.ATS_BLOCK_COMMENT),
-                AttributesDescriptor("Braces", ATSSyntaxHighlighter.ATS_BRACES),
-                AttributesDescriptor("Brackets", ATSSyntaxHighlighter.ATS_BRACKETS),
-                AttributesDescriptor("Commas", ATSSyntaxHighlighter.ATS_COMMA),
-                AttributesDescriptor("Directives", ATSSyntaxHighlighter.ATS_DIRECTIVES),
-                AttributesDescriptor("Identifiers", ATSSyntaxHighlighter.ATS_IDENTIFIER),
-                AttributesDescriptor("Line comments", ATSSyntaxHighlighter.ATS_LINE_COMMENT),
-                AttributesDescriptor("Keywords", ATSSyntaxHighlighter.ATS_KEYWORD),
-                AttributesDescriptor("Local variables", ATSSyntaxHighlighter.ATS_LOCAL_VARIABLE),
-                AttributesDescriptor("Numbers", ATSSyntaxHighlighter.ATS_NUMBER),
-                AttributesDescriptor("Operators", ATSSyntaxHighlighter.ATS_OPERATION_SIGN),
-                AttributesDescriptor("Parentheses", ATSSyntaxHighlighter.ATS_PARENTHESES),
-                AttributesDescriptor("Semicolons", ATSSyntaxHighlighter.ATS_SEMICOLON),
-                AttributesDescriptor("Strings", ATSSyntaxHighlighter.ATS_STRING),
-                AttributesDescriptor("Type declarations", ATSSyntaxHighlighter.ATS_TYPE_DECLARATIONS),
-                AttributesDescriptor("Val, Fun declarations", ATSSyntaxHighlighter.ATS_VAL_DECLARATIONS)
+                AttributesDescriptor(message("options.attribute.descriptor.comment.block"), ATSSyntaxHighlighter.ATS_BLOCK_COMMENT),
+                AttributesDescriptor(message("options.attribute.descriptor.braces"), ATSSyntaxHighlighter.ATS_BRACES),
+                AttributesDescriptor(message("options.attribute.descriptor.brackets"), ATSSyntaxHighlighter.ATS_BRACKETS),
+                AttributesDescriptor(message("options.attribute.descriptor.comma"), ATSSyntaxHighlighter.ATS_COMMA),
+                AttributesDescriptor(message("options.attribute.descriptor.directive"), ATSSyntaxHighlighter.ATS_DIRECTIVES),
+                AttributesDescriptor(message("options.attribute.descriptor.identifier"), ATSSyntaxHighlighter.ATS_IDENTIFIER),
+                AttributesDescriptor(message("options.attribute.descriptor.comment.line"), ATSSyntaxHighlighter.ATS_LINE_COMMENT),
+                AttributesDescriptor(message("options.attribute.descriptor.keyword"), ATSSyntaxHighlighter.ATS_KEYWORD),
+                AttributesDescriptor(message("options.attribute.descriptor.variable"), ATSSyntaxHighlighter.ATS_LOCAL_VARIABLE),
+                AttributesDescriptor(message("options.attribute.descriptor.number"), ATSSyntaxHighlighter.ATS_NUMBER),
+                AttributesDescriptor(message("options.attribute.descriptor.operator"), ATSSyntaxHighlighter.ATS_OPERATION_SIGN),
+                AttributesDescriptor(message("options.attribute.descriptor.parentheses"), ATSSyntaxHighlighter.ATS_PARENTHESES),
+                AttributesDescriptor(message("options.attribute.descriptor.semicolon"), ATSSyntaxHighlighter.ATS_SEMICOLON),
+                AttributesDescriptor(message("options.attribute.descriptor.string"), ATSSyntaxHighlighter.ATS_STRING),
+                AttributesDescriptor(message("options.attribute.descriptor.declaration.type"), ATSSyntaxHighlighter.ATS_TYPE_DECLARATIONS),
+                AttributesDescriptor(message("options.attribute.descriptor.declaration.val"), ATSSyntaxHighlighter.ATS_VAL_DECLARATIONS)
         )
     }
 }

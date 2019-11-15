@@ -73,9 +73,10 @@ EXPONENT_PART = [Ee] ["+""-"]? ({DIGIT})*
 // TODO: Check supported suffixes in annotator: f, l (case-insensitive)
 FLOATING_POINT_SUFFIX = [FfLl]+
 
+// TODO: Check valid escape sequences in annotator.
 ESCAPE_SEQUENCE = \\ [^\r\n]
 CHAR_SINGLEQ_BASE = [^\\\'\r\n] | {ESCAPE_SEQUENCE}
-CHAR_DOUBLEQ_BASE = [^\\\"\r\n] | {ESCAPE_SEQUENCE} | \\ {CRLF}
+CHAR_DOUBLEQ_BASE = [^\\\"\r\n] | {ESCAPE_SEQUENCE} | \\? {CRLF}
 CHAR_LITERAL = "'" ({CHAR_SINGLEQ_BASE})* ("'" | \\)?
 STRING_LITERAL = \" ({CHAR_DOUBLEQ_BASE})* (\" | \\)?
 

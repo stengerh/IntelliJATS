@@ -36,6 +36,9 @@ class ATSSyntaxHighlighter : SyntaxHighlighterBase() {
         val ATS_TYPE_DECLARATIONS = createTextAttributesKey("TYPE_DECLARATIONS", KEYWORD)
         val ATS_VAL_DECLARATIONS = createTextAttributesKey("VAL_DECLARATIONS", INSTANCE_FIELD)
 
+        val ATS_INVALID_STRING_ESCAPE = createTextAttributesKey("INVALID_STRING_ESCAPE", INVALID_STRING_ESCAPE)
+        val ATS_VALID_STRING_ESCAPE = createTextAttributesKey("VALID_STRING_ESCAPE", VALID_STRING_ESCAPE)
+
 
         private val EMPTY_KEYS = emptyArray<TextAttributesKey>()
 

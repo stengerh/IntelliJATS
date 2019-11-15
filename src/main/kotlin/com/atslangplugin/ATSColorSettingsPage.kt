@@ -106,7 +106,9 @@ end // end of [list_vt_quicksort]
                 AttributesDescriptor(message("options.attribute.descriptor.operator"), ATSSyntaxHighlighter.ATS_OPERATION_SIGN),
                 AttributesDescriptor(message("options.attribute.descriptor.parentheses"), ATSSyntaxHighlighter.ATS_PARENTHESES),
                 AttributesDescriptor(message("options.attribute.descriptor.semicolon"), ATSSyntaxHighlighter.ATS_SEMICOLON),
-                AttributesDescriptor(message("options.attribute.descriptor.string"), ATSSyntaxHighlighter.ATS_STRING),
+                AttributesDescriptor(message("options.attribute.descriptor.string.escape.invalid"), ATSSyntaxHighlighter.ATS_INVALID_STRING_ESCAPE),
+                AttributesDescriptor(message("options.attribute.descriptor.string.escape.valid"), ATSSyntaxHighlighter.ATS_VALID_STRING_ESCAPE),
+                AttributesDescriptor(message("options.attribute.descriptor.string.text"), ATSSyntaxHighlighter.ATS_STRING),
                 AttributesDescriptor(message("options.attribute.descriptor.declaration.type"), ATSSyntaxHighlighter.ATS_TYPE_DECLARATIONS),
                 AttributesDescriptor(message("options.attribute.descriptor.declaration.val"), ATSSyntaxHighlighter.ATS_VAL_DECLARATIONS)
         )

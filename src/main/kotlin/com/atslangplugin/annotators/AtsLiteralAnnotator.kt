@@ -1,10 +1,12 @@
 package com.atslangplugin.annotators
 
 import com.atslangplugin.ATSBundle
+import com.atslangplugin.ATSSyntaxHighlighter
 import com.atslangplugin.psi.ATSCharLiteral
 import com.atslangplugin.psi.ATSFloatLiteral
 import com.atslangplugin.psi.ATSIntLiteral
 import com.atslangplugin.psi.ATSStringLiteral
+import com.intellij.lang.annotation.Annotation
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.Annotator
 import com.intellij.openapi.util.TextRange
@@ -23,15 +25,15 @@ class AtsLiteralAnnotator : Annotator {
 
     private fun annotateIntLiteral(element: ATSIntLiteral, holder: AnnotationHolder) {
         val text = element.text
-        
+
         if (POSSIBLE_OCT_LITERAL.matches(text) && !VALID_OCT_LITERAL.matches(text)) {
             holder.createErrorAnnotation(element, ATSBundle.message("syntax.error.int.oct.invalid"))
         }
-            
+
         if (EMPTY_HEX_LITERAL.matches(text)) {
             holder.createErrorAnnotation(element, ATSBundle.message("syntax.error.int.hex.empty"))
         }
-        
+
         val suffix = INT_SUFFIX.find(text)
         if (suffix != null && !SUPPORTED_INT_SUFFIX.matches(suffix.value)) {
             val elementOffset = element.textOffset
@@ -42,11 +44,11 @@ class AtsLiteralAnnotator : Annotator {
 
     private fun annotateFloatLiteral(element: ATSFloatLiteral, holder: AnnotationHolder) {
         val text = element.text
-        
+
         if (EMPTY_FLOAT_EXPONENT.matches(text)) {
-            holder.createErrorAnnotation(element,  ATSBundle.message("syntax.error.float.exp.empty"))
+            holder.createErrorAnnotation(element, ATSBundle.message("syntax.error.float.exp.empty"))
         }
-        
+
         val suffix = FLOAT_SUFFIX.find(text)
         if (suffix != null && !SUPPORTED_FLOAT_SUFFIX.matches(suffix.value)) {
             val elementOffset = element.textOffset
@@ -63,7 +65,7 @@ class AtsLiteralAnnotator : Annotator {
         }
 
         val textFragments = getTextFragments(element)
-        annotateInvalidEscapeSequences(element, textFragments, holder)
+        annotateEscapeSequences(element, textFragments, holder)
     }
 
     private fun annotateCharLiteral(element: ATSCharLiteral, holder: AnnotationHolder) {
@@ -83,7 +85,7 @@ class AtsLiteralAnnotator : Annotator {
             holder.createErrorAnnotation(element, ATSBundle.message("syntax.error.char.too.long"))
         }
 
-        annotateInvalidEscapeSequences(element, textFragments, holder)
+        annotateEscapeSequences(element, textFragments, holder)
     }
 
     private fun isEscapedChar(text: String, index: Int): Boolean {
@@ -94,16 +96,38 @@ class AtsLiteralAnnotator : Annotator {
         return (count % 2) == 1
     }
 
-    private fun annotateInvalidEscapeSequences(element: PsiElement, textFragments: List<Pair<TextRange, String>>, holder: AnnotationHolder) {
-        val elementOffset = element.textOffset
+    private fun annotateEscapeSequences(element: PsiElement, textFragments: List<Pair<TextRange, String>>, holder: AnnotationHolder) {
+        val elementOffset by lazy { element.textOffset }
         textFragments.forEach { (fragmentRange, fragmentText) ->
-            if (fragmentText.first() == '\\' && fragmentText.length > 1 && !VALID_ESCAPE_SEQUENCE.matches(fragmentText)) {
-                when (fragmentText[1]) {
-                    'x', 'X' -> holder.createErrorAnnotation(fragmentRange.shiftRight(elementOffset), ATSBundle.message("syntax.error.escape.hex.invalid"))
-                    else -> holder.createErrorAnnotation(fragmentRange.shiftRight(elementOffset), ATSBundle.message("syntax.error.escape.oct.invalid"))
+            if (fragmentText.first() == '\\' && fragmentText.length > 1) {
+                if (VALID_ESCAPE_SEQUENCE.matches(fragmentText)) {
+                    holder.createInfoAnnotation(elementOffset, fragmentRange) {
+                        textAttributes = ATSSyntaxHighlighter.ATS_VALID_STRING_ESCAPE
+                    }
+                } else {
+                    when (fragmentText[1]) {
+                        'x', 'X' -> holder.createErrorAnnotation(elementOffset, fragmentRange, ATSBundle.message("syntax.error.escape.hex.invalid")) {
+                            textAttributes = ATSSyntaxHighlighter.ATS_INVALID_STRING_ESCAPE
+                        }
+                        else -> holder.createErrorAnnotation(elementOffset, fragmentRange, ATSBundle.message("syntax.error.escape.oct.invalid")) {
+                            textAttributes = ATSSyntaxHighlighter.ATS_INVALID_STRING_ESCAPE
+                        }
+                    }
                 }
             }
         }
+    }
+
+    private fun AnnotationHolder.createInfoAnnotation(elementOffset: Int, rangeInElement: TextRange, init: Annotation.() -> Unit): Annotation {
+        val annotation = this.createInfoAnnotation(rangeInElement.shiftRight(elementOffset), null)
+        annotation.init()
+        return annotation
+    }
+
+    private fun AnnotationHolder.createErrorAnnotation(elementOffset: Int, rangeInElement: TextRange, message: String, init: Annotation.() -> Unit): Annotation {
+        val annotation = this.createErrorAnnotation(rangeInElement.shiftRight(elementOffset), message)
+        annotation.init()
+        return annotation
     }
 
     private fun getTextFragments(element: ATSCharLiteral): List<Pair<TextRange, String>> {
@@ -128,12 +152,12 @@ class AtsLiteralAnnotator : Annotator {
         val VALID_OCT_LITERAL = Regex("0[0-7]+")
 
         val EMPTY_HEX_LITERAL = Regex("0[Xx]")
-        
+
         val INT_SUFFIX = Regex("[LlUu]+$")
         val SUPPORTED_INT_SUFFIX = Regex("u|l|ul|lu|ll|ull|llu", RegexOption.IGNORE_CASE)
 
         val EMPTY_FLOAT_EXPONENT = Regex("[0-9.]+[Ee][+-]?[^0-9]*")
-        
+
         val FLOAT_SUFFIX = Regex("[FfLl]+$")
         val SUPPORTED_FLOAT_SUFFIX = Regex("[FfLl]")
 

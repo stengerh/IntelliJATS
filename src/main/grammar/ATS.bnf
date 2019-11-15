@@ -8,9 +8,12 @@
   psiPackage="com.atslangplugin.psi"
   psiImplPackage="com.atslangplugin.psi.impl"
 
-  elementTypeHolderClass="com.atslangplugin.psi.ATSTokenTypes"
+  elementTypeHolderClass="com.atslangplugin.psi.ATSElementTypes"
   elementTypeClass="com.atslangplugin.psi.ATSElementType"
   tokenTypeClass="com.atslangplugin.psi.ATSTokenType"
+  
+  generateTokens=false
+  parserImports="static com.atslangplugin.psi.ATSTokenTypes.*"
 }
 
 ATSFile ::= item_*

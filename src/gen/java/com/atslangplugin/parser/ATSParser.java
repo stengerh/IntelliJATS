@@ -3,13 +3,14 @@ package com.atslangplugin.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-import static com.atslangplugin.psi.ATSTokenTypes.*;
+import static com.atslangplugin.psi.ATSElementTypes.*;
 import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.LightPsiParser;
+import static com.atslangplugin.psi.ATSTokenTypes.*;
 
 @SuppressWarnings({"SimplifiableIfStatement", "UnusedAssignment"})
 public class ATSParser implements PsiParser, LightPsiParser {

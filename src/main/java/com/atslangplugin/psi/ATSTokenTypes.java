@@ -1,4 +1,3 @@
-// This is a generated file. Not intended for manual editing.
 package com.atslangplugin.psi;
 
 import com.intellij.psi.tree.IElementType;
@@ -7,8 +6,6 @@ import com.intellij.lang.ASTNode;
 import com.atslangplugin.psi.impl.*;
 
 public interface ATSTokenTypes {
-
-  IElementType DUMMY = new ATSElementType("DUMMY");
 
   IElementType ABSTYPE = new ATSTokenType("ABSTYPE");
   IElementType ADDRAT = new ATSTokenType("ADDRAT");
@@ -198,14 +195,4 @@ public interface ATSTokenTypes {
   IElementType WHILESTAR = new ATSTokenType("WHILESTAR");
   IElementType WITH = new ATSTokenType("WITH");
   IElementType WITHTYPE = new ATSTokenType("WITHTYPE");
-
-  class Factory {
-    public static PsiElement createElement(ASTNode node) {
-      IElementType type = node.getElementType();
-       if (type == DUMMY) {
-        return new ATSDummyImpl(node);
-      }
-      throw new AssertionError("Unknown element type: " + type);
-    }
-  }
 }

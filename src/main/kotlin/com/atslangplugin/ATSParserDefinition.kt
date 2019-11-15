@@ -1,6 +1,7 @@
 package com.atslangplugin
 
 import com.atslangplugin.parser.ATSParserWrapper
+import com.atslangplugin.psi.ATSElementTypes
 import com.atslangplugin.psi.ATSTokenTypes
 import com.atslangplugin.psi.impl.ATSDynamicFileImpl
 import com.intellij.lang.ASTNode
@@ -55,7 +56,7 @@ class ATSParserDefinition : ParserDefinition {
     }
 
     override fun createElement(node: ASTNode): PsiElement {
-        return ATSTokenTypes.Factory.createElement(node)
+        return ATSElementTypes.Factory.createElement(node)
     }
 
     companion object {

@@ -22,10 +22,25 @@ public class ATSParser implements PsiParser, LightPsiParser {
 
   public void parseLight(IElementType root_, PsiBuilder builder_) {
     boolean result_;
-    builder_ = adapt_builder_(root_, builder_, this, null);
+    builder_ = adapt_builder_(root_, builder_, this, EXTENDS_SETS_);
     Marker marker_ = enter_section_(builder_, 0, _COLLAPSE_, null);
-    if (root_ == DUMMY) {
+    if (root_ == CHAR_LITERAL) {
+      result_ = char_literal(builder_, 0);
+    }
+    else if (root_ == DUMMY) {
       result_ = dummy(builder_, 0);
+    }
+    else if (root_ == FLOAT_LITERAL) {
+      result_ = float_literal(builder_, 0);
+    }
+    else if (root_ == INT_LITERAL) {
+      result_ = int_literal(builder_, 0);
+    }
+    else if (root_ == LITERAL) {
+      result_ = literal(builder_, 0);
+    }
+    else if (root_ == STRING_LITERAL) {
+      result_ = string_literal(builder_, 0);
     }
     else {
       result_ = parse_root_(root_, builder_, 0);
@@ -36,6 +51,11 @@ public class ATSParser implements PsiParser, LightPsiParser {
   protected boolean parse_root_(IElementType root_, PsiBuilder builder_, int level_) {
     return ATSFile(builder_, level_ + 1);
   }
+
+  public static final TokenSet[] EXTENDS_SETS_ = new TokenSet[] {
+    create_token_set_(CHAR_LITERAL, FLOAT_LITERAL, INT_LITERAL, LITERAL,
+      STRING_LITERAL),
+  };
 
   /* ********************************************************** */
   // item_*
@@ -48,6 +68,18 @@ public class ATSParser implements PsiParser, LightPsiParser {
       pos_ = current_position_(builder_);
     }
     return true;
+  }
+
+  /* ********************************************************** */
+  // CHAR
+  public static boolean char_literal(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "char_literal")) return false;
+    if (!nextTokenIs(builder_, CHAR)) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, CHAR);
+    exit_section_(builder_, marker_, CHAR_LITERAL, result_);
+    return result_;
   }
 
   /* ********************************************************** */
@@ -254,14 +286,7 @@ public class ATSParser implements PsiParser, LightPsiParser {
   //     IDENsrp |
   //     IDENext |
   //     
-  //     INT |
-  //     
-  //     CHAR |
-  //     
-  //     FLOAT |
-  //     
   //     CDATA |
-  //     STRING |
   //     
   //     COMMA |
   //     SEMICOLON |
@@ -452,11 +477,7 @@ public class ATSParser implements PsiParser, LightPsiParser {
     if (!result_) result_ = consumeToken(builder_, IDENDLR);
     if (!result_) result_ = consumeToken(builder_, IDENSRP);
     if (!result_) result_ = consumeToken(builder_, IDENEXT);
-    if (!result_) result_ = consumeToken(builder_, INT);
-    if (!result_) result_ = consumeToken(builder_, CHAR);
-    if (!result_) result_ = consumeToken(builder_, FLOAT);
     if (!result_) result_ = consumeToken(builder_, CDATA);
-    if (!result_) result_ = consumeToken(builder_, STRING);
     if (!result_) result_ = consumeToken(builder_, COMMA);
     if (!result_) result_ = consumeToken(builder_, SEMICOLON);
     if (!result_) result_ = consumeToken(builder_, LPAREN);
@@ -491,7 +512,32 @@ public class ATSParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // FLOAT
+  public static boolean float_literal(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "float_literal")) return false;
+    if (!nextTokenIs(builder_, FLOAT)) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, FLOAT);
+    exit_section_(builder_, marker_, FLOAT_LITERAL, result_);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // INT
+  public static boolean int_literal(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "int_literal")) return false;
+    if (!nextTokenIs(builder_, INT)) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, INT);
+    exit_section_(builder_, marker_, INT_LITERAL, result_);
+    return result_;
+  }
+
+  /* ********************************************************** */
   // dummy |
+  //     literal |
   //     COMMENT_DOC |
   //     COMMENT_LINE |
   //     COMMENT_BLOCK |
@@ -502,12 +548,42 @@ public class ATSParser implements PsiParser, LightPsiParser {
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = dummy(builder_, level_ + 1);
+    if (!result_) result_ = literal(builder_, level_ + 1);
     if (!result_) result_ = consumeToken(builder_, COMMENT_DOC);
     if (!result_) result_ = consumeToken(builder_, COMMENT_LINE);
     if (!result_) result_ = consumeToken(builder_, COMMENT_BLOCK);
     if (!result_) result_ = consumeToken(builder_, COMMENT_REST);
     if (!result_) result_ = consumeToken(builder_, CRLF);
     exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // int_literal |
+  //     float_literal |
+  //     char_literal |
+  //     string_literal
+  public static boolean literal(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "literal")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _COLLAPSE_, LITERAL, "<literal>");
+    result_ = int_literal(builder_, level_ + 1);
+    if (!result_) result_ = float_literal(builder_, level_ + 1);
+    if (!result_) result_ = char_literal(builder_, level_ + 1);
+    if (!result_) result_ = string_literal(builder_, level_ + 1);
+    exit_section_(builder_, level_, marker_, result_, false, null);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // STRING
+  public static boolean string_literal(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "string_literal")) return false;
+    if (!nextTokenIs(builder_, STRING)) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, STRING);
+    exit_section_(builder_, marker_, STRING_LITERAL, result_);
     return result_;
   }
 

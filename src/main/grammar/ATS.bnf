@@ -20,11 +20,29 @@ ATSFile ::= item_*
 
 private item_ ::=
     dummy |
+    literal |
     COMMENT_DOC |
     COMMENT_LINE |
     COMMENT_BLOCK |
     COMMENT_REST |
-    CRLF
+    CRLF ;
+
+{
+    extends(".+_literal") = literal
+}
+literal ::=
+    int_literal |
+    float_literal |
+    char_literal |
+    string_literal ;
+
+int_literal ::= INT ;
+
+float_literal ::= FLOAT ;
+
+char_literal ::= CHAR ;
+
+string_literal ::= STRING ;
 
 dummy ::=
     NONE |
@@ -230,14 +248,7 @@ dummy ::=
     IDENsrp |
     IDENext |
     
-    INT |
-    
-    CHAR |
-    
-    FLOAT |
-    
     CDATA |
-    STRING |
     
     COMMA |
     SEMICOLON |

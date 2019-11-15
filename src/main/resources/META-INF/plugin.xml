@@ -60,6 +60,8 @@
     <externalAnnotator language="ATS" implementationClass="com.atslangplugin.annotators.CompilerExternalAnnotator"/>
 
     <!--<annotator language="ATS" implementationClass="com.atslangplugin.annotators.CompilerAnnotator"/>-->
+
+    <annotator language="ATS" implementationClass="com.atslangplugin.annotators.AtsLiteralAnnotator"/>
   </extensions>
 
   <application-components>

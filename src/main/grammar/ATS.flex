@@ -47,11 +47,11 @@ EXTCODE = "%{"|"%{#"|"%{^"|"%{$"|"%}"
 //DECIMAL_INTEGER_LITERAL = (0 | ([1-9] ({DIGIT})*)) ({INTEGER_SUFFIX})?
 //OCTAL_INTEGER_LITERAL = 0 ({OCTAL_DIGIT})* ({INTEGER_SUFFIX})?
 INTEGER_LITERAL = {DECIMAL_OR_OCTAL_INTEGER_LITERAL} | {HEXADECIMAL_INTEGER_LITERAL}
-// TODO: Check valid octal digits in annotator.
+// Check valid octal digits in AtsLiteralAnnotator.
 DECIMAL_OR_OCTAL_INTEGER_LITERAL = ({DIGIT})+ ({INTEGER_SUFFIX})?
-// TODO: Check non-empty hex digits in annotator.
+// Check non-empty hex digits in AtsLiteralAnnotator.
 HEXADECIMAL_INTEGER_LITERAL = 0[Xx] ({HEX_DIGIT})* ({INTEGER_SUFFIX})?
-// TODO: Check supported suffixes in annotator: u, l, ul, lu, ll, ull, llu (case-insensitive)
+// Check supported suffixes in AtsLiteralAnnotator: u, l, ul, lu, ll, ull, llu (case-insensitive)
 INTEGER_SUFFIX = [LlUu]+
 
 WHITE_SPACE=[\ \n\r\t\f]
@@ -68,12 +68,12 @@ FLOAT_LITERAL = ({FLOATING_POINT_LITERAL1}) | ({FLOATING_POINT_LITERAL2}) | ({FL
 FLOATING_POINT_LITERAL1 = ({DIGIT})+ "." ({DIGIT})* ({EXPONENT_PART})? ({FLOATING_POINT_SUFFIX})?
 FLOATING_POINT_LITERAL2 = "." ({DIGIT})+ ({EXPONENT_PART})? ({FLOATING_POINT_SUFFIX})?
 FLOATING_POINT_LITERAL3 = ({DIGIT})+ ({EXPONENT_PART}) ({FLOATING_POINT_SUFFIX})?
-// TODO: Check non-empty exponent digits in annotator.
+// Check non-empty exponent digits in AtsLiteralAnnotator.
 EXPONENT_PART = [Ee] ["+""-"]? ({DIGIT})*
-// TODO: Check supported suffixes in annotator: f, l (case-insensitive)
+// Check supported suffixes in AtsLiteralAnnotator: f, l (case-insensitive)
 FLOATING_POINT_SUFFIX = [FfLl]+
 
-// TODO: Check valid escape sequences in annotator.
+// Check valid escape sequences in AtsLiteralAnnotator.
 ESCAPE_SEQUENCE = \\ [^\r\n]
 CHAR_SINGLEQ_BASE = [^\\\'\r\n] | {ESCAPE_SEQUENCE}
 CHAR_DOUBLEQ_BASE = [^\\\"\r\n] | {ESCAPE_SEQUENCE} | \\? {CRLF}

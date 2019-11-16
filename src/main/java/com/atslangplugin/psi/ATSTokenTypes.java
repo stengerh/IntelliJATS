@@ -86,6 +86,7 @@ public interface ATSTokenTypes {
   IElementType ERR = new ATSTokenType("ERR");
   IElementType EXCEPTION = new ATSTokenType("EXCEPTION");
   IElementType EXTCODE = new ATSTokenType("EXTCODE");
+  IElementType EXTCODE_CLOSE = new ATSTokenType("EXTCODE_CLOSE");
   IElementType EXTERN = new ATSTokenType("EXTERN");
   IElementType EXTVAR = new ATSTokenType("EXTVAR");
   IElementType EXTYPE = new ATSTokenType("EXTYPE");

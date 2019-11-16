@@ -10,6 +10,7 @@ public interface ATSElementTypes {
 
   IElementType CHAR_LITERAL = new ATSElementType("CHAR_LITERAL");
   IElementType DUMMY = new ATSElementType("DUMMY");
+  IElementType EXTERNAL_CODE = new ATSElementType("EXTERNAL_CODE");
   IElementType FLOAT_LITERAL = new ATSElementType("FLOAT_LITERAL");
   IElementType INT_LITERAL = new ATSElementType("INT_LITERAL");
   IElementType LITERAL = new ATSElementType("LITERAL");
@@ -23,6 +24,9 @@ public interface ATSElementTypes {
       }
       else if (type == DUMMY) {
         return new ATSDummyImpl(node);
+      }
+      else if (type == EXTERNAL_CODE) {
+        return new ATSExternalCodeImpl(node);
       }
       else if (type == FLOAT_LITERAL) {
         return new ATSFloatLiteralImpl(node);

@@ -30,6 +30,9 @@ public class ATSParser implements PsiParser, LightPsiParser {
     else if (root_ == DUMMY) {
       result_ = dummy(builder_, 0);
     }
+    else if (root_ == EXTERNAL_CODE) {
+      result_ = external_code(builder_, 0);
+    }
     else if (root_ == FLOAT_LITERAL) {
       result_ = float_literal(builder_, 0);
     }
@@ -310,7 +313,7 @@ public class ATSParser implements PsiParser, LightPsiParser {
   //     COMMALPAREN |
   //     PERCENTLPAREN |
   //     
-  //     EXTCODE |
+  //     EXTCODE_CLOSE |
   //     
   //     ERR |
   //     
@@ -496,7 +499,7 @@ public class ATSParser implements PsiParser, LightPsiParser {
     if (!result_) result_ = consumeToken(builder_, BQUOTELPAREN);
     if (!result_) result_ = consumeToken(builder_, COMMALPAREN);
     if (!result_) result_ = consumeToken(builder_, PERCENTLPAREN);
-    if (!result_) result_ = consumeToken(builder_, EXTCODE);
+    if (!result_) result_ = consumeToken(builder_, EXTCODE_CLOSE);
     if (!result_) result_ = consumeToken(builder_, ERR);
     if (!result_) result_ = consumeToken(builder_, EOF);
     if (!result_) result_ = consumeToken(builder_, IDENTIFIER);
@@ -508,6 +511,18 @@ public class ATSParser implements PsiParser, LightPsiParser {
     if (!result_) result_ = consumeToken(builder_, QMARK);
     if (!result_) result_ = consumeToken(builder_, REQUIRE);
     exit_section_(builder_, level_, marker_, result_, false, null);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // EXTCODE
+  public static boolean external_code(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "external_code")) return false;
+    if (!nextTokenIs(builder_, EXTCODE)) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, EXTCODE);
+    exit_section_(builder_, marker_, EXTERNAL_CODE, result_);
     return result_;
   }
 
@@ -538,6 +553,7 @@ public class ATSParser implements PsiParser, LightPsiParser {
   /* ********************************************************** */
   // dummy |
   //     literal |
+  //     external_code |
   //     COMMENT_DOC |
   //     COMMENT_LINE |
   //     COMMENT_BLOCK |
@@ -549,6 +565,7 @@ public class ATSParser implements PsiParser, LightPsiParser {
     Marker marker_ = enter_section_(builder_);
     result_ = dummy(builder_, level_ + 1);
     if (!result_) result_ = literal(builder_, level_ + 1);
+    if (!result_) result_ = external_code(builder_, level_ + 1);
     if (!result_) result_ = consumeToken(builder_, COMMENT_DOC);
     if (!result_) result_ = consumeToken(builder_, COMMENT_LINE);
     if (!result_) result_ = consumeToken(builder_, COMMENT_BLOCK);

@@ -22,6 +22,7 @@ class ATSSyntaxHighlighter : SyntaxHighlighterBase() {
         val ATS_COMMA = createTextAttributesKey("COMMA", COMMA)
         val ATS_DIRECTIVES = createTextAttributesKey("DIRECTIVES", PREDEFINED_SYMBOL)
         val ATS_DOC_COMMENT = createTextAttributesKey("DOC_COMMENT", DOC_COMMENT)
+        val ATS_EXTERNAL_CODE = createTextAttributesKey("EXTERNAL_CODE", TEMPLATE_LANGUAGE_COLOR)
         val ATS_FUNCTION_CALL = createTextAttributesKey("FUNCTION_CALL", FUNCTION_CALL)
         val ATS_IDENTIFIER = createTextAttributesKey("IDENTIFIER", IDENTIFIER)
         val ATS_LINE_COMMENT = createTextAttributesKey("LINE_COMMENT", LINE_COMMENT)
@@ -49,6 +50,7 @@ class ATSSyntaxHighlighter : SyntaxHighlighterBase() {
         private val ATS_COMMA_KEYS = arrayOf(ATS_COMMA)
         private val ATS_DOC_COMMENT_KEYS = arrayOf(ATS_DOC_COMMENT)
         private val ATS_DIRECTIVES_KEYS = arrayOf(ATS_DIRECTIVES)
+        private val ATS_EXTERNAL_CODE_KEYS = arrayOf(ATS_EXTERNAL_CODE)
         private val ATS_FUNCTION_CALL_KEYS = arrayOf(ATS_FUNCTION_CALL)
         private val ATS_IDENTIFIER_KEYS = arrayOf(ATS_IDENTIFIER)
         private val ATS_LINE_COMMENT_KEYS = arrayOf(ATS_LINE_COMMENT)
@@ -137,7 +139,7 @@ class ATSSyntaxHighlighter : SyntaxHighlighterBase() {
             tmpMap.put(ATSTokenTypes.EQSLASHEQGT, ATS_OPERATION_SIGN_KEYS)
             tmpMap.put(ATSTokenTypes.EQSLASHEQGTGT, ATS_OPERATION_SIGN_KEYS)
             tmpMap.put(ATSTokenTypes.EXCEPTION, ATS_KEYWORD_KEYS)
-            tmpMap.put(ATSTokenTypes.EXTCODE, ATS_BRACES_KEYS)
+            tmpMap.put(ATSTokenTypes.EXTCODE_CLOSE, ATS_BRACES_KEYS)
             tmpMap.put(ATSTokenTypes.EXTERN, ATS_KEYWORD_KEYS)
             tmpMap.put(ATSTokenTypes.EXTVAR, ATS_KEYWORD_KEYS)
             tmpMap.put(ATSTokenTypes.FIX, ATS_KEYWORD_KEYS)
@@ -246,6 +248,7 @@ class ATSSyntaxHighlighter : SyntaxHighlighterBase() {
 //        MakefileTypes.SPLIT -> LINE_SPLIT_KEYS
 //        MakefileTypes.TAB -> TAB_KEYS
 //        TokenType.BAD_CHARACTER -> BAD_CHAR_KEYS
+        ATSTokenTypes.EXTCODE -> ATS_EXTERNAL_CODE_KEYS
         ATSTokenTypes.DATATYPE -> ATS_TYPE_DECLARATIONS_KEYS
         else -> tokenColorMap.getOrDefault(tokenType,EMPTY_KEYS) //TODO: remove the map in favor of the cleaner syntax
     }

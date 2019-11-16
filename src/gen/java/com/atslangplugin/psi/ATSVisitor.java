@@ -15,6 +15,10 @@ public class ATSVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitExternalCode(@NotNull ATSExternalCode o) {
+    visitPsiElement(o);
+  }
+
   public void visitFloatLiteral(@NotNull ATSFloatLiteral o) {
     visitLiteral(o);
   }

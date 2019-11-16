@@ -21,6 +21,7 @@ ATSFile ::= item_*
 private item_ ::=
     dummy |
     literal |
+    external_code |
     COMMENT_DOC |
     COMMENT_LINE |
     COMMENT_BLOCK |
@@ -43,6 +44,9 @@ float_literal ::= FLOAT ;
 char_literal ::= CHAR ;
 
 string_literal ::= STRING ;
+
+// TODO: Enable language injection for external code blocks.
+external_code ::= EXTCODE ;
 
 dummy ::=
     NONE |
@@ -272,7 +276,7 @@ dummy ::=
     COMMALPAREN |
     PERCENTLPAREN |
     
-    EXTCODE |
+    EXTCODE_CLOSE |
     
     ERR |
     

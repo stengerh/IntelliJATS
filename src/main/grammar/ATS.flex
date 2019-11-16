@@ -31,13 +31,12 @@ import com.atslangplugin.psi.ATSTokenTypes;
 IDENTIFIER= ([:letter:]|_) ([:letter:]|{DIGIT}|_ )*
 
 CRLF=(\n | \r | \r\n)
+WHITE_SPACE=[\ \n\r\t\f]
 
 DIGIT=[0-9]
 // Currently not used
 //OCTAL_DIGIT=[0-7]
 HEX_DIGIT=[0-9A-Fa-f]
-
-EXTCODE = "%{"|"%{#"|"%{^"|"%{$"|"%}"
 
 /*
  Octal integer literals do not end at the first non-octal digit.
@@ -54,8 +53,6 @@ DECIMAL_OR_OCTAL_INTEGER_LITERAL = ({DIGIT})+ ({INTEGER_SUFFIX})?
 HEXADECIMAL_INTEGER_LITERAL = 0[Xx] ({HEX_DIGIT})* ({INTEGER_SUFFIX})?
 // Check supported suffixes in AtsLiteralAnnotator: u, l, ul, lu, ll, ull, llu (case-insensitive)
 INTEGER_SUFFIX = [LlUu]+
-
-WHITE_SPACE=[\ \n\r\t\f]
 
 /* comments */
 END_OF_LINE_COMMENT = "//" [^\r\n]*
@@ -84,12 +81,18 @@ CHAR_DOUBLEQ_BASE = [^\\\"\r\n] | {ESCAPE_SEQUENCE} | \\? {CRLF}
 CHAR_LITERAL = "'" ({CHAR_SINGLEQ_BASE})* ("'" | \\)?
 STRING_LITERAL = \" ({CHAR_DOUBLEQ_BASE})* (\" | \\)?
 
+EXTCODE_OPEN = "%{"
+EXTCODE_KIND = "#" | "^" | "^2" | "" | "$2" | "$"
+EXTCODE_CLOSE = "%}"
+
 %state PRE
 %state PRAGMA
 %state DEFINE
 %state DEFINE_CONTINUATION
 %state CONTINUATION
 %state NESTING_COMMENT
+%state EXTCODE_FIRST
+%state EXTCODE_REST
 
 %%
 
@@ -319,7 +322,8 @@ STRING_LITERAL = \" ({CHAR_DOUBLEQ_BASE})* (\" | \\)?
 ",("                        { return ATSTokenTypes.COMMALPAREN; }
 "%("                        { return ATSTokenTypes.PERCENTLPAREN; }
 //
-{EXTCODE}                   { return ATSTokenTypes.EXTCODE; }
+^{EXTCODE_OPEN}{EXTCODE_KIND}
+                            { yybegin(EXTCODE_FIRST); }
 //
 {END_OF_LINE_COMMENT}       { return ATSTokenTypes.COMMENT_LINE; }
 {END_OF_FILE_COMMENT}       { return ATSTokenTypes.COMMENT_REST; }
@@ -356,6 +360,20 @@ STRING_LITERAL = \" ({CHAR_DOUBLEQ_BASE})* (\" | \\)?
                               return nestingCommentType;
                             }
 } // End of <BLOCK_COMMENT>
+
+<EXTCODE_FIRST> {
+    {CRLF}                 { yybegin(EXTCODE_REST); }
+    [^\r\n]+               { yybegin(EXTCODE_REST); }
+    <<EOF>>                { yybegin(YYINITIAL); return ATSTokenTypes.EXTCODE; }
+} // End of <EXTCODE_FIRST>
+
+<EXTCODE_REST> {
+    {CRLF}                 { }
+    {EXTCODE_CLOSE}        { yybegin(YYINITIAL); return ATSTokenTypes.EXTCODE; }
+    ("%"([^"}"\r\n][^\r\n]*)?) | ([^"%"\r\n][^\r\n]*)
+                           { }
+    <<EOF>>                { yybegin(YYINITIAL); return ATSTokenTypes.EXTCODE; }
+} // End of <EXTCODE_FIRST>
 
 // This seems to cause a bug (OOME) in IntelliJ:
 //<<EOF>>                     { return ATSTokenTypes.EOF; }

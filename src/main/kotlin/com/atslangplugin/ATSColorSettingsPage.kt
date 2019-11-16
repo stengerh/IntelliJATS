@@ -99,6 +99,7 @@ end // end of [list_vt_quicksort]
                 AttributesDescriptor(message("options.attribute.descriptor.brackets"), ATSSyntaxHighlighter.ATS_BRACKETS),
                 AttributesDescriptor(message("options.attribute.descriptor.comma"), ATSSyntaxHighlighter.ATS_COMMA),
                 AttributesDescriptor(message("options.attribute.descriptor.directive"), ATSSyntaxHighlighter.ATS_DIRECTIVES),
+                AttributesDescriptor(message("options.attribute.descriptor.extcode"), ATSSyntaxHighlighter.ATS_EXTERNAL_CODE),
                 AttributesDescriptor(message("options.attribute.descriptor.identifier"), ATSSyntaxHighlighter.ATS_IDENTIFIER),
                 AttributesDescriptor(message("options.attribute.descriptor.keyword"), ATSSyntaxHighlighter.ATS_KEYWORD),
                 AttributesDescriptor(message("options.attribute.descriptor.variable"), ATSSyntaxHighlighter.ATS_LOCAL_VARIABLE),

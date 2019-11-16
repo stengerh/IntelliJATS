@@ -323,6 +323,8 @@ STRING_LITERAL = \" ({CHAR_DOUBLEQ_BASE})* (\" | \\)?
 //
 {END_OF_LINE_COMMENT}       { return ATSTokenTypes.COMMENT_LINE; }
 {END_OF_FILE_COMMENT}       { return ATSTokenTypes.COMMENT_REST; }
+{BLOCK_COMMENT_OPEN}{NESTING_COMMENT_CLOSE}
+                            { return ATSTokenTypes.COMMENT_BLOCK; }
 {BLOCK_COMMENT_OPEN}        { openCommentCount = 1; nestingCommentType = ATSTokenTypes.COMMENT_BLOCK; yybegin(NESTING_COMMENT); }
 {DOC_COMMENT_OPEN}          { openCommentCount = 1; nestingCommentType = ATSTokenTypes.COMMENT_DOC; yybegin(NESTING_COMMENT); }
 {NONNESTING_BLOCK_COMMENT}  { return ATSTokenTypes.COMMENT_BLOCK; }

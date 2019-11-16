@@ -58,9 +58,11 @@ WHITE_SPACE=[\ \n\r\t\f]
 
 /* comments */
 END_OF_LINE_COMMENT = "//" [^\r\n]*
-COMMENT_TAIL=([^"*"]*("*"+[^"*"")"])?)*("*"+")")?
 END_OF_FILE_COMMENT = "////" (.* {CRLF}?)*
+COMMENT_TAIL=([^"*"]*("*"+[^"*"")"])?)*("*"+")")?
 DOCUMENTATION_COMMENT="(*""*"+("("|([^"(""*"]{COMMENT_TAIL}))?
+// TODO: Add inspection which allows converting between different styles of block comments.  
+C_STYLE_BLOCK_COMMENT = "/*" ([^"*"] | "*"+ [^"/"])* ("*"+ "/")?
 //DOCUMENTATION_COMMENT = "(*" (\*+\ +{CRLF}?)* {COMMENT_CONTENT} (\*+\ +{CRLF}?)* "*)"
 //COMMENT_CONTENT = ( [^*] | \*+ [^)*] ) // should we delimit the ')' ?
 
@@ -321,6 +323,7 @@ STRING_LITERAL = \" ({CHAR_DOUBLEQ_BASE})* (\" | \\)?
 "(*"                        { openCommentCount = 1; yybegin(BLOCK_COMMENT); }
 {END_OF_FILE_COMMENT}       { return ATSTokenTypes.COMMENT_REST; }
 {DOCUMENTATION_COMMENT}     { return ATSTokenTypes.COMMENT_DOC; }
+{C_STYLE_BLOCK_COMMENT}     { return ATSTokenTypes.COMMENT_BLOCK; }
 //
 "%"                         { return ATSTokenTypes.PERCENT; }
 "?"                         { return ATSTokenTypes.QMARK; }

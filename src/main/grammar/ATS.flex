@@ -22,6 +22,7 @@ import com.atslangplugin.psi.ATSTokenTypes;
 
 %{
     private int openCommentCount;
+    private IElementType nestingCommentType;
 %}
 
 
@@ -59,10 +60,11 @@ WHITE_SPACE=[\ \n\r\t\f]
 /* comments */
 END_OF_LINE_COMMENT = "//" [^\r\n]*
 END_OF_FILE_COMMENT = "////" (.* {CRLF}?)*
-COMMENT_TAIL=([^"*"]*("*"+[^"*"")"])?)*("*"+")")?
-DOCUMENTATION_COMMENT="(*""*"+("("|([^"(""*"]{COMMENT_TAIL}))?
+BLOCK_COMMENT_OPEN = "(*"
+DOC_COMMENT_OPEN = "(**"
+NESTING_COMMENT_CLOSE = "*"+ ")"
 // TODO: Add inspection which allows converting between different styles of block comments.  
-C_STYLE_BLOCK_COMMENT = "/*" ([^"*"] | "*"+ [^"/"])* ("*"+ "/")?
+NONNESTING_BLOCK_COMMENT = "/*" ([^"*"] | "*"+ [^"/"])* ("*"+ "/")?
 //DOCUMENTATION_COMMENT = "(*" (\*+\ +{CRLF}?)* {COMMENT_CONTENT} (\*+\ +{CRLF}?)* "*)"
 //COMMENT_CONTENT = ( [^*] | \*+ [^)*] ) // should we delimit the ')' ?
 
@@ -87,7 +89,7 @@ STRING_LITERAL = \" ({CHAR_DOUBLEQ_BASE})* (\" | \\)?
 %state DEFINE
 %state DEFINE_CONTINUATION
 %state CONTINUATION
-%state BLOCK_COMMENT
+%state NESTING_COMMENT
 
 %%
 
@@ -320,10 +322,10 @@ STRING_LITERAL = \" ({CHAR_DOUBLEQ_BASE})* (\" | \\)?
 {EXTCODE}                   { return ATSTokenTypes.EXTCODE; }
 //
 {END_OF_LINE_COMMENT}       { return ATSTokenTypes.COMMENT_LINE; }
-"(*"                        { openCommentCount = 1; yybegin(BLOCK_COMMENT); }
 {END_OF_FILE_COMMENT}       { return ATSTokenTypes.COMMENT_REST; }
-{DOCUMENTATION_COMMENT}     { return ATSTokenTypes.COMMENT_DOC; }
-{C_STYLE_BLOCK_COMMENT}     { return ATSTokenTypes.COMMENT_BLOCK; }
+{BLOCK_COMMENT_OPEN}        { openCommentCount = 1; nestingCommentType = ATSTokenTypes.COMMENT_BLOCK; yybegin(NESTING_COMMENT); }
+{DOC_COMMENT_OPEN}          { openCommentCount = 1; nestingCommentType = ATSTokenTypes.COMMENT_DOC; yybegin(NESTING_COMMENT); }
+{NONNESTING_BLOCK_COMMENT}  { return ATSTokenTypes.COMMENT_BLOCK; }
 //
 "%"                         { return ATSTokenTypes.PERCENT; }
 "?"                         { return ATSTokenTypes.QMARK; }
@@ -337,19 +339,19 @@ STRING_LITERAL = \" ({CHAR_DOUBLEQ_BASE})* (\" | \\)?
 
 } // End of <YYINITIAL>
 
-<BLOCK_COMMENT> {
-    "(*"                    { openCommentCount += 1; }
-    [^\*\(\)]+              { }  
-    "*)"                    { openCommentCount -= 1;
+<NESTING_COMMENT> {
+    {BLOCK_COMMENT_OPEN}    { openCommentCount += 1; }
+    [^"*()"]+               { }  
+    {NESTING_COMMENT_CLOSE} { openCommentCount -= 1;
                               if (openCommentCount == 0) {
                                 yybegin(YYINITIAL);
-                                return ATSTokenTypes.COMMENT_BLOCK;
+                                return nestingCommentType;
                               }
                             }
-    [\*\(\)]                { }
+    ["*()"]                 { }
     <<EOF>>                 { openCommentCount = 0;
                               yybegin(YYINITIAL);
-                              return ATSTokenTypes.COMMENT_BLOCK;
+                              return nestingCommentType;
                             }
 } // End of <BLOCK_COMMENT>
 

@@ -2,10 +2,7 @@ package com.atslangplugin.annotators
 
 import com.atslangplugin.ATSBundle
 import com.atslangplugin.ATSSyntaxHighlighter
-import com.atslangplugin.psi.ATSCharLiteral
-import com.atslangplugin.psi.ATSFloatLiteral
-import com.atslangplugin.psi.ATSIntLiteral
-import com.atslangplugin.psi.ATSStringLiteral
+import com.atslangplugin.psi.*
 import com.intellij.lang.annotation.Annotation
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.Annotator
@@ -20,6 +17,7 @@ class AtsLiteralAnnotator : Annotator {
             is ATSFloatLiteral -> annotateFloatLiteral(element, holder)
             is ATSStringLiteral -> annotatorStringLiteral(element, holder)
             is ATSCharLiteral -> annotateCharLiteral(element, holder)
+            is ATSExternalCode -> annotateExternalCode(element, holder)
         }
     }
 
@@ -86,6 +84,13 @@ class AtsLiteralAnnotator : Annotator {
         }
 
         annotateEscapeSequences(element, textFragments, holder)
+    }
+
+    private fun annotateExternalCode(element: ATSExternalCode, holder: AnnotationHolder) {
+        val text = element.text
+        if (!text.endsWith("\r%}") && !text.endsWith("\n%}")) {
+            holder.createErrorAnnotation(element, ATSBundle.message("syntax.error.extcode.unclosed"))
+        }
     }
 
     private fun isEscapedChar(text: String, index: Int): Boolean {

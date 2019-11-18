@@ -45,6 +45,8 @@
     <lang.syntaxHighlighterFactory language="ATS"
                                    implementationClass="com.atslangplugin.ATSSyntaxHighlighterFactory"/>
     <lang.commenter language="ATS" implementationClass="com.atslangplugin.ATSCommenter"/>
+    <lang.elementManipulator forClass="com.atslangplugin.psi.ATSExternalCode"
+                             implementationClass="com.atslangplugin.psi.impl.ATSExternalCodeManipulator"/>
 
 
 <!--compiler is probably the way to go -->

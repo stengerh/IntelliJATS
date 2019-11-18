@@ -8,10 +8,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.atslangplugin.psi.ATSElementTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.atslangplugin.psi.*;
 
-public class ATSExternalCodeImpl extends ASTWrapperPsiElement implements ATSExternalCode {
+public class ATSExternalCodeImpl extends ATSExternalCodeMixin implements ATSExternalCode {
 
   public ATSExternalCodeImpl(ASTNode node) {
     super(node);

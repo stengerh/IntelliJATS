@@ -45,8 +45,9 @@ char_literal ::= CHAR ;
 
 string_literal ::= STRING ;
 
-// TODO: Enable language injection for external code blocks.
-external_code ::= EXTCODE ;
+external_code ::= EXTCODE {
+    mixin = "com.atslangplugin.psi.impl.ATSExternalCodeMixin"
+};
 
 dummy ::=
     NONE |
